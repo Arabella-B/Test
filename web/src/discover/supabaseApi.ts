@@ -5,7 +5,9 @@ import type { NewPost, Post, PostsApi } from "./types";
 // bucket; the feed asks for short-lived links (valid 1 hour) to show them.
 
 const BUCKET = "post-images";
-const FIELDS = "*, profiles(display_name), post_likes(count)";
+// "profiles!posts_user_id_fkey" means "the post's author". It has to be named,
+// because posts also link to profiles through likes (who liked it).
+const FIELDS = "*, profiles!posts_user_id_fkey(display_name), post_likes(count)";
 
 interface PostRow {
   id: string;
@@ -28,6 +30,7 @@ interface PostRow {
 }
 
 function friendly(message: string): string {
+  console.error("Discover:", message); // the real error, for debugging
   if (/posted a lot/.test(message)) return message;
   if (/check constraint|violates/i.test(message)) return "Something in the form isn't quite right. Please check it and try again.";
   if (/fetch|network/i.test(message)) return "No connection. Check your internet and try again.";

@@ -35,6 +35,7 @@ function check<T>(result: { data: T; error: { message: string } | null }): T {
 
 /** Turn database errors into plain English. */
 function friendly(message: string): string {
+  console.error("Groups:", message); // the real error, for debugging
   if (/too quickly|lot of groups/.test(message)) return message;
   if (/row-level security|permission/i.test(message)) return "You need to join this group first.";
   if (/check constraint/i.test(message)) return "That's too long or too short. Please check and try again.";
