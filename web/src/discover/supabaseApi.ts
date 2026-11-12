@@ -72,9 +72,10 @@ export function createSupabasePostsApi(me: { id: string; name: string }): PostsA
     }));
   }
 
+  /** The name your events go out under: your verified business, "Wayfund team" for admins, or null. */
   async function myBusiness(): Promise<string | null> {
-    const { data } = await supabase.from("verified_businesses").select("business_name").eq("user_id", me.id).maybeSingle();
-    return data?.business_name ?? null;
+    const { data, error } = await supabase.rpc("my_event_name");
+    return error ? null : ((data as string | null) ?? null);
   }
 
   return {

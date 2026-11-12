@@ -45,7 +45,7 @@ export interface PostsApi {
   /** A page of the feed, newest first (events: soonest first, upcoming only). */
   listPosts(options: { filter: FeedFilter; country?: string; offset: number; limit: number }): Promise<Post[]>;
   getPost(id: string): Promise<Post | null>;
-  /** Your verified business name, or null if you're not a verified business (only they can post events). */
+  /** The name your events are posted under (your verified business, or "Wayfund team" for admins); null if you can't post events. */
   getMyBusiness(): Promise<string | null>;
   createPost(post: NewPost): Promise<Post>;
   deletePost(id: string): Promise<void>;

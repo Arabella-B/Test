@@ -2,6 +2,7 @@ import { Fragment, useEffect, useRef, useState, type FormEvent, type KeyboardEve
 import ReportSheet from "../components/ReportSheet";
 import Sheet from "../components/Sheet";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../auth/AuthProvider";
 import { GroupEmoji } from "./GroupsPage";
 import { chatTime, markRead, useGroups } from "./GroupsProvider";
 import type { ChatMessage, Group } from "./types";
@@ -12,6 +13,7 @@ import type { ChatMessage, Group } from "./types";
 export default function GroupChat() {
   const { id = "" } = useParams();
   const { api, blocked, refreshBlocked } = useGroups();
+  const { isAdmin } = useAuth();
   const navigate = useNavigate();
   const [group, setGroup] = useState<Group | null | undefined>(undefined);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -234,8 +236,10 @@ export default function GroupChat() {
                 <button className="btn-soft" onClick={() => block(selected)}>🚫 Block {selected.authorName}</button>
               </>
             )}
-            {(selected.userId === api.me.id || group?.isOwner) && (
-              <button className="min-h-12 rounded-2xl font-semibold text-bad ring-1 ring-bad/30" onClick={() => remove(selected)}>🗑️ Delete message</button>
+            {(selected.userId === api.me.id || group?.isOwner || isAdmin) && (
+              <button className="min-h-12 rounded-2xl font-semibold text-bad ring-1 ring-bad/30" onClick={() => remove(selected)}>
+                {selected.userId === api.me.id || group?.isOwner ? "🗑️ Delete message" : "🛡️ Remove message (admin)"}
+              </button>
             )}
           </div>
         </Sheet>

@@ -11,6 +11,7 @@ import { GroupsProvider } from "./groups/GroupsProvider";
 import GroupsPage from "./groups/GroupsPage";
 import GroupChat from "./groups/GroupChat";
 import Profile from "./pages/Profile";
+import AdminPage from "./admin/AdminPage";
 import { TripProvider } from "./trip/store";
 import { SyncProvider } from "./trip/SyncProvider";
 import TripLayout from "./trip/pages/TripLayout";
@@ -59,6 +60,7 @@ export default function Root() {
               <Route path="settings" element={<Settings />} />
             </Route>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<Navigate to="/discover" replace />} />
           </Route>
         </Routes>

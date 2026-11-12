@@ -173,6 +173,11 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   (in the Supabase dashboard). Event posts automatically show the business's verified name and a
   green tick. See `supabase/events_verified_businesses_only.sql`, which also has the one-line
   commands to verify or un-verify a business.
+- **Admins** (the `admins` table, set only in the Supabase dashboard) get a 🛡️ Admin badge and an
+  **Admin** page (Profile → Admin tools) with a **reports inbox** (remove the reported post or
+  message, or dismiss the report) and a **verified businesses** list (find an account by name and
+  verify it, or remove it). Admins can also post events as "Wayfund team" and remove any post or
+  chat message. See `supabase/admin_role.sql`.
 - **Photos** are shrunk on the device (max 1600px JPEG) before upload. Re-drawing the photo
   also **removes hidden location (GPS) data**. They're stored in the private `post-images`
   bucket; the feed shows them using links that expire after an hour.

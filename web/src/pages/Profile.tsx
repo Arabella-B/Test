@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { useGroups } from "../groups/GroupsProvider";
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
@@ -7,7 +8,7 @@ import { PALETTES, getPalette, getThemeChoice, setPalette, setThemeChoice, type 
 // Your public profile (just a display name for now) and account options.
 
 export default function Profile() {
-  const { session, demo, displayName, signOut } = useAuth();
+  const { session, demo, displayName, isAdmin, signOut } = useAuth();
   const [name, setName] = useState(displayName);
   const [saved, setSaved] = useState<string | null>(null);
 
@@ -26,7 +27,10 @@ export default function Profile() {
           {(displayName || "?").slice(0, 1).toUpperCase()}
         </div>
         <div>
-          <div className="text-xl font-bold">{displayName}</div>
+          <div className="flex flex-wrap items-center gap-2 text-xl font-bold">
+            {displayName}
+            {isAdmin && <span className="rounded-full bg-brand px-2 py-0.5 text-xs font-extrabold text-on-brand">🛡️ Admin</span>}
+          </div>
           <div className="text-sm text-muted">{demo ? "Demo account" : session?.user.email}</div>
         </div>
       </div>
@@ -43,6 +47,16 @@ export default function Profile() {
             {saved && <span className="text-sm font-semibold text-good">{saved}</span>}
           </div>
         </form>
+      )}
+
+      {isAdmin && (
+        <Link to="/admin" className="card card-accent flex items-center justify-between gap-3">
+          <span>
+            <span className="block text-lg font-bold">🛡️ Admin tools</span>
+            <span className="block text-sm">Reports, verified businesses</span>
+          </span>
+          <span className="text-2xl">→</span>
+        </Link>
       )}
 
       <Appearance />

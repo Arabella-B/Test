@@ -110,7 +110,7 @@ export default function NewPostPage() {
       ) : (
       <>
       {kind === "event" && business && (
-        <p className="rounded-2xl bg-good/10 p-3 text-sm font-semibold">✔︎ Posting as <b>{business}</b> (verified business)</p>
+        <p className="rounded-2xl bg-good/10 p-3 text-sm font-semibold">✔︎ Posting as <b>{business}</b></p>
       )}
 
       {/* Photo */}
