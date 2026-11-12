@@ -24,10 +24,10 @@ const STATUS = {
 const pounds = (v: unknown) => formatMoney(Math.round(Number(v) * 100), true);
 
 export default function Dashboard() {
-  const { transactions, settings, hasSettings, isDemo, stops, budgets } = useTrip();
+  const { transactions, settings, hasSettings, isDemo, stops, budgets, cardEdits } = useTrip();
   const navigate = useNavigate();
   const stats = useMemo(() => computeStats(transactions, settings), [transactions, settings]);
-  const insights = useMemo(() => computeInsights(transactions, settings, { stops, budgets }), [transactions, settings, stops, budgets]);
+  const insights = useMemo(() => computeInsights(transactions, settings, { stops, budgets, cardEdits }), [transactions, settings, stops, budgets, cardEdits]);
   const countries = useMemo(() => {
     const countable = countableTransactions(transactions, settings);
     return stops.map((s) => stopStats(s, countable));

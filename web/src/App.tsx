@@ -20,6 +20,9 @@ import Checklist from "./trip/pages/Checklist";
 import Settings from "./trip/pages/Settings";
 import RoutePage from "./trip/pages/Route";
 import Budgets from "./trip/pages/Budgets";
+import Countries from "./trip/pages/Countries";
+import CountryDetail from "./trip/pages/CountryDetail";
+import Afford from "./trip/pages/Afford";
 
 export default function Root() {
   const { loading, session, demo } = useAuth();
@@ -47,6 +50,9 @@ export default function Root() {
               <Route path="transactions" element={<Transactions />} />
               <Route path="route" element={<RoutePage />} />
               <Route path="budgets" element={<Budgets />} />
+              <Route path="countries" element={<Countries />} />
+              <Route path="countries/:name" element={<CountryDetail />} />
+              <Route path="afford" element={<Afford />} />
               <Route path="checklist" element={<Checklist />} />
               <Route path="settings" element={<Settings />} />
             </Route>

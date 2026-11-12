@@ -1,4 +1,5 @@
 import { getCategory } from "./categories";
+import { dailyTotal, getCard, type CardEdits } from "./countryInfo";
 import { addDays, daysBetween, formatDate, formatMoney, today } from "./money";
 import { computeStats, spendingOf } from "./stats";
 import { budgetStatuses, countableTransactions, stopForDate, stopStats } from "./route";
@@ -22,7 +23,7 @@ const pct = (n: number) => `${Math.round(n * 100)}%`;
 export function computeInsights(
   allTxs: Transaction[],
   settings: TripSettings,
-  extras: { stops?: TripStop[]; budgets?: CategoryBudget[]; now?: string } = {},
+  extras: { stops?: TripStop[]; budgets?: CategoryBudget[]; cardEdits?: CardEdits; now?: string } = {},
 ): Insight[] {
   const now = extras.now ?? today();
   const out: Insight[] = [];
@@ -55,6 +56,46 @@ export function computeInsights(
         title: `${here.country} is on budget`,
         text: `You're averaging ${formatMoney(st.actualDaily ?? 0, true)}/day against a target of ${formatMoney(here.dailyBudget, true)}. Keep it up!`,
         priority: 25,
+        link: "/trip/route",
+      });
+    }
+  }
+
+  // 0c. Route budgets compared with typical costs from the country cards
+  const upcoming = (extras.stops ?? []).filter((s) => s.endDate >= now);
+  const withCards = upcoming
+    .map((s) => ({ stop: s, card: getCard(s.country, extras.cardEdits) }))
+    .filter((x): x is { stop: TripStop; card: NonNullable<ReturnType<typeof getCard>> } => !!x.card);
+  const tooLow = withCards
+    .map((x) => ({ ...x, typical: dailyTotal(x.card, "budget") * 100 }))
+    .filter((x) => x.stop.dailyBudget < x.typical * 0.85)
+    .sort((a, b) => a.stop.dailyBudget / a.typical - b.stop.dailyBudget / b.typical)[0];
+  if (tooLow) {
+    out.push({
+      id: "route-low",
+      emoji: tooLow.stop.flag || "🗺️",
+      tone: "warn",
+      title: `${tooLow.stop.country} budget looks low`,
+      text: `Your ${formatMoney(tooLow.stop.dailyBudget, true)}/day for ${tooLow.stop.country} is below typical backpacker costs there (about ${formatMoney(tooLow.typical, true)}/day). Consider raising it or spending fewer days.`,
+      priority: 75,
+      link: "/trip/route",
+    });
+  }
+  if (withCards.length >= 2) {
+    const sorted = [...withCards].sort((a, b) => dailyTotal(a.card, "budget") - dailyTotal(b.card, "budget"));
+    const cheap = sorted[0];
+    const dear = sorted[sorted.length - 1];
+    const ratio = dailyTotal(dear.card, "budget") / dailyTotal(cheap.card, "budget");
+    if (ratio >= 2) {
+      out.push({
+        id: "route-compare",
+        emoji: "⚖️",
+        tone: "info",
+        title: "Costs vary a lot on your route",
+        text: `${dear.stop.country} costs about ${ratio.toFixed(1)}× more per day than ${cheap.stop.country} for backpackers ` +
+          `(about £${dailyTotal(dear.card, "budget")} vs £${dailyTotal(cheap.card, "budget")}). ` +
+          `Your plan gives them ${formatMoney(dear.stop.dailyBudget, true)} and ${formatMoney(cheap.stop.dailyBudget, true)} a day.`,
+        priority: 30,
         link: "/trip/route",
       });
     }

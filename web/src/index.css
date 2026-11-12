@@ -27,23 +27,27 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* A reusable rounded card. */
-.card {
-  @apply rounded-3xl bg-white p-5 shadow-sm ring-1 ring-black/5;
-}
+/* Reusable styles. They're in the "components" layer so extra classes on an element
+   (like a coloured background on a card) always win over these defaults. */
+@layer components {
+  /* A reusable rounded card. */
+  .card {
+    @apply rounded-3xl bg-white p-5 shadow-sm ring-1 ring-black/5;
+  }
 
-.btn {
-  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand px-5 font-semibold text-white transition active:scale-[0.98] disabled:opacity-50;
-}
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand px-5 font-semibold text-white transition active:scale-[0.98] disabled:opacity-50;
+  }
 
-.btn-soft {
-  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand-soft px-5 font-semibold text-brand transition active:scale-[0.98];
-}
+  .btn-soft {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand-soft px-5 font-semibold text-brand transition active:scale-[0.98];
+  }
 
-.input {
-  @apply min-h-12 w-full rounded-2xl border border-black/10 bg-white px-4 text-base outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
-}
+  .input {
+    @apply min-h-12 w-full rounded-2xl border border-black/10 bg-white px-4 text-base outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
+  }
 
-.label {
-  @apply grid gap-1.5 text-sm font-semibold text-ink;
+  .label {
+    @apply grid gap-1.5 text-sm font-semibold text-ink;
+  }
 }

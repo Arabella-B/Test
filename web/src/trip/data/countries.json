@@ -1,0 +1,2172 @@
+{
+ "europe": {
+  "lastChecked": "2026-11-12",
+  "ees": [
+   "The EU Entry/Exit System (EES) started on 12 October 2025 and has been fully operational at all Schengen external borders since 10 April 2026.",
+   "On your first entry you register fingerprints and a face photo at the border; it's free. Under-12s give a photo only, no fingerprints.",
+   "EES replaces passport stamps: it logs every entry and exit digitally and counts your 90/180 days automatically.",
+   "Your EES record lasts 3 years, so later crossings should be quicker. Expect longer queues on your first entry, especially at Eurostar and the Dover/Calais ports.",
+   "ABTA says how EES is applied can still vary between countries and border points.",
+   "All 12 European countries with cards here are in Schengen and use EES, Switzerland included. Moving between them by train normally means no passport check, but spot checks happen (e.g. Germany)."
+  ],
+  "etias": [
+   "ETIAS is NOT in force yet. As of November 2026 you cannot apply, and UK travellers need only a valid passport.",
+   "No official start date has been set. The EU said 'last quarter of 2026', but recent reports say it won't start before 2027. The EU has promised months of notice.",
+   "Announced fee: €20 (up from the original €7). Free for under-18s and over-70s. Valid for 3 years or until your passport expires.",
+   "Planned: a 6-month transition after launch, then a grace period, before it's strictly required.",
+   "Beware of fake ETIAS websites already charging fees. When it launches, apply only via the official EU site or app."
+  ],
+  "schengen90180": "UK passport holders can stay up to 90 days in any rolling 180-day period across the whole Schengen area combined (not 90 per country). EES now tracks this, and overstaying can bring a fine or an entry ban of up to 3 years.",
+  "ghic": [
+   "The UK GHIC is FREE from the official NHS website. Unofficial sites charge a fee, so avoid them.",
+   "It covers medically necessary state healthcare (emergencies, A&E, pre-existing conditions) at the same cost a local would pay, which is not always free.",
+   "It does NOT cover private treatment, medical repatriation to the UK, or ski/mountain rescue. You still need travel insurance.",
+   "It's valid for up to 5 years. An old UK EHIC still works until its expiry date.",
+   "Switzerland: the NHS confirms UK GHICs are accepted for British nationals (plus Swiss/EU nationals and some others).",
+   "Private clinics and hospitals usually won't accept GHIC. Ask for the state/public service."
+  ],
+  "interrail": {
+   "passes": [
+    "Youth (12–27) 2nd class 2026 tariff in EUR (seat61 summary of the official tariff). GBP figures are approximate conversions at €1.196/£; interrail.com sets its own GBP prices, so check the checkout.",
+    "Youth Global Pass 4 days in 1 month: €212 (~£177)",
+    "Youth Global Pass 7 days in 1 month: €286 (~£239)",
+    "Youth Global Pass 10 days in 2 months: €335 (~£280)",
+    "Youth Global Pass 15 days in 2 months: €415 (~£347)",
+    "Youth Global Pass 15 days continuous: €357 (~£298)",
+    "Youth Global Pass 1 month continuous: €522 (~£436)",
+    "Youth Global Pass 2 months continuous: €620 (~£518); 3 months continuous: €717 (~£600)",
+    "New (beta): Global Plus Pass, 5 or 7 days in 1 month, includes most seat reservations plus 3 credits for high-demand trains. No youth price published on the page we checked."
+   ],
+   "reservations": [
+    "France TGV INOUI: compulsory, €10–€20 (limited pass-holder quota; book early or pay more or miss out).",
+    "France OUIGO: Interrail's fee table now lists OUIGO (€5–€20 compulsory), but some guides still say it's not covered. Check when booking.",
+    "France Intercités: €10–€20 on compulsory routes; about €1.60 where only recommended.",
+    "Paris–Barcelona TGV: compulsory, about €35, and pass-holder seats sell out.",
+    "Spain AVE and iryo: compulsory, about €10; Avant about €4. Avlo and Ouigo Spain are not covered.",
+    "Italy Frecciarossa/Frecciargento: compulsory, about €13; Intercity about €3. Italo is NOT covered by Interrail.",
+    "Eurostar London–Paris/Brussels/Amsterdam: pass-holder fare about €35 in Standard. Limited seats, so book weeks ahead.",
+    "Eurostar Paris–Brussels about €27, Paris–Amsterdam about €32, Brussels–Amsterdam about €22 (all compulsory).",
+    "Portugal Alfa Pendular/Intercidades: compulsory, about €5, and only bought locally in Portugal.",
+    "Germany ICE (about €5.50), Austria Railjet (about €3), Croatia (€1–€4): optional, though recommended at busy times.",
+    "Czechia SuperCity about €2.90 and Hungary InterCity about €2: compulsory but cheap.",
+    "Switzerland: most trains need no reservation. Glacier Express about €37–€53 and Bernina Express about €30–€39 are extra.",
+    "Germany/Austria–Italy EuroCity: compulsory, about €13–€17. Paris–Switzerland TGV Lyria: about €25–€29.",
+    "Booking through Interrail's own reservation system adds about €2 per person per train. Fees are 'indicative' and may differ locally."
+   ],
+   "tips": [
+    "Budget roughly £5–£10 a day for reservations if you use many fast trains in France, Spain and Italy; much less in Germany, Austria, Switzerland and Central Europe.",
+    "Use the Rail Planner app to add trips. Mobile passes must be activated and each journey added before you board.",
+    "Regional/slow trains in France, Spain and Italy usually need no reservation. It's a good way to avoid fees if you have time.",
+    "Your pass covers one outbound and one inbound journey in your home country (e.g. to St Pancras).",
+    "Many Swiss mountain railways are discounted only (often 25–50%), not free, with an Interrail pass.",
+    "Night train beds/couchettes always cost extra."
+   ]
+  },
+  "links": [
+   {
+    "label": "Apply for a free GHIC (NHS)",
+    "url": "https://www.nhs.uk/using-the-nhs/healthcare-abroad/apply-for-a-free-uk-global-health-insurance-card-ghic/"
+   },
+   {
+    "label": "EES official info (EU)",
+    "url": "https://travel-europe.europa.eu/ees_en"
+   },
+   {
+    "label": "ETIAS official info (EU)",
+    "url": "https://travel-europe.europa.eu/etias_en"
+   },
+   {
+    "label": "Interrail Global Pass",
+    "url": "https://www.interrail.com/en/interrail-passes/global-pass"
+   },
+   {
+    "label": "Interrail domestic reservation fees",
+    "url": "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees"
+   },
+   {
+    "label": "Interrail international reservation fees",
+    "url": "https://www.interrail.com/en/book-reservations/reservation-fees/international-train-reservation-fees"
+   },
+   {
+    "label": "ABTA: upcoming changes for travel to Europe",
+    "url": "https://www.abta.com/tips-and-advice/planning-and-booking-a-holiday/upcoming-changes-travel-europe"
+   }
+  ],
+  "sources": [
+   "https://home-affairs.ec.europa.eu/news/entryexit-system-will-become-fully-operational-10-april-2026-2026-03-30_en",
+   "https://www.gov.uk/foreign-travel-advice/france/entry-requirements",
+   "https://www.abta.com/tips-and-advice/planning-and-booking-a-holiday/upcoming-changes-travel-europe",
+   "https://schengentraveler.com/etias-launch-date/",
+   "https://www.nhs.uk/using-the-nhs/healthcare-abroad/apply-for-a-free-uk-global-health-insurance-card-ghic/",
+   "https://www.gov.uk/foreign-travel-advice/switzerland/health",
+   "https://www.seat61.com/how-to-use-an-interrail-pass.htm",
+   "https://www.interrail.com/en/interrail-passes/global-pass",
+   "https://plus.interrail.com/en/interrail-plus-pass",
+   "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+   "https://www.interrail.com/en/book-reservations/reservation-fees/international-train-reservation-fees",
+   "https://www.thetrainline.com/trains/rail-passes/interrail"
+  ]
+ },
+ "countries": [
+  {
+   "country": "Thailand",
+   "flag": "🇹🇭",
+   "lastChecked": "2026-11-12",
+   "summary": "Easy, well-trodden backpacker country with cheap street food and good transport, but costs creep up on the islands and in Bangkok nightlife.",
+   "costs": {
+    "budget": {
+     "accommodation": 9,
+     "food": 8,
+     "transport": 5,
+     "activities": 7
+    },
+    "midRange": {
+     "accommodation": 28,
+     "food": 18,
+     "transport": 10,
+     "activities": 15
+    }
+   },
+   "money": {
+    "currency": "Thai baht (THB)",
+    "cashOrCard": "Cash for street food, markets, guesthouses and songthaews; cards fine in malls, chains and bigger hotels. QR payments common for locals.",
+    "atms": "Thai ATMs charge a fixed fee per foreign-card withdrawal: usually 220 THB (~£5), some 2026 reports of 250–350 THB. AEON ATMs can be cheaper. Decline conversion.",
+    "tipping": "Not expected. Rounding up or leaving 20–50 THB for good service in restaurants or massages is appreciated."
+   },
+   "entry": [
+    "UK passport: from 15 Sept 2026 visa-exempt stays were cut from 60 to 30 days, for tourism only. Business trips now need a visa.",
+    "Thailand Digital Arrival Card (TDAC) is required for all foreign visitors: fill it in free online within 3 days before arrival.",
+    "Visa-exempt entry by land is normally limited to 2 times per calendar year.",
+    "Passport must be valid 6 months from arrival with 1 blank page.",
+    "You may be asked for proof of onward travel and 10,000 THB per person in funds; Brits have been refused entry without it.",
+    "A 300 THB tourist entry fee has been planned for years but repeatedly delayed; not confirmed as being collected as of Nov 2026."
+   ],
+   "health": [
+    "All travellers: keep routine UK jabs up to date (MMR, diphtheria-tetanus-polio).",
+    "Most travellers: hepatitis A and tetanus.",
+    "Some travellers: typhoid, hepatitis B, rabies, Japanese encephalitis, dengue, chikungunya, BCG. Ask a travel clinic 4–6 weeks before.",
+    "Malaria: none in Bangkok, Chiang Mai, Koh Samui/Phangan; low risk in forested border areas. Mostly bite avoidance, not tablets.",
+    "Dengue is a risk nationwide (51,795 cases in 2025). Use DEET repellent, especially in the daytime.",
+    "Zika and chikungunya are present (UK Zika cases linked to Thailand in 2026). Pregnant travellers should get advice first.",
+    "Rabies is present: avoid dogs, cats and monkeys. Any bite or scratch needs urgent medical care.",
+    "Mpox clade Ib cases reported in 2026: TravelHealthPro advises extra precautions.",
+    "Tap water is not safe to drink: use bottled or filtered water."
+   ],
+   "safety": [
+    "Jet-ski and scooter hire: never leave your passport as a deposit. Firms may claim fake damage and keep it until you pay.",
+    "Tuk-tuk/gem scam: a friendly stranger says a sight is 'closed today' and sends you to a gem or tailor shop. Walk away.",
+    "Vapes and e-cigarettes are illegal, with fines of 5,000–30,000 THB, possible detention and court.",
+    "Cannabis is now medical-only with a Thai prescription. Recreational use is illegal; taking it out of Thailand is a crime.",
+    "Drink spiking and methanol in drinks occur in tourist areas, including at full moon parties. Watch your drink.",
+    "Use ATMs inside banks and keep your card in sight to avoid skimming.",
+    "FCDO advises against all but essential travel within 20km of the Cambodia border and to the far south near Malaysia.",
+    "Beware fake high-paying job offers: some lead to trafficking into scam compounds in neighbouring countries."
+   ],
+   "practical": {
+    "plugs": "Types A, B, C, O · 220V",
+    "emergency": "191 police · 1669 ambulance · 1155 tourist police",
+    "sim": "AIS, True and dtac sell tourist SIMs/eSIMs at airports. Bring your passport to register."
+   },
+   "mustKnow": [
+    "Visa-free stay is now only 30 days (from 15 Sept 2026). Plan your route or get a visa for longer.",
+    "Fill in the free TDAC online in the 3 days before you arrive. Ignore paid look-alike sites.",
+    "Scooters: you need the right UK licence category plus a 1968 IDP, or insurance may refuse to pay. Always wear a helmet.",
+    "Each foreign-card ATM withdrawal costs ~220 THB or more, so take out larger amounts less often."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/thailand"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/thailand/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/thailand"
+    },
+    {
+     "label": "Thailand Digital Arrival Card (TDAC)",
+     "url": "https://tdac.immigration.go.th/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/thailand",
+    "https://www.gov.uk/foreign-travel-advice/thailand/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/thailand/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/thailand",
+    "https://tdac.immigration.go.th/",
+    "https://www.ttgasia.com/2026/09/08/thailand-cuts-visa-free-stay-to-30-days-for-60-countries/",
+    "https://www.khaosodenglish.com/tourism/2026/09/07/understanding-thailands-upcoming-visa-changes/",
+    "https://blog.wego.com/thailand-tourist-entry-fee-2026/",
+    "https://portail-asie.com/en/withdraw-money-in-thailand/",
+    "https://www.thelongestwayhome.com/travel-guides/thailand/thailand-money-atms-credit-cards.html"
+   ]
+  },
+  {
+   "country": "Vietnam",
+   "flag": "🇻🇳",
+   "lastChecked": "2026-11-12",
+   "summary": "Very good value, with amazing food and a long north–south backpacker trail by bus, train or (riskily) motorbike.",
+   "costs": {
+    "budget": {
+     "accommodation": 7,
+     "food": 6,
+     "transport": 5,
+     "activities": 5
+    },
+    "midRange": {
+     "accommodation": 22,
+     "food": 14,
+     "transport": 9,
+     "activities": 12
+    }
+   },
+   "money": {
+    "currency": "Vietnamese dong (VND)",
+    "cashOrCard": "Cash-heavy: street food, buses, markets and small guesthouses want dong. Cards and QR work in cities, hotels and bigger restaurants.",
+    "atms": "ATMs are everywhere in towns; local banks often add a fee (roughly 20,000–110,000 VND) and limits can be low. Rural areas can run dry, so carry cash.",
+    "tipping": "Not traditionally expected; small tips for guides, drivers and good service are appreciated."
+   },
+   "entry": [
+    "UK passport: visa-free for up to 45 days for tourism or business. Check the date stamped in your passport.",
+    "E-visa: up to 90 days, multiple entry, valid only at the entry/exit points you choose. Reported fees: US$25 single, US$50 multiple entry.",
+    "Apply only on the official portal evisa.gov.vn. Many look-alike sites charge far more or issue fake visas.",
+    "GOV.UK still names the older address evisa.xuatnhapcanh.gov.vn, which now says the portal moved to evisa.gov.vn (Nov 2024).",
+    "Passport must be valid 6 months from arrival, have 2 blank pages and be undamaged. Use the same passport in and out.",
+    "Digital arrival card at Ho Chi Minh City airport is encouraged but not mandatory. GOV.UK says a health declaration may be needed."
+   ],
+   "health": [
+    "All travellers: keep routine UK jabs up to date (MMR, diphtheria-tetanus-polio).",
+    "Most travellers: hepatitis A, tetanus and typhoid.",
+    "Some travellers: hepatitis B, rabies, Japanese encephalitis, dengue, chikungunya, BCG. Ask a travel clinic 4–6 weeks before.",
+    "Malaria: none in Hanoi, Ho Chi Minh City, big cities, Phu Quoc or the coast north of Nha Trang; low risk in rural highlands.",
+    "Dengue, Zika and chikungunya are present: avoid mosquito bites, especially in the daytime.",
+    "Rabies is present: avoid animals and get urgent care after any bite, scratch or lick.",
+    "Don't drink tap water. Buy alcohol from reputable places, as methanol poisoning has killed tourists."
+   ],
+   "safety": [
+    "Bag and phone snatching from passing motorbikes is common. Hold bags away from the road.",
+    "Never leave your passport with a motorbike rental shop or landlord as a deposit.",
+    "Use Grab, XanhSM or metered taxis from big firms; be wary of 'free' airport bus transfers.",
+    "Drugs carry very heavy penalties, including possible death sentences. Police drug-test at parties.",
+    "Laughing gas balloons are widely sold in bars and can be dangerous.",
+    "Only change money at official counters. Vapes are banned.",
+    "Use reputable operators for Ha Long Bay boats and adventure trips; standards vary."
+   ],
+   "practical": {
+    "plugs": "Types A, C, D (F also common) · 220V",
+    "emergency": "113 police · 115 ambulance · 114 fire",
+    "sim": "Viettel, Vinaphone and Mobifone tourist SIMs/eSIMs at airports. SIMs must be registered with your passport."
+   },
+   "mustKnow": [
+    "45 days visa-free; for longer, get the 90-day e-visa only from evisa.gov.vn, not look-alike sites.",
+    "Motorbikes: you need your UK licence plus a 1968 IDP, a helmet, and insurance that covers riding. Accidents have killed Brits.",
+    "Carry cash: much of daily life is cash-only, especially outside big cities."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/vietnam"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/vietnam/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/vietnam"
+    },
+    {
+     "label": "Official Vietnam e-visa portal",
+     "url": "https://evisa.gov.vn/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/vietnam/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/vietnam/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/vietnam",
+    "https://evisa.xuatnhapcanh.gov.vn",
+    "https://evisa.gov.vn/",
+    "https://vietnamnews.vn/society/1348634/immigration-department-warns-of-illegal-e-visa-application-websites.html",
+    "https://www.vietnamtourism.com/en/which-website-is-legit-for-a-vietnam-visa-the-complete-2026-guide-to-official-portals-scams-and-safe-alternatives"
+   ]
+  },
+  {
+   "country": "Cambodia",
+   "flag": "🇰🇭",
+   "lastChecked": "2026-11-12",
+   "summary": "Cheap and friendly, with Angkor as the big-ticket cost; US dollars are used alongside the riel almost everywhere.",
+   "costs": {
+    "budget": {
+     "accommodation": 6,
+     "food": 6,
+     "transport": 4,
+     "activities": 8
+    },
+    "midRange": {
+     "accommodation": 20,
+     "food": 14,
+     "transport": 8,
+     "activities": 16
+    }
+   },
+   "money": {
+    "currency": "Cambodian riel (KHR), with US dollars widely used",
+    "cashOrCard": "Cash is king. Prices are often in US$, with change under $1 given in riel. Cards mainly in hotels and upmarket places.",
+    "atms": "Most ATMs give US dollars and charge a fee (often ~$4–5). Bring clean, untorn dollar notes; damaged notes get refused.",
+    "tipping": "Not required but appreciated; a dollar or two for guides, drivers and good service is normal."
+   },
+   "entry": [
+    "UK passport: a tourist visa is needed. It allows 30 days and can be extended once in Cambodia.",
+    "E-visa: apply at least 4 days ahead via the official Cambodia e-visa app or the embassy site. Reported fee: about US$30.",
+    "Visa on arrival at airports and land borders: bring a passport photo and US dollars cash (usually ~$30; one source says $35).",
+    "Flying in: fill in the free e-Arrival Card at arrival.gov.kh within 7 days before arrival.",
+    "Passport must be valid 6 months from arrival, undamaged, with no missing pages.",
+    "Land border crossings with Thailand remain suspended after the 2025 fighting. Check before planning an overland route."
+   ],
+   "health": [
+    "All travellers: keep routine UK jabs up to date (MMR, diphtheria-tetanus-polio).",
+    "Most travellers: hepatitis A, tetanus and typhoid.",
+    "Some travellers: hepatitis B, rabies, Japanese encephalitis, dengue, chikungunya, BCG. Ask a travel clinic 4–6 weeks before.",
+    "Malaria: none in Phnom Penh, very low at Angkor/Siem Reap; low elsewhere. Tablets are not usually advised, but avoid bites.",
+    "Dengue is high in 2026 (28,000+ cases by July, up 58% on 2025). Use repellent day and night.",
+    "Rabies is present: avoid animals and get urgent care after any bite or scratch.",
+    "Avoid swimming in fresh water (schistosomiasis). Drink bottled or filtered water."
+   ],
+   "safety": [
+    "Bag and phone snatching by motorbike thieves is common, especially in Phnom Penh and Sihanoukville.",
+    "Fake 'easy high-pay' job offers lure people into forced scam compounds, mainly around Sihanoukville and border areas.",
+    "Methanol in alcohol and drink spiking have caused deaths. Never leave drinks unattended.",
+    "Landmines remain in rural areas: stay on main paths, including around remote temples.",
+    "Check dollar notes you get as change: fake bills circulate.",
+    "Zero tolerance for drugs, including cannabis; long jail terms even for small amounts.",
+    "FCDO advises against all but essential travel within 20km of the Thai border (tense ceasefire, landmines)."
+   ],
+   "practical": {
+    "plugs": "Types A, C, G · 230V",
+    "emergency": "117 police · 119 ambulance · 118 fire",
+    "sim": "Smart, Cellcard and Metfone tourist SIMs at airports and shops; passport needed. Data is cheap."
+   },
+   "mustKnow": [
+    "Sort your visa first: e-visa online/app or visa on arrival with US$ cash and a photo, plus the free e-Arrival Card if flying.",
+    "Budget for an Angkor pass, the main big expense (price set in US$; check at the official ticket office).",
+    "Don't leave your passport as a deposit for a scooter; helmets are required and no helmet can void insurance.",
+    "Overland to/from Thailand is not currently possible: land crossings are suspended."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/cambodia"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/cambodia/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/cambodia"
+    },
+    {
+     "label": "Cambodia e-Arrival Card",
+     "url": "https://arrival.gov.kh/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/cambodia",
+    "https://www.gov.uk/foreign-travel-advice/cambodia/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/cambodia/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/cambodia",
+    "https://arrival.gov.kh/",
+    "https://www.airtraveler.club/intel/cambodia-e-visa-cost-2026-36-all-in-and-no-passport-sticker/",
+    "https://www.issacompass.com/insights/cambodia-e-visa-and-e-arrival-card-step-by-step"
+   ]
+  },
+  {
+   "country": "Laos",
+   "flag": "🇱🇦",
+   "lastChecked": "2026-11-12",
+   "summary": "Slow, laid-back and cheap, with river towns and mountains; transport is slower and less frequent than in its neighbours.",
+   "costs": {
+    "budget": {
+     "accommodation": 6,
+     "food": 6,
+     "transport": 6,
+     "activities": 5
+    },
+    "midRange": {
+     "accommodation": 20,
+     "food": 13,
+     "transport": 11,
+     "activities": 12
+    }
+   },
+   "money": {
+    "currency": "Lao kip (LAK)",
+    "cashOrCard": "Mostly cash. Kip is used day to day; some hotels and tours quote in US$ or Thai baht. Cards only in larger hotels and some cafes.",
+    "atms": "ATMs in main towns but few in rural areas. Per-withdrawal limits are low and fees apply, so withdraw what you need before heading out.",
+    "tipping": "Not expected; small tips for guides and drivers are welcome."
+   },
+   "entry": [
+    "UK passport: a visa is needed. Tourist visas allow 30 days and can be extended twice (up to 60 extra days).",
+    "E-visa: apply at laoevisa.gov.la at least 5 days ahead. Single entry only.",
+    "Visa on arrival at main airports and many land borders: bring US$ cash and a photo. Fees quoted vary (about US$30–40), not officially confirmed.",
+    "Fill in the free Lao Digital Immigration Form (LDIF) at immigration.gov.la within 3 days before arrival and before departure.",
+    "Passport must be valid 6 months from arrival with 2 blank pages.",
+    "Overstaying is fined; failing to extend within 90 days can mean a US$2,000 fine."
+   ],
+   "health": [
+    "All travellers: keep routine UK jabs up to date (MMR, diphtheria-tetanus-polio).",
+    "Most travellers: hepatitis A, tetanus and typhoid.",
+    "Some travellers: hepatitis B, rabies, Japanese encephalitis, dengue, chikungunya, polio booster, BCG.",
+    "Staying 4+ weeks? You may need proof of polio vaccination on exit (a polio case was confirmed in 2025). Check TravelHealthPro.",
+    "Malaria: low risk overall, very low in Vientiane. Tablets usually not advised, but avoid bites.",
+    "Dengue, Zika and chikungunya are present: use repellent, especially in the daytime.",
+    "Rabies is present: avoid animals. Medical care is limited, so serious cases often go to Thailand."
+   ],
+   "safety": [
+    "Unexploded bombs are still found across Laos: stay on marked paths and never touch metal objects.",
+    "River tubing, kayaking and swimming (incl. the Mekong) have caused drownings. Insist on a lifejacket and don't mix with alcohol.",
+    "Methanol in drinks has caused deaths (Tiger Vodka/Whisky were banned). Avoid cheap spirits and buckets.",
+    "Some scooter rental firms 'steal' or damage their own bikes, then keep passports for big fees. Never leave your passport.",
+    "Zero tolerance for drugs, including cannabis; trafficking can carry the death penalty.",
+    "Bag snatching from motorbikes happens: keep cash and cards separate."
+   ],
+   "practical": {
+    "plugs": "Types A, B, C, E, F · 230V",
+    "emergency": "1191 police · 1195 ambulance · 1190 fire",
+    "sim": "Unitel and Lao Telecom SIMs at airports and phone shops; passport needed. Coverage patchy in remote areas."
+   },
+   "mustKnow": [
+    "Bring US$ cash and a photo for a visa on arrival, or get the e-visa from laoevisa.gov.la only.",
+    "Complete the free LDIF arrival form online before you arrive.",
+    "Motorbikes: you need your UK licence plus a 1949 IDP; helmets may not be supplied and night riding is dangerous.",
+    "UXO (unexploded bombs) is a real risk off the beaten track."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/laos"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/laos/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/laos"
+    },
+    {
+     "label": "Official Lao e-visa site",
+     "url": "https://laoevisa.gov.la/index"
+    },
+    {
+     "label": "Lao Digital Immigration Form (LDIF)",
+     "url": "https://www.immigration.gov.la/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/laos/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/laos/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/laos",
+    "https://laoevisa.gov.la/index",
+    "https://www.immigration.gov.la/",
+    "https://visafalcon.com/laos-visa-requirements",
+    "https://www.entrybrief.com/gb-passport/la/",
+    "https://www.easia-travel.com/travel-news/laos/laos-introduces-digital-immigration-registration-system-from-september-2025/"
+   ]
+  },
+  {
+   "country": "Indonesia",
+   "flag": "🇮🇩",
+   "lastChecked": "2026-11-12",
+   "summary": "Huge and varied: Bali is touristy and pricier, while Java, Lombok and Flores are cheaper and more adventurous.",
+   "costs": {
+    "budget": {
+     "accommodation": 8,
+     "food": 7,
+     "transport": 5,
+     "activities": 7
+    },
+    "midRange": {
+     "accommodation": 26,
+     "food": 16,
+     "transport": 10,
+     "activities": 16
+    }
+   },
+   "money": {
+    "currency": "Indonesian rupiah (IDR)",
+    "cashOrCard": "Cash for warungs, markets and small guesthouses; cards common in Bali cafes and hotels. Outside Bali, carry plenty of cash.",
+    "atms": "Plenty of ATMs in towns; some charge a fee and limits can be low. Use bank-branch ATMs, as card skimming is common.",
+    "tipping": "Not expected; 5–10% or rounding up for good service is appreciated. Many restaurants add a service charge."
+   },
+   "entry": [
+    "UK passport: 30-day visa on arrival (VoA), IDR 500,000, single entry, payable by cash or card. Extendable once by 30 days.",
+    "You can apply for an e-VoA or other visas online at evisa.imigrasi.go.id at least a week ahead. Get approval before flying.",
+    "Proof of onward or return travel is required for the VoA.",
+    "Fill in the free All Indonesia arrival card (customs/health) within 72 hours before arrival. Avoid sites that charge for it.",
+    "Bali tourist levy: IDR 150,000 (about £6–8) per foreign visitor, pay online via the official Love Bali site or on arrival.",
+    "Passport must be valid 6 months from arrival with 2 blank pages. Overstaying costs IDR 1 million per day."
+   ],
+   "health": [
+    "All travellers: keep routine UK jabs up to date (MMR, diphtheria-tetanus-polio).",
+    "Most travellers: hepatitis A, tetanus and typhoid.",
+    "Some travellers: hepatitis B, rabies, Japanese encephalitis, dengue, chikungunya, BCG. Ask a travel clinic 4–6 weeks before.",
+    "Malaria: high risk in Papua (tablets advised); low risk in Bali, Lombok, Java and Sumatra; none in Jakarta.",
+    "Dengue, Zika and chikungunya are present. UK Zika cases linked to Bali/Indonesia were reported in 2026.",
+    "Rabies is present, including Bali: avoid dogs and monkeys and get urgent care after any bite or scratch.",
+    "Don't drink tap water. 'Bali belly' is common: be careful with ice and raw food."
+   ],
+   "safety": [
+    "Methanol-laced alcohol has killed tourists, even from licensed bars. Avoid cheap spirits and unbranded arak.",
+    "Bag snatching and pickpocketing are common in busy Bali areas.",
+    "Use only licensed money changers (Bank Indonesia logo and QR code); short-changing scams are common.",
+    "Agree prices first at Bali tattoo parlours, spas and salons; scams are rising.",
+    "Drugs, including CBD and cannabis vapes, carry long prison sentences or death. Police raid Bali venues.",
+    "Volcano exclusion zones can change quickly; boats can be overcrowded, so avoid night crossings."
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 general · 110 police · 118/119 ambulance",
+    "sim": "Telkomsel, XL and Indosat tourist SIMs/eSIMs at airports; passport needed. Phones bought abroad are fine for short visits."
+   },
+   "mustKnow": [
+    "Budget for the IDR 500,000 VoA plus the IDR 150,000 Bali levy, and fill in the free All Indonesia card.",
+    "Scooters: your UK licence isn't valid on its own; you need an IDP and a helmet. Bali crashes have risen sharply.",
+    "Never risk drugs or cheap spirits: penalties and methanol poisoning are both deadly serious."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/indonesia"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/indonesia/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/indonesia"
+    },
+    {
+     "label": "Official Indonesia e-visa site",
+     "url": "https://evisa.imigrasi.go.id/"
+    },
+    {
+     "label": "All Indonesia arrival card",
+     "url": "https://allindonesia.imigrasi.go.id/"
+    },
+    {
+     "label": "Bali tourist levy (Love Bali)",
+     "url": "https://lovebali.baliprov.go.id/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/indonesia/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/indonesia/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/indonesia",
+    "https://evisa.imigrasi.go.id/",
+    "https://allindonesia.imigrasi.go.id/",
+    "https://lovebali.baliprov.go.id/"
+   ]
+  },
+  {
+   "country": "Japan",
+   "flag": "🇯🇵",
+   "lastChecked": "2026-11-12",
+   "summary": "Safe, spotless and fascinating, but by far the priciest country in the region; hostels, konbini food and rail passes keep it doable.",
+   "costs": {
+    "budget": {
+     "accommodation": 22,
+     "food": 16,
+     "transport": 14,
+     "activities": 8
+    },
+    "midRange": {
+     "accommodation": 60,
+     "food": 35,
+     "transport": 22,
+     "activities": 18
+    }
+   },
+   "money": {
+    "currency": "Japanese yen (JPY)",
+    "cashOrCard": "Cards and IC cards (Suica/Pasmo, also on phones) work in cities, but small restaurants, shrines and rural places can be cash-only.",
+    "atms": "7-Eleven, Japan Post and many convenience-store ATMs accept UK cards; some machine fees apply. Ordinary Japanese bank ATMs often don't.",
+    "tipping": "Don't tip: it isn't part of the culture and can cause confusion."
+   },
+   "entry": [
+    "UK passport: no visa needed for tourist stays up to 90 days; an extension of up to another 90 days can be requested in Japan.",
+    "Passport must be valid for your whole stay with a blank page. No extra validity required.",
+    "No pre-arrival authorisation is in force yet. Japan plans a JESTA travel authorisation, reported for around 2028.",
+    "Optional: Visit Japan Web lets you do immigration and customs forms online before you land.",
+    "Departure tax rose from ¥1,000 to ¥3,000 from 1 July 2026; it's usually added to your flight ticket.",
+    "Some common UK medicines (e.g. some cold remedies, ADHD meds) are restricted. Check before you pack."
+   ],
+   "health": [
+    "All travellers: keep routine UK jabs up to date (MMR, diphtheria-tetanus-polio).",
+    "Most travellers: make sure tetanus is up to date.",
+    "Some travellers: hepatitis B, Japanese encephalitis (longer rural stays), tick-borne encephalitis (hikers), rabies only for bat contact.",
+    "No malaria. Dengue risk is low but present.",
+    "Measles cases rose in 2026: check you've had 2 MMR doses.",
+    "Tap water is safe to drink. Summer heatstroke is a serious risk."
+   ],
+   "safety": [
+    "Very low crime, but bar touts in Kabukicho (Shinjuku) and Roppongi spike drinks and run up huge card bills. Don't follow touts.",
+    "Check menu and cover charges before ordering in bars; bill disputes have led to arrests.",
+    "Always carry your passport: police can ask for it and arrest you without it.",
+    "Zero tolerance on drugs; suspects can be held for up to 23 days without charge.",
+    "Learn earthquake and tsunami basics and follow alerts; typhoon season is June–December.",
+    "Bear sightings are increasing in mountain and forest areas."
+   ],
+   "practical": {
+    "plugs": "Types A, B · 100V (UK chargers usually fine; check hair dryers)",
+    "emergency": "110 police · 119 ambulance/fire",
+    "sim": "Data-only SIMs and eSIMs are easy to buy at airports or online; pocket Wi-Fi is also popular. Voice SIMs are hard for tourists."
+   },
+   "mustKnow": [
+    "Tax-free shopping changed on 1 Nov 2026: you pay full price including tax and claim a refund at customs when you leave.",
+    "Carry some cash: plenty of small places still don't take cards.",
+    "Check your medicines before you go: some UK over-the-counter drugs are illegal in Japan.",
+    "Driving needs a 1949 IDP plus your UK licence."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/japan"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/japan/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/japan"
+    },
+    {
+     "label": "Visit Japan Web (arrival forms)",
+     "url": "https://services.digital.go.jp/en/visit-japan-web/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/japan/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/japan/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/japan",
+    "https://services.digital.go.jp/en/visit-japan-web/",
+    "https://www.japan.travel/en/ca/news/japans-international-tourist-tax-is-increasing/",
+    "https://www.travelvoice.jp/english/the-japanese-ruling-parties-specify-a-rise-in-departure-tax-to-3-000-yen-in-the-tax-reform-outline-for-fy2026",
+    "https://www.japan-guide.com/news/tax-free-shopping.html",
+    "https://www.japan.travel/en/ca/news/changes-are-coming-to-japans-tax-free-shopping/",
+    "https://www.executivetraveller.com/news/japan-tourist-tax-free-shopping-refund"
+   ]
+  },
+  {
+   "country": "Australia",
+   "flag": "🇦🇺",
+   "lastChecked": "2026-11-12",
+   "summary": "Easy, safe and social for backpackers, but one of the priciest places on a gap year – most people work on a Working Holiday visa to fund it.",
+   "costs": {
+    "budget": {
+     "accommodation": 25,
+     "food": 15,
+     "transport": 10,
+     "activities": 10
+    },
+    "midRange": {
+     "accommodation": 75,
+     "food": 35,
+     "transport": 20,
+     "activities": 25
+    }
+   },
+   "money": {
+    "currency": "Australian dollar (AUD)",
+    "cashOrCard": "Card and contactless almost everywhere; carry a little cash for markets and remote areas.",
+    "atms": "Plentiful in towns; some charge a fee to foreign cards – use your bank's partner or a fee-free travel card.",
+    "tipping": "Not expected. Rounding up or 10% for great restaurant service is a nice extra, not required."
+   },
+   "entry": [
+    "UK passport: you need an eVisitor (subclass 651) or an ETA (subclass 601) before you fly.",
+    "eVisitor is free and applied for online; ETA is via the official Australian ETA app with an AUD 20 service charge.",
+    "Both allow stays of up to 3 months per visit; you cannot work on either.",
+    "Passport must be valid for your whole stay (check transit countries – many want 6 months).",
+    "Working Holiday visa (subclass 417): UK citizens can apply up to age 35 and work while travelling.",
+    "Since July 2024, UK citizens can get a 2nd and 3rd Working Holiday visa without doing farm/regional work.",
+    "Working Holiday visa fee rises most Julys – check the current fee on the Home Affairs site before applying.",
+    "Biosecurity is strict: declare all food, plant, animal and wooden items or face heavy fines."
+   ],
+   "health": [
+    "Make sure UK routine jabs are up to date; tetanus is recommended for most travellers.",
+    "Some travellers: hepatitis B, Japanese encephalitis (parts of the country), rabies (bat bites) and polio – ask a travel nurse.",
+    "No malaria. Dengue occurs in parts of northern Queensland – avoid mosquito bites.",
+    "Other mosquito viruses (Ross River, Murray Valley) exist – use repellent, especially in the north and outback.",
+    "Sun is fierce: high-factor sunscreen, hat and water. Swim between the red and yellow flags on beaches.",
+    "A yellow fever certificate is needed only if arriving from a yellow fever risk country (e.g. South America)."
+   ],
+   "safety": [
+    "Very safe overall; the main risks are sun, sea, wildlife and driving long distances tired.",
+    "Rip currents kill swimmers every year – only swim at patrolled beaches between the flags.",
+    "Job scams: be wary of farm or hostel jobs asking for upfront fees, or cash-in-hand pay below minimum wage.",
+    "Use a reputable bank for wages and keep payslips – you may claim back superannuation when you leave.",
+    "In the outback carry plenty of water and fuel, and tell someone your route."
+   ],
+   "practical": {
+    "plugs": "Type I · 230V",
+    "emergency": "000 (112 also works from mobiles)",
+    "sim": "Telstra has the best rural coverage; Optus, Vodafone and Boost are cheaper. Bring passport ID to activate."
+   },
+   "mustKnow": [
+    "Get your eVisitor or ETA before flying – only via the official Home Affairs site or the official ETA app.",
+    "Daily costs are high; budget around £60 a day even as a hostel backpacker.",
+    "Declare food and outdoor gear at the airport – biosecurity fines are big.",
+    "UK citizens no longer need farm work to extend a Working Holiday visa."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/australia"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/australia/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/australia"
+    },
+    {
+     "label": "eVisitor (Home Affairs)",
+     "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/evisitor-651"
+    },
+    {
+     "label": "ETA (Home Affairs)",
+     "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601"
+    },
+    {
+     "label": "Working Holiday visa 417",
+     "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/work-holiday-417"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/australia/entry-requirements",
+    "https://travelhealthpro.org.uk/countries/australia",
+    "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601",
+    "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/evisitor-651",
+    "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/work-holiday-417",
+    "https://oneplanetmigrationlaw.com.au/immigration-blog/working-holiday-visa-australia-417-vs-462-2026/",
+    "https://www.frazerjones.com/career-advice/international-relocation/new-rules-for-australia-uk-working-holiday-visa/"
+   ]
+  },
+  {
+   "country": "New Zealand",
+   "flag": "🇳🇿",
+   "lastChecked": "2026-11-12",
+   "summary": "Stunning, safe and outdoorsy, but expensive – backpackers save by cooking in hostels, using bus passes or campervan relocations.",
+   "costs": {
+    "budget": {
+     "accommodation": 19,
+     "food": 15,
+     "transport": 12,
+     "activities": 12
+    },
+    "midRange": {
+     "accommodation": 65,
+     "food": 30,
+     "transport": 25,
+     "activities": 30
+    }
+   },
+   "money": {
+    "currency": "New Zealand dollar (NZD)",
+    "cashOrCard": "Card and contactless are used almost everywhere; some places add a small card surcharge.",
+    "atms": "Easy to find in towns; scarce in remote areas, so take some cash before long hikes or road trips.",
+    "tipping": "Not expected. Leave 10% only for exceptional service if you want to."
+   },
+   "entry": [
+    "UK passport: no visa needed for tourism, but you must get an NZeTA before travelling.",
+    "NZeTA costs NZD 17 on the official app (about NZD 23 online) plus the NZD 100 visitor levy (IVL) – about NZD 117–123 total.",
+    "The NZeTA is valid for 2 years; UK citizens can stay up to 6 months per visit.",
+    "Allow up to 72 hours for the NZeTA to be processed.",
+    "Passport must be valid for at least 3 months after you plan to leave New Zealand.",
+    "You may be asked for an onward ticket and proof of enough money.",
+    "Working Holiday visa: UK citizens can apply up to age 35; fee about NZD 770 (+ NZD 100 IVL). Check length on INZ.",
+    "Biosecurity is very strict: declare food, hiking boots, tents – fines up to NZD 100,000."
+   ],
+   "health": [
+    "Make sure UK routine jabs are up to date; tetanus is recommended for most travellers.",
+    "No malaria or dengue risk. No yellow fever certificate needed.",
+    "UV levels are very high – use high-factor sunscreen even on cloudy days.",
+    "Mountain weather changes fast: check forecasts and the hut/track info before hiking."
+   ],
+   "safety": [
+    "Very low crime overall, but break-ins to cars and campervans at trailheads and viewpoints are common.",
+    "Never leave passports, cards or laptops visible in a parked vehicle.",
+    "Drive on the left; many roads are narrow and winding – don't drive long distances jet-lagged.",
+    "Rivers and beaches can be dangerous – don't cross flooded rivers when tramping.",
+    "Register your hiking plans with someone (or AdventureSmart) before multi-day walks."
+   ],
+   "practical": {
+    "plugs": "Type I · 230V",
+    "emergency": "111",
+    "sim": "One NZ, Spark and 2degrees sell prepaid SIMs/eSIMs at airports; coverage is patchy in national parks."
+   },
+   "mustKnow": [
+    "Get your NZeTA and pay the NZD 100 visitor levy only via the official app or Immigration NZ site.",
+    "Budget around £55–60 a day even as a backpacker.",
+    "Save money with campervan relocation deals (often NZD 1–5/day) or an InterCity FlexiPass bus pass.",
+    "Declare food and outdoor kit on arrival – biosecurity fines are huge."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/new-zealand"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/new-zealand/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/new-zealand"
+    },
+    {
+     "label": "NZeTA (Immigration New Zealand)",
+     "url": "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/"
+    },
+    {
+     "label": "InterCity FlexiPass",
+     "url": "https://www.intercity.co.nz/bus-pass/flexipass-overview"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/new-zealand/entry-requirements",
+    "https://travelhealthpro.org.uk/countries/new-zealand",
+    "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/",
+    "https://www.mbie.govt.nz/immigration-and-tourism/tourism/tourism-funding/international-visitor-conservation-and-tourism-levy",
+    "https://www.airtraveler.club/intel/new-zealand-ivl-fee-2026-nzd-100-non-refundable-and-who-exempt/",
+    "https://www.tradestaff.co.nz/blog/2026/06/new-zealand-working-holiday-visa-2026-are-you-eligible",
+    "https://www.intercity.co.nz/bus-pass/flexipass-overview",
+    "https://www.imoova.com/"
+   ]
+  },
+  {
+   "country": "USA",
+   "flag": "🇺🇸",
+   "lastChecked": "2026-11-12",
+   "summary": "Huge and varied but expensive, with costs pushed up by tips and sales tax – and medical care is ruinously expensive without insurance.",
+   "costs": {
+    "budget": {
+     "accommodation": 38,
+     "food": 22,
+     "transport": 12,
+     "activities": 12
+    },
+    "midRange": {
+     "accommodation": 110,
+     "food": 45,
+     "transport": 25,
+     "activities": 30
+    }
+   },
+   "money": {
+    "currency": "US dollar (USD)",
+    "cashOrCard": "Cards and contactless are accepted almost everywhere; keep some small notes for tips.",
+    "atms": "Everywhere, but many charge $3–5 per withdrawal on top of your bank's fees.",
+    "tipping": "Expected: 18–22% at sit-down restaurants and bars ($1–2 a drink), 15–20% for taxis, a few dollars for hotel staff."
+   },
+   "entry": [
+    "UK passport: you need an approved ESTA before you fly (or a visa if not eligible).",
+    "ESTA costs US$40.62 (from 16 October 2026) and is valid for 2 years or until your passport expires.",
+    "ESTA allows stays of up to 90 days per visit; you cannot work or study on it.",
+    "Apply ONLY at esta.cbp.dhs.gov or the official ESTA Mobile app – look-alike sites charge extra fees.",
+    "ESTA now asks for a selfie photo; older ESTAs without one may need a new application – check your account.",
+    "From 3 November 2026 all flyers to the US must complete a form saying if they were in the DR Congo in the last 21 days.",
+    "A 2025 plan to make 5 years of social media mandatory for ESTA was not confirmed in force as of Nov 2026 – check.",
+    "Border officers can inspect your phone and social media; arrests or past overstays can make you ineligible."
+   ],
+   "health": [
+    "Make sure UK routine jabs are up to date; tetanus is recommended for most travellers.",
+    "Rabies vaccine may be advised for some (e.g. working with animals or remote trips) – bats can carry rabies.",
+    "No malaria. Dengue occurs in some southern areas and territories; West Nile virus is spread by mosquitoes.",
+    "Healthcare is extremely expensive: insurance must name the USA and have very high medical cover (often £5m+ recommended).",
+    "Altitude illness is possible in the Rockies and high Sierra – ascend gradually."
+   ],
+   "safety": [
+    "Most visits are trouble-free; stay aware in quiet downtown areas at night and on public transport.",
+    "Car break-ins are common at trailheads, beaches and city parking – never leave bags visible.",
+    "Watch for ESTA look-alike sites and fake 'immigration' phone calls demanding payment.",
+    "Gun crime exists – if caught in an incident, follow police instructions (run, hide, tell).",
+    "Extreme heat in deserts (e.g. Death Valley, Grand Canyon in summer) kills hikers – carry lots of water."
+   ],
+   "practical": {
+    "plugs": "Type A/B · 120V (check your devices are dual-voltage)",
+    "emergency": "911",
+    "sim": "Use an eSIM or a prepaid SIM (T-Mobile, Mint, AT&T); bring an unlocked phone."
+   },
+   "mustKnow": [
+    "Only apply for ESTA on esta.cbp.dhs.gov (US$40.62) – other sites are resellers.",
+    "Travel insurance must explicitly cover the USA with very high medical limits.",
+    "Shop and menu prices exclude sales tax (often 0–10%), and tips of ~20% are expected.",
+    "From 3 Nov 2026 every traveller must complete a short DR Congo (Ebola) declaration form."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/usa"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/usa/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/usa"
+    },
+    {
+     "label": "Official ESTA site",
+     "url": "https://esta.cbp.dhs.gov/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/usa",
+    "https://www.gov.uk/foreign-travel-advice/usa/entry-requirements",
+    "https://travelhealthpro.org.uk/countries/usa",
+    "https://esta.cbp.dhs.gov/",
+    "https://esta.cbp.dhs.gov/faq?lang=en",
+    "https://www.cbp.gov/travel/international-visitors/esta",
+    "https://www.federalregister.gov/documents/2025/12/10/2025-22461/agency-information-collection-activities-revision-arrival-and-departure-record-form-i-94-and"
+   ]
+  },
+  {
+   "country": "Mexico",
+   "flag": "🇲🇽",
+   "lastChecked": "2026-11-12",
+   "summary": "Great value with amazing food, culture and beaches; easy backpacker trail from Mexico City to Oaxaca, Chiapas and the Yucatán.",
+   "costs": {
+    "budget": {
+     "accommodation": 12,
+     "food": 10,
+     "transport": 6,
+     "activities": 6
+    },
+    "midRange": {
+     "accommodation": 40,
+     "food": 22,
+     "transport": 12,
+     "activities": 18
+    }
+   },
+   "money": {
+    "currency": "Mexican peso (MXN)",
+    "cashOrCard": "Cards fine in cities and resorts; cash needed for street food, markets, colectivos and small towns.",
+    "atms": "Use bank ATMs inside banks or malls in daylight; always decline 'conversion' to pounds.",
+    "tipping": "10–15% in restaurants (check if 'servicio' is already added); small tips for guides and petrol attendants."
+   },
+   "entry": [
+    "UK passport: no visa needed for tourism; the officer decides how many days you get (max 180).",
+    "Your entry is recorded digitally (tourist card/FMM) – check the days given and keep any e-gate ticket for departure.",
+    "Arriving by land you must complete the online immigration (FMM) form on the INM site.",
+    "You may be asked for an onward ticket, accommodation details and proof of funds.",
+    "Mexican Embassy recommends 6 months' passport validity.",
+    "Quintana Roo (Cancún, Tulum etc.) charges a visitor tax (VISITAX) – keep proof of payment for departure."
+   ],
+   "health": [
+    "Recommended for most travellers: hepatitis A, typhoid and tetanus.",
+    "Some travellers: rabies, and make sure MMR (measles) is up to date.",
+    "Dengue, chikungunya and Zika are spread by day-biting mosquitoes – use repellent.",
+    "Zika: pregnant women or those planning pregnancy should take advice before travel.",
+    "Very low malaria risk – bite avoidance only, no tablets usually needed.",
+    "Mexico City is at ~2,240m – take it easy for your first day or two."
+   ],
+   "safety": [
+    "Only use authorised 'sitio' taxis, airport pre-paid taxis or ride apps – not street taxis.",
+    "Express kidnappings happen: victims are forced to empty ATMs. Use ATMs inside malls in daylight.",
+    "Watch drinks in bars; spiking and fake/methanol alcohol have been reported.",
+    "Virtual kidnapping calls: if someone claims a friend is kidnapped, hang up and contact them directly.",
+    "Fake police may try to 'fine' you – don't hand over your passport or cash; ask for ID.",
+    "FCDO advises against travel to parts of Mexico (e.g. Acapulco) – check regional advice."
+   ],
+   "practical": {
+    "plugs": "Type A/B · 127V",
+    "emergency": "911",
+    "sim": "Telcel has the best coverage. New SIM/eSIM rules: expect to register the line with your passport on activation."
+   },
+   "mustKnow": [
+    "Check the number of days stamped/recorded on entry – it may be less than 180.",
+    "Use authorised taxis or apps and bank ATMs inside buildings in daylight.",
+    "Check FCDO regional advice – some states have 'all but essential travel' warnings.",
+    "Get hepatitis A and typhoid jabs and use mosquito repellent (dengue)."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/mexico"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/mexico/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/mexico"
+    },
+    {
+     "label": "Mexican immigration (INM)",
+     "url": "https://www.gob.mx/inm"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/mexico/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/mexico/safety-and-security",
+    "https://travelhealthpro.org.uk/countries/mexico",
+    "https://www.gob.mx/inm",
+    "https://mobileecosystemforum.com/2026/10/06/mexico-revises-mobile-registration-framework-staggered-deadlines-and-a-narrowed-scope/",
+    "https://www.mexperience.com/all-mexico-cellphone-users-must-register"
+   ]
+  },
+  {
+   "country": "Colombia",
+   "flag": "🇨🇴",
+   "lastChecked": "2026-11-12",
+   "summary": "Friendly, varied and good value – Caribbean coast, coffee region and cities like Medellín – but you need solid street smarts.",
+   "costs": {
+    "budget": {
+     "accommodation": 10,
+     "food": 9,
+     "transport": 6,
+     "activities": 6
+    },
+    "midRange": {
+     "accommodation": 35,
+     "food": 20,
+     "transport": 12,
+     "activities": 15
+    }
+   },
+   "money": {
+    "currency": "Colombian peso (COP)",
+    "cashOrCard": "Cash is king outside cities and for buses, street food and small hostels; cards fine in malls and bigger places.",
+    "atms": "Use ATMs inside banks or malls in daytime; many have low limits and fees – Bancolombia and Davivienda are common.",
+    "tipping": "Restaurants often add a 10% 'servicio voluntario' – you can decline it; no need to add more."
+   },
+   "entry": [
+    "UK passport: no visa needed for up to 90 days (can be extended to 180 days in any 12 months).",
+    "You must show a return or onward ticket dated within your permitted stay.",
+    "Check-MIG online form is now optional but can speed up entry (submit 72 hours to 1 hour before travel).",
+    "Passport valid on entry; Colombia recommends 6 months' validity after you leave.",
+    "Make sure you get an entry stamp at land borders, or you may be fined.",
+    "Departure tax is usually included in your flight ticket; San Andrés needs a tourist card bought before flying."
+   ],
+   "health": [
+    "Recommended for most travellers: hepatitis A, typhoid and tetanus.",
+    "Yellow fever: there is an ongoing outbreak; vaccination is recommended for many areas – check TravelHealthPro.",
+    "Carry your yellow fever certificate – it may be checked at airports, bus stations and some parks.",
+    "Some travellers: rabies and tuberculosis (long stays).",
+    "Dengue, chikungunya and Zika risk – avoid mosquito bites day and night.",
+    "Low malaria risk in rural areas below 1,600m – bite avoidance; Bogotá is at ~2,600m (altitude)."
+   ],
+   "safety": [
+    "Scopolamine (burundanga) drugging: never accept drinks, food, cigarettes or flyers from strangers.",
+    "Dating-app robberies target foreigners – don't invite matches back or go to theirs.",
+    "Use ride apps or booked taxis, never street taxis, especially at night.",
+    "Fake police may ask to 'check' your money – ask to go to the nearest CAI police station.",
+    "'No dar papaya': keep phones out of sight in the street – snatch theft is common.",
+    "FCDO advises against travel to some border and rural areas – check regional advice."
+   ],
+   "practical": {
+    "plugs": "Type A/B · 110V",
+    "emergency": "123",
+    "sim": "Claro has the best coverage; Movistar and Tigo are cheaper. Buy at official stores with your passport."
+   },
+   "mustKnow": [
+    "Have proof of onward travel before you fly in.",
+    "Get a yellow fever jab before travel (ongoing outbreak) and carry the certificate.",
+    "Drugging and dating-app robberies are the biggest risks – never accept anything from strangers.",
+    "Use ATMs inside banks or malls in daytime."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/colombia"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/colombia/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/colombia"
+    },
+    {
+     "label": "Check-MIG (Migración Colombia)",
+     "url": "https://apps.migracioncolombia.gov.co/pre-registro/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/colombia/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/colombia/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/colombia/getting-help",
+    "https://travelhealthpro.org.uk/countries/colombia",
+    "https://apps.migracioncolombia.gov.co/pre-registro/"
+   ]
+  },
+  {
+   "country": "Peru",
+   "flag": "🇵🇪",
+   "lastChecked": "2026-11-12",
+   "summary": "A backpacker classic – Machu Picchu, the Andes, Amazon and great food – cheap day to day, but big-ticket trips and altitude need planning.",
+   "costs": {
+    "budget": {
+     "accommodation": 9,
+     "food": 8,
+     "transport": 7,
+     "activities": 7
+    },
+    "midRange": {
+     "accommodation": 30,
+     "food": 18,
+     "transport": 14,
+     "activities": 20
+    }
+   },
+   "money": {
+    "currency": "Peruvian sol (PEN)",
+    "cashOrCard": "Very cash-heavy outside cities and tourist restaurants; cards often have a surcharge.",
+    "atms": "Common in cities but low withdrawal limits and fees; bring clean, undamaged US dollars as backup.",
+    "tipping": "About 10% in sit-down restaurants; tip trekking guides, porters and cooks (agree amounts with your group)."
+   },
+   "entry": [
+    "UK passport: no visa needed; usually up to 90 days in 180 (max 183 days a year) – check the days you are given.",
+    "Passport must be valid for at least 6 months from arrival.",
+    "Overstaying means a fine and possible detention – keep track of your days.",
+    "At land borders make sure you get an entry stamp, or you can't leave Peru.",
+    "From 7 December, passengers connecting at Lima airport must pay a separate airport fee (TUUA) – pay online in advance."
+   ],
+   "health": [
+    "Recommended for most travellers: hepatitis A, typhoid and tetanus.",
+    "Yellow fever jab recommended for jungle/Amazon areas below 2,300m (e.g. Puerto Maldonado, Iquitos).",
+    "Generally not needed if you only visit Cusco city, Machu Picchu, the Inca Trail or Lima – check TravelHealthPro.",
+    "Some travellers: rabies and tuberculosis. Dengue, chikungunya and Zika – avoid mosquito bites.",
+    "Low malaria risk in the Amazon and rural areas below 2,000m – bite avoidance; none in Lima.",
+    "Altitude: Cusco is ~3,400m. Ascend slowly, rest on day one, drink water, avoid alcohol; ask a GP about acetazolamide.",
+    "Descend if you get worsening headache, breathlessness at rest or confusion – these can be serious."
+   ],
+   "safety": [
+    "Fake taxis at Lima airport and bus stations – use app or booked taxis, never hail on the street.",
+    "Express kidnapping: victims forced to withdraw cash. Don't resist; travel in groups at night.",
+    "Counterfeit soles and US dollars circulate – check notes and avoid street money changers in Cusco.",
+    "Armed robberies on some intercity buses – use reputable companies and avoid overnight routes where possible.",
+    "Ayahuasca 'retreats' are unregulated; people have died or been assaulted.",
+    "Protests can block roads and stop Machu Picchu trains with little notice."
+   ],
+   "practical": {
+    "plugs": "Type A/C · 220V",
+    "emergency": "105 (police), 106 (ambulance), 116 (fire)",
+    "sim": "Claro or Movistar have the best coverage; Entel and Bitel are cheaper. Register with passport at an official shop."
+   },
+   "mustKnow": [
+    "Book Machu Picchu tickets early only on tuboleto.cultura.pe – timed entry by circuit, daily caps (4,500–5,600).",
+    "Acclimatise to altitude: spend 2–3 days around Cusco/Sacred Valley before hard treks.",
+    "Get a yellow fever jab if heading to the Amazon; carry the certificate.",
+    "El Niño may bring heavy rain, floods and landslides into early 2027 – check routes and trains."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/peru"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/peru/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/peru"
+    },
+    {
+     "label": "Official Machu Picchu tickets",
+     "url": "https://tuboleto.cultura.pe/"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/peru/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/peru/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/peru/getting-help",
+    "https://travelhealthpro.org.uk/countries/peru",
+    "https://tuboleto.cultura.pe/",
+    "https://andina.pe/ingles/noticia-planning-to-visit-machu-picchu-in-2026-check-out-new-ticket-rates-and-visitor-limits-1050546.aspx"
+   ]
+  },
+  {
+   "country": "Bolivia",
+   "flag": "🇧🇴",
+   "lastChecked": "2026-11-12",
+   "summary": "The cheapest country on the South America trail, with the Uyuni salt flats and La Paz, but high altitude, cash-only habits and frequent roadblocks.",
+   "costs": {
+    "budget": {
+     "accommodation": 7,
+     "food": 6,
+     "transport": 4,
+     "activities": 6
+    },
+    "midRange": {
+     "accommodation": 22,
+     "food": 14,
+     "transport": 8,
+     "activities": 15
+    }
+   },
+   "money": {
+    "currency": "Bolivian boliviano (BOB)",
+    "cashOrCard": "Very cash-heavy – most hostels, buses, food and tours want bolivianos. Cards only in bigger hotels and shops.",
+    "atms": "Fine in La Paz, Sucre and Santa Cruz but low limits; none on the Uyuni jeep tour – take enough cash first.",
+    "tipping": "Not expected in local places; around 10% in tourist restaurants and a tip for tour guides and drivers."
+   },
+   "entry": [
+    "UK passport: no visa needed for up to 90 days in a year (officials may stamp 30 – you can still stay 90).",
+    "Passport must be valid for 6 months from arrival with at least two blank pages.",
+    "Make sure you get an entry stamp, or you may be fined when you leave.",
+    "You may be asked for proof of your first night's accommodation.",
+    "Yellow fever certificate needed if arriving from a yellow fever risk country (e.g. from Brazil or Peru's Amazon)."
+   ],
+   "health": [
+    "Recommended for most travellers: hepatitis A, typhoid and tetanus.",
+    "Yellow fever jab recommended for lowland areas below 2,300m east of the Andes (Rurrenabaque, Santa Cruz, Beni, Pando).",
+    "Bolivia says visitors to yellow fever risk areas should carry a vaccination card – carry yours.",
+    "Some travellers: hepatitis B, rabies and tuberculosis. Dengue, chikungunya and Zika in the lowlands.",
+    "Low malaria risk in the Amazon and rural areas below 2,500m; no risk above 2,500m.",
+    "Altitude: La Paz ~3,600m, El Alto airport ~4,000m, Uyuni ~3,700m with tours up to ~5,000m – ascend slowly.",
+    "Ideally arrive overland from lower places (e.g. Cusco/Lake Titicaca), rest, hydrate, avoid alcohol; ask a GP about acetazolamide."
+   ],
+   "safety": [
+    "Fake police are a known scam – never get into an unmarked 'police' car or show cash/cards on the street.",
+    "Express kidnappings target lone travellers, often in taxis at borders – take the direct Copacabana–La Paz bus.",
+    "Use radio taxis booked by phone or your hostel; avoid taxis already carrying passengers.",
+    "Tour operators (Uyuni, Death Road) have no minimum standards – pick reputable ones and check vehicles/bikes.",
+    "Roadblocks and protests are common under the current State of Emergency – don't try to cross them.",
+    "Bus tickets marked 'condicionado' don't guarantee you'll arrive; allow spare days."
+   ],
+   "practical": {
+    "plugs": "Type A/C · 230V (some 110V in La Paz)",
+    "emergency": "110 (police), 118 (ambulance), 119 (fire)",
+    "sim": "Entel has the widest coverage (including the altiplano); Tigo is good in cities. Register with passport."
+   },
+   "mustKnow": [
+    "The boliviano was floated in June 2026: rate jumped from 6.96 to ~12 per US$ and the parallel market has mostly closed.",
+    "ATMs and cards now give near-market rates; check the BCB rate, use licensed casas de cambio, avoid street changers.",
+    "Bring crisp, undamaged US dollars as backup and take enough cash before Uyuni – prices are rising (inflation ~20%).",
+    "Plan for altitude and roadblocks: build in rest days and buffer days."
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/bolivia"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/bolivia/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/countries/bolivia"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/bolivia",
+    "https://www.gov.uk/foreign-travel-advice/bolivia/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/bolivia/warnings-and-insurance",
+    "https://www.gov.uk/foreign-travel-advice/bolivia/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/bolivia/getting-help",
+    "https://travelhealthpro.org.uk/countries/bolivia",
+    "https://www.france24.com/en/live-news/20260629-bolivia-removes-15-year-dollar-peg-in-bid-to-revive-economy",
+    "https://www.riotimesonline.com/bolivia-exchange-rate-flexible-regime-september-2026/",
+    "https://bushop.com/bolivia/guides/bolivia-currency-guide-bolivianos-exchange-rates-and-where-to-change-money/"
+   ]
+  },
+  {
+   "country": "France",
+   "flag": "🇫🇷",
+   "lastChecked": "2026-11-12",
+   "summary": "Pricey in Paris but manageable with hostels, bakeries and supermarket picnics; fast TGVs need paid reservations, so slow regional trains save money.",
+   "costs": {
+    "budget": {
+     "accommodation": 32,
+     "food": 20,
+     "transport": 7,
+     "activities": 8
+    },
+    "midRange": {
+     "accommodation": 85,
+     "food": 45,
+     "transport": 15,
+     "activities": 20
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Contactless cards accepted almost everywhere; carry a little cash for markets and small cafés.",
+    "atms": "Use bank ATMs; always choose to be charged in euros (decline 'conversion' to GBP).",
+    "tipping": "Service is included by law ('service compris'). Rounding up or leaving €1–2 is enough."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry; at Eurostar St Pancras and Dover this happens before you leave the UK",
+    "ETIAS: not needed yet (no start date confirmed)",
+    "Passport must be under 10 years old on entry and valid 3+ months after you leave Schengen"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare; you may pay part of the cost as locals do",
+    "Emergency: 112 (or 15 for SAMU ambulance)",
+    "Pharmacies (green cross) give good advice for minor issues",
+    "Ticks and mosquitoes in summer; dengue and chikungunya cases occur in the south"
+   ],
+   "safety": [
+    "Pickpocket gangs work the Paris Métro, RER and mainline stations, often one distracts while another steals",
+    "Serious assaults reported on RER B (airports, Gare du Nord) and RER D. Stay alert, especially late",
+    "Petition/clipboard and 'friendship bracelet' scams around Montmartre and the Eiffel Tower",
+    "Watch for drink spiking in bars; buy your own drinks",
+    "Strikes are frequent and can cancel trains at short notice. Check SNCF before travel"
+   ],
+   "practical": {
+    "plugs": "Types C, E · 230V",
+    "emergency": "112 (15 ambulance, 17 police, 18 fire)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "TGV INOUI needs a reservation (€10–€20) with a limited pass-holder quota. Book early",
+    "Eurostar pass-holder fare about €35 from London; seats are limited",
+    "Paris adds a small per-night tourist tax to accommodation bills",
+    "Under-26s get free entry to many national museums and monuments (check ID rules)"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/france"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/france/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/81/france"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/france/entry-requirements",
+    "https://www.gov.uk/foreign-travel-advice/france/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/france/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/international-train-reservation-fees"
+   ]
+  },
+  {
+   "country": "Spain",
+   "flag": "🇪🇸",
+   "lastChecked": "2026-11-12",
+   "summary": "Good value outside Barcelona, with cheap tapas and late nights; most long-distance trains need a paid reservation and some budget trains aren't covered.",
+   "costs": {
+    "budget": {
+     "accommodation": 25,
+     "food": 18,
+     "transport": 6,
+     "activities": 8
+    },
+    "midRange": {
+     "accommodation": 70,
+     "food": 38,
+     "transport": 12,
+     "activities": 18
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Contactless widely accepted, even for small amounts; some tapas bars and markets prefer cash.",
+    "atms": "Some ATMs charge a fee, shown on screen. Decline the 'conversion' offer and pay in euros.",
+    "tipping": "Not expected; round up or leave small change. 5–10% for good table service."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: use public health centres and hospitals; private clinics won't accept it",
+    "Emergency: 112",
+    "Strong summer heat, especially inland (Madrid, Seville). Carry water and avoid midday sun",
+    "Drinks are often stronger than in the UK"
+   ],
+   "safety": [
+    "Pickpocketing is common in Barcelona (Las Ramblas, metro, beaches) and central Madrid",
+    "Distraction thefts by teams, e.g. someone 'spills' something on you while a partner takes your bag",
+    "Fake plain-clothes police may ask to see your wallet. Real police ask for ID, never cash",
+    "Drink spiking reported in nightlife areas; keep your drink in sight",
+    "Fines for drinking in the street and wearing only swimwear away from the beach in some areas"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (091 National Police)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "AVE and iryo need reservations (about €10). Avlo and Ouigo Spain are not covered by Interrail",
+    "Paris–Barcelona TGV reservation about €35 and sells out; book early",
+    "Barcelona's tourist tax roughly doubled in April 2026. Expect a few euros per night extra",
+    "Wildfires: starting one, even by accident, is a crime. No barbecues in forest areas"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/spain"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/spain/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/203/spain"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/spain/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/spain/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://www.seat61.com/how-to-use-an-interrail-pass.htm",
+    "https://www.idealista.com/en/news/node/886033",
+    "https://www.catalannews.com/society-science/item/new-tourist-tax-comes-into-force-in-barcelona"
+   ]
+  },
+  {
+   "country": "Portugal",
+   "flag": "🇵🇹",
+   "lastChecked": "2026-11-12",
+   "summary": "One of Western Europe's cheapest countries, with great hostels and cheap food; the train network is small and reservations must be bought locally.",
+   "costs": {
+    "budget": {
+     "accommodation": 23,
+     "food": 16,
+     "transport": 5,
+     "activities": 7
+    },
+    "midRange": {
+     "accommodation": 65,
+     "food": 35,
+     "transport": 10,
+     "activities": 15
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Cards and contactless widely accepted; small cafés and rural places may be cash-only or have card minimums.",
+    "atms": "Use 'Multibanco' bank ATMs; avoid standalone Euronet-style machines with high fees.",
+    "tipping": "Not expected; rounding up or 5–10% in restaurants is appreciated."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare; you may pay local fees",
+    "Emergency: 112; SNS 24 health line 808 24 24 24 (press 9 for English)",
+    "UK prescriptions aren't recognised. Bring enough medication in original packaging"
+   ],
+   "safety": [
+    "Pickpockets on busy trams, buses and stops in Lisbon and Porto (tram 28 is a known hotspot)",
+    "Street sellers in Lisbon's Baixa/Bairro Alto may offer 'drugs' (often fake). Ignore them; drugs remain illegal to sell",
+    "Drink spiking risk in nightlife areas; drinks are often strong",
+    "Wildfire risk April–October; starting a fire, even by accident, is illegal"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "Alfa Pendular and Intercidades need a reservation (about €5), bought only at stations in Portugal",
+    "Lisbon tourist tax €4 per night (max 7 nights); Porto €3, with a review possibly raising it",
+    "No direct trains to Spain beyond limited Vigo/Badajoz links. Buses are often easier"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/portugal"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/portugal/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/181/portugal"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/portugal/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/portugal/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://supercasa.pt/en-gb/noticias/porto-pode-aumentar-taxa-turistica-para-quatro-anos/n9072"
+   ]
+  },
+  {
+   "country": "Italy",
+   "flag": "🇮🇹",
+   "lastChecked": "2026-11-12",
+   "summary": "Incredible food and sights; hostels in Venice, Florence and Rome are pricey, but regional trains are cheap and need no reservation.",
+   "costs": {
+    "budget": {
+     "accommodation": 30,
+     "food": 20,
+     "transport": 7,
+     "activities": 10
+    },
+    "midRange": {
+     "accommodation": 85,
+     "food": 45,
+     "transport": 14,
+     "activities": 22
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Shops must legally accept cards and contactless is common, but carry some cash for small bars and markets.",
+    "atms": "Use 'Bancomat' bank ATMs; decline the GBP conversion offer.",
+    "tipping": "Not expected. Many restaurants add a 'coperto' (cover charge) of €1–4 per person; rounding up is fine."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare; go to public hospitals (Pronto Soccorso = A&E)",
+    "Emergency: 112 (118 ambulance)",
+    "UK prescriptions aren't accepted at pharmacies (green cross); an Italian GP can prescribe",
+    "Mosquitoes in summer; West Nile and dengue cases are reported"
+   ],
+   "safety": [
+    "Pickpocketing and bag-snatching around Rome's Termini, metro line A, the Colosseum and Trevi Fountain",
+    "Distraction thefts at stations, e.g. 'helpers' at ticket machines or people carrying your bag for 'tips'",
+    "Bracelet/rose sellers who push items on you and then demand money",
+    "Drink spiking risk; bar drinks are often stronger than in the UK",
+    "Fines for not validating bus/regional train tickets, sitting on monuments or bathing in fountains"
+   ],
+   "practical": {
+    "plugs": "Types C, F, L · 230V",
+    "emergency": "112 (118 ambulance, 113 police)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "Frecciarossa/Frecciargento need a reservation (about €13); Italo is NOT covered by Interrail",
+    "Validate paper regional tickets/reservations before boarding, or risk an on-the-spot fine",
+    "Venice day-trip fee (€5–€10) ran on 60 days April–July 2026; reports say 72 days from late March 2027. Check the official site",
+    "Trevi Fountain basin now costs €2 (Feb 2026–end 2027); city tourist taxes in Rome can be several euros a night"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/italy"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/italy/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/111/italy"
+    },
+    {
+     "label": "Venice access fee (official)",
+     "url": "https://cda.veneziaunica.it/en/access-fee"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/italy/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/italy/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://www.turismoroma.it/en/news/trevi-fountain-new-entry-fee-one-romes-symbols",
+    "https://www.euronews.com/2026/03/30/venice-daytripper-fee-to-return-in-2026-when-will-visitors-have-to-pay",
+    "https://www.bluewin.ch/en/news/venice-will-charge-an-admission-fee-on-even-more-days-in-2027-li.3638144",
+    "https://cda.veneziaunica.it/en/access-fee"
+   ]
+  },
+  {
+   "country": "Germany",
+   "flag": "🇩🇪",
+   "lastChecked": "2026-11-12",
+   "summary": "Very Interrail-friendly with frequent trains and no compulsory reservations; Berlin and Leipzig are good value, Munich less so.",
+   "costs": {
+    "budget": {
+     "accommodation": 28,
+     "food": 18,
+     "transport": 6,
+     "activities": 8
+    },
+    "midRange": {
+     "accommodation": 80,
+     "food": 40,
+     "transport": 12,
+     "activities": 18
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Still more cash-heavy than the UK: some bakeries, bars and kiosks are cash-only, though cards are increasingly accepted.",
+    "atms": "Use bank ATMs (Sparkasse, Volksbank, etc.); check your change when paying cash.",
+    "tipping": "Round up or add 5–10%. Tell the server the total you want to pay instead of leaving coins."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)",
+    "Germany runs temporary border checks at its land borders. Keep your passport handy on trains"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare; private doctors may not accept it",
+    "Emergency: 112 (ambulance/fire), 110 police",
+    "Ticks in forests and parks in summer"
+   ],
+   "safety": [
+    "Crime is similar to the UK; watch for pickpockets at big stations and crowded events",
+    "Terror threat is high; stay alert at markets, festivals and crowded public events",
+    "Only change money at banks or official exchanges; check change carefully"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (110 police)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "ICE reservations are optional (about €5.50) but worth it at weekends and holidays",
+    "Delays on Deutsche Bahn are common. Leave buffer time for connections",
+    "Carry some cash for small places; the Christmas markets are often cash-first"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/germany"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/germany/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/88/germany"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/germany/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/germany/health",
+    "https://www.gov.uk/foreign-travel-advice/france/entry-requirements",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees"
+   ]
+  },
+  {
+   "country": "Netherlands",
+   "flag": "🇳🇱",
+   "lastChecked": "2026-11-12",
+   "summary": "Compact and easy by train, but Amsterdam beds are among Europe's priciest. Consider staying in Haarlem, Utrecht or Rotterdam.",
+   "costs": {
+    "budget": {
+     "accommodation": 38,
+     "food": 22,
+     "transport": 7,
+     "activities": 10
+    },
+    "midRange": {
+     "accommodation": 110,
+     "food": 48,
+     "transport": 13,
+     "activities": 22
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Very card-friendly; many shops and cafés are card-only ('pin only') and cash is rarely needed.",
+    "atms": "Bank ATMs are fewer than in the UK. You'll seldom need one.",
+    "tipping": "Not expected; round up or 5–10% for good service."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare, but not prescription charges",
+    "Emergency: 112; see a GP (huisarts) for non-urgent care",
+    "Mixing alcohol, cannabis and 'magic truffles' can be dangerous"
+   ],
+   "safety": [
+    "Pickpockets around Amsterdam Centraal, on trams and on Schiphol trains",
+    "Fake police may claim a 'counterfeit money' check to take cash/cards. Call 0900 8844 to verify",
+    "Ignore street drug sellers; avoid dark alleys late at night",
+    "Cyclists have priority and move fast. Don't walk in bike lanes"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (police non-emergency 0900 8844)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "Amsterdam tourist tax is 12.5% of the room price; a rise to 16% in 2027 has been proposed (not confirmed)",
+    "Hotel VAT rose to 21% in 2026, pushing room prices up",
+    "Domestic trains need no reservation; Eurostar to Brussels/Paris/London does (about €22–€35)",
+    "Cannabis is only tolerated in licensed coffee shops; smoking it in public is illegal"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/netherlands"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/netherlands/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/160/netherlands"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/netherlands/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/netherlands/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/international-train-reservation-fees",
+    "https://www.iamexpat.nl/expat-info/dutch-news/amsterdam-raise-tourist-tax-20-2031",
+    "https://amsterdam-explorer.com/tourist-tax/"
+   ]
+  },
+  {
+   "country": "Switzerland",
+   "flag": "🇨🇭",
+   "lastChecked": "2026-11-12",
+   "summary": "Stunning and very expensive. Interrail covers the main network, so self-cater and use free city transport cards to keep costs down.",
+   "costs": {
+    "budget": {
+     "accommodation": 45,
+     "food": 30,
+     "transport": 8,
+     "activities": 12
+    },
+    "midRange": {
+     "accommodation": 130,
+     "food": 65,
+     "transport": 20,
+     "activities": 30
+    }
+   },
+   "money": {
+    "currency": "Swiss franc (CHF)",
+    "cashOrCard": "Cards and contactless accepted almost everywhere; euros sometimes taken but at poor rates with change in CHF.",
+    "atms": "Plentiful bank ATMs; choose to be charged in CHF, not GBP.",
+    "tipping": "Service is included; rounding up is plenty."
+   },
+   "entry": [
+    "UK passport: Schengen (not EU), 90 days in any 180 without a visa",
+    "EES: Switzerland uses EES too; fingerprints and photo on first Schengen entry",
+    "ETIAS: not needed yet; Switzerland will apply it when it starts"
+   ],
+   "health": [
+    "GHIC/EHIC: accepted for British nationals for state healthcare, but costs are high and you pay a share",
+    "Emergency: 112 (144 ambulance)",
+    "Altitude and mountain weather can change fast; mountain rescue is NOT covered by GHIC"
+   ],
+   "safety": [
+    "Very low crime; watch bags at busy stations like Zürich HB and Geneva",
+    "Mountain hiking is the main risk. Check the weather, stick to marked paths and get insurance that covers rescue"
+   ],
+   "practical": {
+    "plugs": "Types C, J · 230V (UK–Euro adapters with 2 round pins usually fit)",
+    "emergency": "112 (117 police, 144 ambulance)",
+    "sim": "Switzerland isn't in the EU, so EU eSIMs/roaming deals often exclude it. Check before you go"
+   },
+   "mustKnow": [
+    "Most trains need no reservation; Glacier Express (about €37–€53) and Bernina Express (about €30–€39) cost extra",
+    "Many mountain railways and cable cars are only discounted, not free, with Interrail",
+    "Hostel stays in Geneva, Basel, Bern and others often include a free local transport card",
+    "Cheapest food: Coop and Migros supermarkets and their takeaway counters"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/switzerland"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/switzerland/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/216/switzerland"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/switzerland/health",
+    "https://www.nhs.uk/using-the-nhs/healthcare-abroad/apply-for-a-free-uk-global-health-insurance-card-ghic/",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://www.seat61.com/how-to-use-an-interrail-pass.htm"
+   ]
+  },
+  {
+   "country": "Austria",
+   "flag": "🇦🇹",
+   "lastChecked": "2026-11-12",
+   "summary": "Easy, safe and Interrail-friendly with cheap optional reservations; Vienna and Salzburg are mid-priced, and the Alps add costs.",
+   "costs": {
+    "budget": {
+     "accommodation": 28,
+     "food": 19,
+     "transport": 6,
+     "activities": 9
+    },
+    "midRange": {
+     "accommodation": 80,
+     "food": 42,
+     "transport": 12,
+     "activities": 18
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Cards widely accepted, but some traditional cafés, huts and market stalls still prefer cash.",
+    "atms": "Bank ATMs ('Bankomat') are common; avoid high-fee standalone machines.",
+    "tipping": "Round up or add 5–10%; tell the server the total when you pay."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare",
+    "Emergency: 112 (144 ambulance)",
+    "Tick-borne diseases in forests and meadows; check TravelHealthPro about TBE if hiking"
+   ],
+   "safety": [
+    "Low crime; pickpockets at Vienna's main stations, the Prater and Christmas markets",
+    "Mountain hikes: weather changes fast, and rescue isn't covered by GHIC"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (133 police, 144 ambulance)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "Railjet reservations are optional (about €3) but useful at busy times",
+    "EuroCity trains to Italy need a compulsory reservation (about €13–€17)",
+    "Vienna adds a city tax to accommodation bills"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/austria"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/austria/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/16/austria"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/austria/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/international-train-reservation-fees"
+   ]
+  },
+  {
+   "country": "Czechia",
+   "flag": "🇨🇿",
+   "lastChecked": "2026-11-12",
+   "summary": "Cheap beer, cheap hostels and beautiful Prague; watch out for exchange and taxi rip-offs and always validate transport tickets.",
+   "costs": {
+    "budget": {
+     "accommodation": 18,
+     "food": 12,
+     "transport": 3,
+     "activities": 6
+    },
+    "midRange": {
+     "accommodation": 55,
+     "food": 28,
+     "transport": 7,
+     "activities": 13
+    }
+   },
+   "money": {
+    "currency": "Czech koruna (CZK)",
+    "cashOrCard": "Cards and contactless accepted almost everywhere in cities; keep a little CZK for small places. Euros are not standard.",
+    "atms": "Use bank ATMs (ČSOB, KB, Česká spořitelna). Avoid Euronet machines and always decline the GBP conversion.",
+    "tipping": "Round up or about 10% in restaurants; check the bill for an added service charge."
+   },
+   "entry": [
+    "UK passport: Schengen (since 2007), 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)",
+    "You must carry ID (your passport); you can be fined if you don't"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare",
+    "Emergency: 112 (155 ambulance)",
+    "Ticks in forests in summer"
+   ],
+   "safety": [
+    "Pickpockets on airport buses and metro, trams to Prague Castle and in the Old Town",
+    "Never change money on the street (counterfeit notes); 'zero commission' exchange booths often give terrible rates",
+    "Fake plain-clothes police may ask to see your cash. Offer to go to a station or call 112",
+    "Unmarked or rogue taxis overcharge. Use apps like Bolt/Uber or check the posted rates",
+    "Nightclub 'consumption cards' carry heavy penalties if lost; watch for drink spiking"
+   ],
+   "practical": {
+    "plugs": "Types C, E · 230V",
+    "emergency": "112 (155 ambulance, 158 police)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "Unvalidated public transport tickets mean an on-the-spot fine of 1,000 CZK (about £35)",
+    "SuperCity trains need a reservation (about €2.90); most other trains don't",
+    "Prague tourist fee is 50 CZK per person per night"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/czech-republic"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/czech-republic/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/62/czech-republic"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/czech-republic/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/czech-republic/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://sdileneubytovani.praha.eu/jnp/en/for_accommodation_providers/local_tourist_fee.html"
+   ]
+  },
+  {
+   "country": "Hungary",
+   "flag": "🇭🇺",
+   "lastChecked": "2026-11-12",
+   "summary": "Budapest is great value, with thermal baths, ruin bars and cheap hostels, but check bills carefully and avoid street money changers.",
+   "costs": {
+    "budget": {
+     "accommodation": 17,
+     "food": 12,
+     "transport": 3,
+     "activities": 6
+    },
+    "midRange": {
+     "accommodation": 52,
+     "food": 27,
+     "transport": 7,
+     "activities": 13
+    }
+   },
+   "money": {
+    "currency": "Hungarian forint (HUF)",
+    "cashOrCard": "Cards and contactless widely accepted in Budapest; carry some forints for markets and smaller towns. Euros are not standard.",
+    "atms": "Use bank ATMs (OTP, K&H, etc.), avoid Euronet, and always decline the GBP conversion.",
+    "tipping": "10–15% is usual, but many restaurants add a service charge ('szervizdíj'). Check the bill so you don't tip twice."
+   },
+   "entry": [
+    "UK passport: Schengen (since 2007), 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)",
+    "Always carry your actual passport; police don't accept a copy"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare",
+    "Emergency: 112"
+   ],
+   "safety": [
+    "Some bars, clubs and restaurants massively overcharge tourists. Check menu prices and your bill",
+    "Taxi drivers may get commission for taking you to certain venues; use reputable firms or apps",
+    "Don't change money on the street",
+    "Pickpockets on public transport, at stations and markets in Budapest"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (104 ambulance, 107 police)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "InterCity trains need a cheap compulsory reservation (about €2)",
+    "Budapest adds a 4% tourist tax to accommodation",
+    "Validate public transport tickets; inspectors are common in Budapest"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/hungary"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/hungary/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/103/hungary"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/hungary/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/hungary/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees"
+   ]
+  },
+  {
+   "country": "Croatia",
+   "flag": "🇭🇷",
+   "lastChecked": "2026-11-12",
+   "summary": "Beautiful coast and islands, but summer prices are high and trains don't reach most of the coast, so plan to use buses and ferries.",
+   "costs": {
+    "budget": {
+     "accommodation": 28,
+     "food": 18,
+     "transport": 8,
+     "activities": 8
+    },
+    "midRange": {
+     "accommodation": 80,
+     "food": 38,
+     "transport": 15,
+     "activities": 18
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR), since 2023",
+    "cashOrCard": "Cards widely accepted in cities and resorts; carry cash for islands, small konobas and buses bought on board.",
+    "atms": "Plenty in towns; avoid high-fee standalone machines and decline the GBP conversion.",
+    "tipping": "Round up or about 10% for good restaurant service."
+   },
+   "entry": [
+    "UK passport: Schengen (joined 2023), 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen; checks still happen at the Bosnia/Montenegro/Serbia borders",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare, but some fees still apply",
+    "Emergency: 112",
+    "Strong summer sun and heat on the coast; ticks inland"
+   ],
+   "safety": [
+    "Pickpockets in tourist areas such as Dubrovnik Old Town and Split",
+    "Some 'gentlemen's clubs' overcharge and threaten tourists who refuse to pay",
+    "Sexual assaults in taxis reported. Photo the plate and share your trip",
+    "Landmines remain in some rural inland areas. Stick to marked paths"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (192 police, 194 ambulance)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "No trains to Dubrovnik and few to the coast. Buses and Jadrolinija ferries are the norm (not covered by Interrail)",
+    "Split and Dubrovnik fine people for drinking in public, wearing swimwear in town and sleeping outdoors",
+    "Train reservations are optional and cheap (€1–€4)"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/croatia"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/croatia/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/59/croatia"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/croatia/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/croatia/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees"
+   ]
+  },
+  {
+   "country": "Greece",
+   "flag": "🇬🇷",
+   "lastChecked": "2026-11-12",
+   "summary": "Cheap food and good hostels, especially in Athens; islands cost more in summer, and ferries rather than trains will take much of your transport budget.",
+   "costs": {
+    "budget": {
+     "accommodation": 25,
+     "food": 16,
+     "transport": 9,
+     "activities": 7
+    },
+    "midRange": {
+     "accommodation": 70,
+     "food": 35,
+     "transport": 18,
+     "activities": 15
+    }
+   },
+   "money": {
+    "currency": "Euro (EUR)",
+    "cashOrCard": "Businesses must accept cards and contactless is common; carry cash for small islands, kiosks and tavernas.",
+    "atms": "Common in towns but scarce on small islands. Withdraw before you go; decline the GBP conversion.",
+    "tipping": "Round up or leave 5–10% in tavernas; not expected in cafés."
+   },
+   "entry": [
+    "UK passport: Schengen, 90 days in any 180 without a visa",
+    "EES: fingerprints and photo on first entry to Schengen",
+    "ETIAS: not needed yet (no start date confirmed)"
+   ],
+   "health": [
+    "GHIC/EHIC: covers state healthcare; ambulances are basic, with shortages on some islands",
+    "Emergency: 112 (166 ambulance)",
+    "Very hot summers; drink lots of water and avoid midday sun"
+   ],
+   "safety": [
+    "Thefts of passports, wallets and bags on the Athens metro and around central Athens",
+    "Drink spiking and sexual assaults reported in party resorts. Stick together and use licensed taxis/apps",
+    "Quad bikes cause many injuries and are often excluded from insurance. Helmets are required",
+    "Wildfire risk April–October; causing a fire, even by accident, is a crime"
+   ],
+   "practical": {
+    "plugs": "Types C, F · 230V",
+    "emergency": "112 (100 police, 166 ambulance, 171 tourist police)",
+    "sim": "UK SIM roaming charges may apply; EU eSIMs are cheap"
+   },
+   "mustKnow": [
+    "Rail network is small (mainly Athens–Thessaloniki); InterCity seats are compulsory but free with a pass",
+    "Interrail gives discounts on some ferries. Check conditions and port taxes on interrail.com",
+    "A per-room 'climate resilience fee' is added to hotel bills (lower in winter); hostels reportedly exempt",
+    "Provisional UK licences aren't valid for hiring vehicles"
+   ],
+   "links": [
+    {
+     "label": "GOV.UK travel advice",
+     "url": "https://www.gov.uk/foreign-travel-advice/greece"
+    },
+    {
+     "label": "Entry requirements (GOV.UK)",
+     "url": "https://www.gov.uk/foreign-travel-advice/greece/entry-requirements"
+    },
+    {
+     "label": "TravelHealthPro",
+     "url": "https://travelhealthpro.org.uk/country/91/greece"
+    }
+   ],
+   "sources": [
+    "https://www.gov.uk/foreign-travel-advice/greece/safety-and-security",
+    "https://www.gov.uk/foreign-travel-advice/greece/health",
+    "https://www.interrail.com/en/book-reservations/reservation-fees/domestic-train-reservation-fees",
+    "https://greekcitytimes.com/2025/01/08/greece-climate-resilience-fee"
+   ]
+  }
+ ]
+}

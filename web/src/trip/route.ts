@@ -121,3 +121,12 @@ export function budgetStatuses(budgets: CategoryBudget[], txs: Transaction[], mo
     return { budget, spent, share, status: share > 1 ? "over" : share >= 0.8 ? "close" : "good" };
   });
 }
+
+/** Money still needed for the rest of the route: unspent budget of current and future stops. */
+export function remainingRoutePlan(stops: TripStop[], txs: Transaction[], now = today()): number {
+  return stops.reduce((sum, s) => {
+    if (s.endDate < now) return sum;
+    const st = stopStats(s, txs, now);
+    return sum + Math.max(0, st.daysElapsed > 0 ? st.remaining : st.planned);
+  }, 0);
+}

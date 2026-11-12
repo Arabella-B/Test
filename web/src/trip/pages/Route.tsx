@@ -2,9 +2,10 @@ import { useMemo, useRef, useState, type FormEvent, type PointerEvent } from "re
 import { useNavigate } from "react-router-dom";
 import Sheet from "../../components/Sheet";
 import { COUNTRY_LIST, findCountry } from "../countries";
+import { dailyTotal, getCard } from "../countryInfo";
 import { formatLocal, fromPence } from "../fx";
 import { addDays, daysBetween, formatDate, formatMoney, today } from "../money";
-import { countableTransactions, followOrder, moveItem, routeWarnings, stopDays, stopStats, type StopStats } from "../route";
+import { countableTransactions, followOrder, moveItem, remainingRoutePlan, routeWarnings, stopDays, stopStats, type StopStats } from "../route";
 import { computeStats } from "../stats";
 import { useTrip } from "../store";
 import type { TripStop } from "../types";
@@ -30,11 +31,7 @@ export default function RoutePage() {
 
   // Money still needed for the rest of the route vs money you have left.
   const now = today();
-  const stillPlanned = stops.reduce((sum, s) => {
-    if (s.endDate < now) return sum;
-    const st = statsById.get(s.id)!;
-    return sum + Math.max(0, st.daysElapsed > 0 ? st.remaining : st.planned);
-  }, 0);
+  const stillPlanned = remainingRoutePlan(stops, countable, now);
   const available = overall.moneyLeft + overall.runway.futureFamily;
   const totalPlanned = stops.reduce((sum, s) => sum + s.dailyBudget * stopDays(s), 0);
   const warnings = routeWarnings(stops);
@@ -216,7 +213,7 @@ function StopSheet({ stop, previous, departure, onClose, onSave, onDelete }: {
   stop: TripStop | null; previous?: TripStop; departure: string;
   onClose: () => void; onSave: (s: TripStop) => void; onDelete: (id: string) => void;
 }) {
-  const { fx } = useTrip();
+  const { fx, cardEdits } = useTrip();
   const defaultStart = stop?.startDate ?? (previous ? addDays(previous.endDate, 1) : departure || today());
   const [country, setCountry] = useState(stop?.country ?? "");
   const [start, setStart] = useState(defaultStart);
@@ -257,6 +254,24 @@ function StopSheet({ stop, previous, departure, onClose, onSave, onDelete }: {
             <input className="input" type="date" value={end} onChange={(e) => setEnd(e.target.value)} />
           </label>
         </div>
+        {(() => {
+          const card = info && getCard(info.name, cardEdits);
+          if (!card) return null;
+          return (
+            <div className="rounded-2xl bg-cream p-3 text-sm">
+              <p className="font-semibold">Typical daily costs in {card.country}</p>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <button type="button" onClick={() => setDaily(String(dailyTotal(card, "budget")))} className="rounded-xl bg-white px-3 py-2 font-semibold ring-1 ring-black/5">
+                  🎒 Backpacker £{dailyTotal(card, "budget")}
+                </button>
+                <button type="button" onClick={() => setDaily(String(dailyTotal(card, "midRange")))} className="rounded-xl bg-white px-3 py-2 font-semibold ring-1 ring-black/5">
+                  🏨 Mid-range £{dailyTotal(card, "midRange")}
+                </button>
+              </div>
+              <p className="mt-1 text-xs text-muted">Tap one to use it, or type your own below.</p>
+            </div>
+          );
+        })()}
         <label className="label">Daily budget (£)
           <input className="input" inputMode="decimal" value={daily} onChange={(e) => setDaily(e.target.value)} placeholder="e.g. 35" />
           {info && dailyPence > 0 && (

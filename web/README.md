@@ -86,6 +86,21 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
 | `src/trip/pages/Route.tsx`, `Budgets.tsx` | The Route and Budgets screens |
 | `src/trip/components/QuickAdd.tsx` | The + Cash button |
 
+## My Trip: country cards and "Can I afford it?" (Stage 4b)
+
+- **Countries** (`/trip/countries`): 25 country cards (Asia, Oceania, the Americas and Europe),
+  your route's countries first. Each card: typical daily costs (backpacker and mid-range, in £ and
+  local money), money tips, entry rules for UK passports, health, scams, plugs, emergency numbers,
+  SIMs, and official links. European cards add Schengen 90/180, EES, ETIAS, GHIC and Interrail info.
+- Researched from GOV.UK, TravelHealthPro and official visa sites on 12 Nov 2026 (key facts
+  spot-checked). **Rules change**: cards show a "last checked" date, warn after 90 days, and can be
+  edited in the app (edits are saved on the device, can be undone, and "Mark as checked today").
+- **Can I afford it?** (`/trip/afford`): cost of N days in a country (backpacker, mid-range or your
+  own £/day) against your spare money after your current route plan; can add it to your route.
+- Adding a country to the route offers its typical costs as one-tap daily budgets, and the
+  Dashboard warns if a country's budget is below typical costs or compares costs on your route.
+- To update the built-in information, edit `src/trip/data/countries.json` (and its `lastChecked` dates).
+
 ## Groups: how they work
 
 - Anyone signed in can see groups, create one, and join or leave freely.
@@ -157,5 +172,5 @@ Safari may clear data for websites you haven't visited in a while. Back up regul
 - **Stage 2 (done):** Groups with live chat; reporting, blocking and anti-spam.
 - **Stage 3 (done):** Discover feed with photos, events, likes, reporting and blocking.
 - **Stage 4a (done):** route with country budgets, multi-currency, cash quick-add, category budgets.
-- **Stage 4b:** country info cards, "Can I afford it?", country comparison tips.
+- **Stage 4b (done):** country info cards, "Can I afford it?", country comparison tips.
 - **Stage 4c:** Excel/OFX import, encrypted sync between devices, passcode lock, dark mode.

@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { categorise } from "./categorise";
+import type { CardEdits } from "./countryInfo";
 import { DEFAULT_CHECKLIST } from "./checklist";
 import { TripDb, requestPersistentStorage, type TripData } from "./db";
 import { demoBudgets, demoCash, demoRows, demoSettings, demoStops } from "./demo";
@@ -45,6 +46,7 @@ interface TripContextValue {
   mappings: ColumnMapping[];
   stops: TripStop[];
   budgets: CategoryBudget[];
+  cardEdits: CardEdits;
   fx: FxRates;
   importRows(rows: ParsedRow[], source: Transaction["source"]): Promise<ImportSummary>;
   /** Log cash spending by hand. Returns true if this switched on cash tracking. */
@@ -56,6 +58,7 @@ interface TripContextValue {
   saveMapping(mapping: ColumnMapping): Promise<void>;
   saveStops(stops: TripStop[]): Promise<void>;
   saveBudgets(budgets: CategoryBudget[]): Promise<void>;
+  saveCardEdits(edits: CardEdits): Promise<void>;
   refreshRates(): Promise<boolean>;
   markBackedUp(): Promise<void>;
   exportData(): TripData;
@@ -65,7 +68,7 @@ interface TripContextValue {
 
 const TripContext = createContext<TripContextValue | null>(null);
 
-const EMPTY: TripData = { transactions: [], settings: null, checklist: null, rules: [], mappings: [], stops: [], budgets: [] };
+const EMPTY: TripData = { transactions: [], settings: null, checklist: null, rules: [], mappings: [], stops: [], budgets: [], cardEdits: {} };
 
 export function TripProvider({ scope, children }: { scope: string; children: ReactNode }) {
   const isDemo = scope === "demo";
@@ -79,6 +82,7 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
   const [mappings, setMappings] = useState<ColumnMapping[]>([]);
   const [stops, setStops] = useState<TripStop[]>([]);
   const [budgets, setBudgets] = useState<CategoryBudget[]>([]);
+  const [cardEdits, setCardEdits] = useState<CardEdits>({});
   const [fx, setFx] = useState<FxRates>(BUILT_IN_RATES);
 
   const apply = useCallback((data: TripData) => {
@@ -90,6 +94,7 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     setMappings(data.mappings);
     setStops(data.stops);
     setBudgets(data.budgets);
+    setCardEdits(data.cardEdits);
   }, []);
 
   const refreshRates = useCallback(async () => {
@@ -237,6 +242,11 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     await db.set("budgets", next);
   }, [db]);
 
+  const saveCardEdits = useCallback(async (next: CardEdits) => {
+    setCardEdits(next);
+    await db.set("cardEdits", next);
+  }, [db]);
+
   const markBackedUp = useCallback(async () => {
     const next = { ...settings, lastBackupAt: new Date().toISOString() };
     setSettings(next);
@@ -244,8 +254,8 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
   }, [db, settings]);
 
   const exportData = useCallback(
-    (): TripData => ({ transactions, settings: hasSettings ? settings : null, checklist, rules, mappings, stops, budgets }),
-    [transactions, settings, hasSettings, checklist, rules, mappings, stops, budgets],
+    (): TripData => ({ transactions, settings: hasSettings ? settings : null, checklist, rules, mappings, stops, budgets, cardEdits }),
+    [transactions, settings, hasSettings, checklist, rules, mappings, stops, budgets, cardEdits],
   );
 
   const replaceAll = useCallback(async (data: TripData) => {
@@ -257,6 +267,7 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     await db.set("mappings", data.mappings);
     await db.set("stops", data.stops);
     await db.set("budgets", data.budgets);
+    await db.set("cardEdits", data.cardEdits);
     apply(data);
   }, [db, apply]);
 
@@ -266,8 +277,8 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
   }, [db, apply]);
 
   const value: TripContextValue = {
-    ready, isDemo, transactions, settings, hasSettings, checklist, rules, mappings, stops, budgets, fx,
-    importRows, addCash, setCategory, deleteTransaction, saveSettings, saveChecklist, saveMapping, saveStops, saveBudgets,
+    ready, isDemo, transactions, settings, hasSettings, checklist, rules, mappings, stops, budgets, cardEdits, fx,
+    importRows, addCash, setCategory, deleteTransaction, saveSettings, saveChecklist, saveMapping, saveStops, saveBudgets, saveCardEdits,
     refreshRates, markBackedUp, exportData, replaceAll, clearAll,
   };
   return <TripContext.Provider value={value}>{children}</TripContext.Provider>;

@@ -12,6 +12,7 @@ const TRIP_TABS = [
   { to: "/trip/transactions", label: "Transactions", icon: "📋" },
   { to: "/trip/route", label: "Route", icon: "🗺️" },
   { to: "/trip/budgets", label: "Budgets", icon: "🎯" },
+  { to: "/trip/countries", label: "Countries", icon: "🌍" },
   { to: "/trip/checklist", label: "Checklist", icon: "✅" },
   { to: "/trip/settings", label: "Settings", icon: "⚙️" },
 ];

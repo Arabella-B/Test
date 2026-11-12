@@ -1,4 +1,5 @@
 import { openDB, type IDBPDatabase } from "idb";
+import type { CardEdits } from "./countryInfo";
 import type { FxRates } from "./fx";
 import type { CategoryBudget, ChecklistItem, ColumnMapping, MerchantRule, Transaction, TripSettings, TripStop } from "./types";
 
@@ -14,9 +15,10 @@ export interface TripData {
   mappings: ColumnMapping[];
   stops: TripStop[];
   budgets: CategoryBudget[];
+  cardEdits: CardEdits;
 }
 
-type KvKey = "settings" | "checklist" | "rules" | "mappings" | "stops" | "budgets" | "fx";
+type KvKey = "settings" | "checklist" | "rules" | "mappings" | "stops" | "budgets" | "fx" | "cardEdits";
 
 export class TripDb {
   private db: Promise<IDBPDatabase>;
@@ -33,7 +35,7 @@ export class TripDb {
 
   async load(): Promise<TripData> {
     const db = await this.db;
-    const [transactions, settings, checklist, rules, mappings, stops, budgets] = await Promise.all([
+    const [transactions, settings, checklist, rules, mappings, stops, budgets, cardEdits] = await Promise.all([
       db.getAll("transactions") as Promise<Transaction[]>,
       db.get("kv", "settings"),
       db.get("kv", "checklist"),
@@ -41,10 +43,11 @@ export class TripDb {
       db.get("kv", "mappings"),
       db.get("kv", "stops"),
       db.get("kv", "budgets"),
+      db.get("kv", "cardEdits"),
     ]);
     return {
       transactions, settings: settings ?? null, checklist: checklist ?? null, rules: rules ?? [], mappings: mappings ?? [],
-      stops: stops ?? [], budgets: budgets ?? [],
+      stops: stops ?? [], budgets: budgets ?? [], cardEdits: cardEdits ?? {},
     };
   }
 

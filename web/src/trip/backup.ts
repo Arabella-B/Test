@@ -23,6 +23,7 @@ export function parseBackup(text: string): TripData {
     mappings: parsed.mappings ?? [],
     stops: parsed.stops ?? [],
     budgets: parsed.budgets ?? [],
+    cardEdits: parsed.cardEdits ?? {},
   };
 }
 
