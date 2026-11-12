@@ -30,7 +30,7 @@ export default function QuickAdd() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-4 z-30 flex h-14 items-center gap-2 rounded-full bg-coral px-5 text-lg font-extrabold text-white shadow-lg active:scale-95 md:bottom-8"
+        className="fixed bottom-[calc(6.25rem+env(safe-area-inset-bottom))] right-4 z-30 flex h-14 items-center gap-2 rounded-full bg-coral px-5 text-lg font-extrabold text-on-coral shadow-lg active:scale-95 md:bottom-8"
         aria-label="Add cash spending"
       >
         <span className="text-2xl leading-none">+</span> Cash
@@ -103,7 +103,7 @@ function QuickAddSheet({ onClose, onDone }: { onClose: () => void; onDone: (mess
             inputMode="decimal"
             placeholder="0"
             aria-label="Amount"
-            className="min-h-16 w-0 min-w-0 flex-1 rounded-2xl border border-ink/15 px-4 text-right text-3xl font-extrabold outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+            className="min-h-16 w-0 min-w-0 flex-1 rounded-2xl border border-ink/15 px-4 text-right text-3xl font-extrabold outline-none focus:border-brand-strong focus:ring-2 focus:ring-brand/20"
           />
         </div>
         <p className="-mt-2 text-right text-sm text-muted">
@@ -137,7 +137,7 @@ function QuickAddSheet({ onClose, onDone }: { onClose: () => void; onDone: (mess
             </label>
           </div>
         ) : (
-          <button onClick={() => setMore(true)} className="text-sm font-semibold text-brand">+ Add a note or change the date</button>
+          <button onClick={() => setMore(true)} className="text-sm font-semibold text-brand-strong">+ Add a note or change the date</button>
         )}
         {here && <p className="text-center text-xs text-muted">{here.flag} You're in {here.country} on {formatDate(date)}, per your route.</p>}
         <p className="text-center text-[10px] text-muted">

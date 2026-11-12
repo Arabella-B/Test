@@ -107,7 +107,7 @@ export default function Transactions() {
           <button
             key={f.key}
             onClick={() => setParam("filter", f.key)}
-            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-brand text-white" : "bg-surface ring-1 ring-ink/10"}`}
+            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-brand text-on-brand" : "bg-surface ring-1 ring-ink/10"}`}
           >
             {f.label}
           </button>

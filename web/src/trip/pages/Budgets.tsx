@@ -66,7 +66,7 @@ export default function Budgets() {
           <p className="text-sm text-muted">Set a monthly limit for categories you want to keep an eye on, like eating out or going out.</p>
         </div>
       ) : (
-        <div className="grid gap-2">
+        <div className="pop-in grid gap-2">
           {statuses.map(({ budget, spent, share, status }) => {
             const cat = getCategory(budget.categoryId);
             const left = budget.monthly - spent;
@@ -140,7 +140,7 @@ function BudgetSheet({ budget, taken, onClose, onSave, onDelete }: {
           <div className="grid max-h-64 grid-cols-2 gap-2 overflow-y-auto">
             {choices.map((c) => (
               <button type="button" key={c.id} onClick={() => setCategoryId(c.id)}
-                className={`flex min-h-12 items-center gap-2 rounded-2xl border-2 px-3 text-left text-sm font-semibold ${categoryId === c.id ? "border-brand" : "border-transparent"}`}
+                className={`flex min-h-12 items-center gap-2 rounded-2xl border-2 px-3 text-left text-sm font-semibold ${categoryId === c.id ? "border-brand-strong" : "border-transparent"}`}
                 style={{ backgroundColor: c.colour + "1F" }}>
                 <span className="text-lg">{c.emoji}</span> {c.name}
               </button>

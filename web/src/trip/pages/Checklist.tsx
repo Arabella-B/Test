@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { dueDate, sortChecklist, urgency, type Urgency } from "../checklist";
 import { daysBetween, formatDate, today } from "../money";
 import { useTrip } from "../store";
+import Stamp from "../../components/Stamp";
+import { celebrate } from "../../lib/celebrate";
 
 // Pre-departure checklist, most urgent first, with due dates counted back
 // from your departure date.
@@ -26,7 +28,10 @@ export default function Checklist() {
   const doneCount = checklist.filter((c) => c.done).length;
 
   function toggle(id: string) {
-    void saveChecklist(checklist.map((c) => (c.id === id ? { ...c, done: !c.done } : c)));
+    const next = checklist.map((c) => (c.id === id ? { ...c, done: !c.done } : c));
+    void saveChecklist(next);
+    // Everything ticked off: celebrate!
+    if (next.every((c) => c.done) && !checklist.every((c) => c.done)) celebrate("🎉 Checklist done: you're ready to go!");
   }
 
   function add(e: FormEvent) {
@@ -44,7 +49,7 @@ export default function Checklist() {
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      <div className="card flex flex-wrap items-center justify-between gap-3 bg-gradient-to-br from-coral to-brand text-white">
+      <div className="card flex flex-wrap items-center justify-between gap-3 bg-gradient-to-br from-coral to-brand text-on-brand">
         <div>
           <p className="text-sm font-semibold opacity-90">{hasSettings ? `Leaving ${formatDate(departure, "long")}` : "Set your departure date"}</p>
           <p className="text-3xl font-extrabold">
@@ -52,8 +57,9 @@ export default function Checklist() {
           </p>
         </div>
         <div className="text-right">
-          <p className="text-3xl font-extrabold">{doneCount}/{checklist.length}</p>
-          <p className="text-sm opacity-90">done</p>
+          {doneCount === checklist.length && checklist.length > 0
+            ? <Stamp title="Ready" subtitle="to go" icon="✈️" thump index={1} />
+            : <><p className="text-3xl font-extrabold">{doneCount}/{checklist.length}</p><p className="text-sm opacity-90">done</p></>}
         </div>
       </div>
       {!hasSettings && (
@@ -84,6 +90,7 @@ export default function Checklist() {
                     {s.label} · due {formatDate(due)}
                   </span>
                 </button>
+                {item.done && <span className="shrink-0"><Stamp size="sm" title="Done" index={item.title.length} /></span>}
               </div>
               {open === item.id && (item.detail || item.custom) && (
                 <div className="border-t border-ink/10 px-4 py-3 text-sm text-muted">

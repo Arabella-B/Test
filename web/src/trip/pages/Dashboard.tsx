@@ -10,6 +10,7 @@ import { addDays, formatDate, formatMoney, today } from "../money";
 import { countableTransactions, stopStats } from "../route";
 import { computeStats } from "../stats";
 import { useTrip } from "../store";
+import { useThemeColours } from "../../lib/useThemeColour";
 
 // The "understand everything in 5 seconds" page: headline numbers, tips and
 // colourful charts. Tapping any chart opens the matching transactions.
@@ -26,6 +27,7 @@ const pounds = (v: unknown) => formatMoney(Math.round(Number(v) * 100), true);
 export default function Dashboard() {
   const { transactions, settings, hasSettings, isDemo, stops, budgets, cardEdits } = useTrip();
   const navigate = useNavigate();
+  const theme = useThemeColours(["brand", "brand-strong", "coral-strong", "grid"]);
   const stats = useMemo(() => computeStats(transactions, settings), [transactions, settings]);
   const insights = useMemo(() => computeInsights(transactions, settings, { stops, budgets, cardEdits }), [transactions, settings, stops, budgets, cardEdits]);
   const countries = useMemo(() => {
@@ -49,10 +51,10 @@ export default function Dashboard() {
       )}
 
       {/* Headline cards */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="pop-in grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Headline label="Money left" value={formatMoney(stats.moneyLeft, true)} valueClass={leftTone} note={`of ${formatMoney(settings.totalBudget, true)} + ${formatMoney(stats.income, true)} in`} />
-        <Headline label="Spent this month" value={formatMoney(stats.spentThisMonth, true)} note={new Date().toLocaleDateString("en-GB", { month: "long" })} />
-        <Headline label="Average per day" value={formatMoney(stats.averageDaily, true)} note="last 30 days" />
+        <Headline tint="card-accent" label="Spent this month" value={formatMoney(stats.spentThisMonth, true)} note={new Date().toLocaleDateString("en-GB", { month: "long" })} />
+        <Headline tint="card-sun" label="Average per day" value={formatMoney(stats.averageDaily, true)} note="last 30 days" />
         <div className="card relative overflow-hidden p-4">
           <p className="text-sm font-semibold text-muted">Runway</p>
           <p className="mt-1 text-2xl font-extrabold">{stats.runway.date ? formatDate(stats.runway.date, "long") : "–"}</p>
@@ -74,16 +76,16 @@ export default function Dashboard() {
       )}
 
       {/* Top tips */}
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="pop-in grid gap-3 md:grid-cols-2">
         {insights.slice(0, 2).map((i) => <InsightCard key={i.id} insight={i} />)}
       </div>
 
       {/* Fees counter */}
-      <button onClick={() => go("category=fees")} className="flex items-center gap-4 rounded-3xl bg-bad p-5 text-left text-white shadow-sm">
+      <button onClick={() => go("category=fees")} className="flex items-center gap-4 rounded-[1.75rem] bg-bad/15 p-5 text-left transition hover:-translate-y-0.5">
         <span className="text-4xl">💱</span>
         <span>
           <span className="block text-sm font-semibold opacity-90">Lost to bank fees so far</span>
-          <span className="block text-3xl font-extrabold">{formatMoney(stats.fees)}</span>
+          <span className="block font-display text-3xl font-extrabold text-bad">{formatMoney(stats.fees)}</span>
         </span>
       </button>
 
@@ -133,13 +135,13 @@ export default function Dashboard() {
           <div className="h-72">
             <ResponsiveContainer>
               <LineChart data={stats.budgetLine} margin={{ left: 0, right: 8, top: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-grid)" />
+                <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} />
                 <XAxis dataKey="date" tickFormatter={(d) => formatDate(d)} minTickGap={40} fontSize={12} />
                 <YAxis tickFormatter={(v) => `£${Math.round(v / 1000)}k`} width={44} fontSize={12} />
                 <Tooltip formatter={pounds} labelFormatter={(d) => formatDate(String(d), "long")} />
                 <Legend />
                 <Line type="monotone" dataKey="plan" name="Plan" stroke="#9CA3AF" strokeDasharray="6 4" dot={false} strokeWidth={2} />
-                <Line type="monotone" dataKey="actual" name="Spent" stroke="#7C3AED" dot={false} strokeWidth={3} connectNulls={false} />
+                <Line type="monotone" dataKey="actual" name="Spent" stroke={theme["brand-strong"]} dot={false} strokeWidth={3} connectNulls={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -152,7 +154,7 @@ export default function Dashboard() {
         <div className="h-72">
           <ResponsiveContainer>
             <BarChart data={stats.monthly} margin={{ left: 0, right: 8, top: 8 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-grid)" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} vertical={false} />
               <XAxis dataKey="month" fontSize={12} />
               <YAxis tickFormatter={(v) => `£${v >= 1000 ? `${Math.round(v / 100) / 10}k` : v}`} width={48} fontSize={12} />
               <Tooltip formatter={(v, name) => [pounds(v), getCategory(String(name)).name]} />
@@ -190,12 +192,12 @@ export default function Dashboard() {
                 }))}
                 margin={{ left: 0, right: 8, top: 8 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-grid)" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} vertical={false} />
                 <XAxis dataKey="name" fontSize={11} interval={0} tickFormatter={(v: string) => (v.length > 12 ? v.slice(0, 11) + "…" : v)} />
                 <YAxis tickFormatter={(v) => `£${v}`} width={40} fontSize={12} />
                 <Tooltip formatter={(v, name) => [v === null ? "Not started" : `${pounds(v)}/day`, name === "target" ? "Target" : "Actual"]} />
                 <Legend formatter={(v) => (v === "target" ? "Target per day" : "Actual per day")} />
-                <Bar dataKey="target" fill="#C4B5FD" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="target" fill={theme.brand} radius={[6, 6, 0, 0]} />
                 <Bar
                   dataKey="actual"
                   fill="#16A34A"
@@ -246,7 +248,7 @@ export default function Dashboard() {
       {insights.length > 2 && (
         <section className="grid grid-cols-1 gap-3">
           <h2 className="text-lg font-extrabold">More tips for you</h2>
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="pop-in grid gap-3 md:grid-cols-2">
             {insights.slice(2).map((i) => <InsightCard key={i.id} insight={i} />)}
           </div>
         </section>
@@ -255,9 +257,9 @@ export default function Dashboard() {
   );
 }
 
-function Headline({ label, value, note, valueClass = "" }: { label: string; value: string; note: string; valueClass?: string }) {
+function Headline({ label, value, note, valueClass = "", tint = "" }: { label: string; value: string; note: string; valueClass?: string; tint?: string }) {
   return (
-    <div className="card p-4">
+    <div className={`card p-4 ${tint}`}>
       <p className="text-sm font-semibold text-muted">{label}</p>
       <p className={`mt-1 text-2xl font-extrabold ${valueClass}`}>{value}</p>
       <p className="truncate text-xs text-muted">{note}</p>
@@ -307,7 +309,7 @@ function Heatmap({ daily, onPick }: { daily: Map<string, number>; onPick: (date:
               title={`${formatDate(d, "long")}: ${formatMoney(v)}`}
               aria-label={`${formatDate(d, "long")}: ${formatMoney(v)}`}
               className="aspect-square rounded-[5px]"
-              style={{ background: future ? "transparent" : v === 0 ? "var(--color-heat-empty)" : `rgba(124, 58, 237, ${0.18 + 0.82 * (v / max)})` }}
+              style={{ background: future ? "transparent" : v === 0 ? "var(--color-heat-empty)" : `color-mix(in srgb, var(--color-brand-strong) ${Math.round(20 + 80 * (v / max))}%, transparent)` }}
             />
           );
         })}
@@ -319,7 +321,7 @@ function Heatmap({ daily, onPick }: { daily: Map<string, number>; onPick: (date:
 function GetStarted({ hasSettings }: { hasSettings: boolean }) {
   return (
     <div className="grid grid-cols-1 gap-4">
-      <div className="card bg-gradient-to-br from-coral to-brand text-white">
+      <div className="card bg-gradient-to-br from-coral to-brand text-on-brand">
         <p className="text-2xl font-extrabold">Let's set up your trip money 💷</p>
         <p className="mt-1 opacity-90">Three quick steps. Everything stays private on this device.</p>
       </div>
@@ -333,7 +335,7 @@ function GetStarted({ hasSettings }: { hasSettings: boolean }) {
 function Step({ n, done, title, text, to, cta }: { n: number; done: boolean; title: string; text: string; to: string; cta: string }) {
   return (
     <div className="card flex items-center gap-4">
-      <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-xl font-extrabold ${done ? "bg-good text-white" : "bg-brand-soft text-brand"}`}>
+      <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-xl font-extrabold ${done ? "bg-good text-white" : "bg-brand-soft text-brand-strong"}`}>
         {done ? "✓" : n}
       </span>
       <span className="min-w-0 flex-1">

@@ -128,7 +128,7 @@ export default function GroupChat() {
   const hiddenCount = messages.length - visible.length;
 
   return (
-    <div className="fixed inset-x-0 top-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 flex flex-col bg-cream md:static md:z-auto md:h-[calc(100dvh-8rem)] md:overflow-hidden md:rounded-3xl md:bg-surface md:ring-1 md:ring-ink/10">
+    <div className="fixed inset-x-0 top-0 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-10 flex flex-col bg-cream md:static md:z-auto md:h-[calc(100dvh-8rem)] md:overflow-hidden md:rounded-3xl md:bg-surface md:ring-1 md:ring-ink/10">
       {/* Header */}
       <header className="flex items-center gap-3 border-b border-ink/10 bg-surface px-3 py-2.5 pt-[max(0.625rem,env(safe-area-inset-top))]">
         <Link to="/groups" className="grid h-10 w-10 place-items-center rounded-full text-xl hover:bg-cream" aria-label="Back to groups">←</Link>
@@ -146,7 +146,7 @@ export default function GroupChat() {
         <div className="border-b border-ink/10 bg-surface px-4 py-3 text-sm">
           <p className="font-semibold">{group.tag}</p>
           <p className="text-muted">{group.purpose || "No description."}</p>
-          {group.isOwner && <p className="mt-1 text-xs text-brand">You created this group, so you can remove any message.</p>}
+          {group.isOwner && <p className="mt-1 text-xs text-brand-strong">You created this group, so you can remove any message.</p>}
         </div>
       )}
 
@@ -178,12 +178,12 @@ export default function GroupChat() {
                     <button
                       onClick={() => setSelected(m)}
                       className={`max-w-[80%] rounded-3xl px-4 py-2 text-left shadow-sm ${
-                        mine ? "rounded-br-lg bg-brand text-white" : "rounded-bl-lg bg-surface ring-1 ring-ink/10"
+                        mine ? "rounded-br-lg bg-brand text-on-brand" : "rounded-bl-lg bg-surface ring-1 ring-ink/10"
                       }`}
                     >
-                      {showName && <span className="block text-xs font-bold text-coral">{m.authorName}</span>}
+                      {showName && <span className="block text-xs font-bold text-coral-strong">{m.authorName}</span>}
                       <span className="block whitespace-pre-wrap break-words">{m.body}</span>
-                      <span className={`block text-right text-[10px] ${mine ? "text-white/70" : "text-muted"}`}>
+                      <span className={`block text-right text-[10px] ${mine ? "text-on-brand/70" : "text-muted"}`}>
                         {new Date(m.createdAt).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}
                       </span>
                     </button>
@@ -212,7 +212,7 @@ export default function GroupChat() {
               aria-label="Message"
               className="input max-h-32 min-h-12 flex-1 resize-none py-3"
             />
-            <button className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand text-xl text-white disabled:opacity-40"
+            <button className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand text-xl text-on-brand disabled:opacity-40"
               disabled={!text.trim() || sending} aria-label="Send">
               ➤
             </button>

@@ -72,8 +72,8 @@ export default function Afford() {
               ["custom", "✏️ My own", "you choose"],
             ] as [Style, string, string][]).map(([key, label, note]) => (
               <button key={key} onClick={() => setStyle(key)}
-                className={`min-h-16 rounded-2xl px-2 text-sm font-semibold ${style === key ? "bg-brand text-white" : "bg-cream"}`}>
-                {label}<span className={`block text-xs font-normal ${style === key ? "text-white/80" : "text-muted"}`}>{note}</span>
+                className={`min-h-16 rounded-2xl px-2 text-sm font-semibold ${style === key ? "bg-brand text-on-brand" : "bg-cream"}`}>
+                {label}<span className={`block text-xs font-normal ${style === key ? "text-on-brand/80" : "text-muted"}`}>{note}</span>
               </button>
             ))}
           </div>

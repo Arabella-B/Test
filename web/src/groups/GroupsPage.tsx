@@ -68,14 +68,14 @@ export default function GroupsPage() {
   return (
     <div className="grid grid-cols-1 gap-4">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-3xl font-extrabold">Groups</h1>
+        <h1 className="text-3xl font-extrabold"><span className="page-title">Groups</span></h1>
         <button className="btn px-4" onClick={() => setCreating(true)}>+ New group</button>
       </div>
 
       <div className="grid grid-cols-2 rounded-2xl bg-surface p-1 ring-1 ring-ink/10">
         {(["mine", "find"] as const).map((t) => (
           <button key={t} onClick={() => setTab(t)}
-            className={`min-h-11 rounded-xl font-semibold ${tab === t ? "bg-brand text-white" : "text-muted"}`}>
+            className={`min-h-11 rounded-xl font-semibold ${tab === t ? "bg-brand text-on-brand" : "text-muted"}`}>
             {t === "mine" ? `My groups${mine.length ? ` (${mine.length})` : ""}` : "Find groups"}
           </button>
         ))}
@@ -106,7 +106,7 @@ export default function GroupsPage() {
                       {last ? `${last.userId === api.me.id ? "You" : last.authorName}: ${last.body}` : "No messages yet. Say hello!"}
                     </span>
                     {unread > 0 && (
-                      <span className="grid h-6 min-w-6 shrink-0 place-items-center rounded-full bg-coral px-1.5 text-xs font-bold text-white">
+                      <span className="grid h-6 min-w-6 shrink-0 place-items-center rounded-full bg-coral px-1.5 text-xs font-bold text-on-coral">
                         {unread > 99 ? "99+" : unread}
                       </span>
                     )}
@@ -124,7 +124,7 @@ export default function GroupsPage() {
           <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
             {["", ...GROUP_TAGS].map((t) => (
               <button key={t || "all"} onClick={() => setTag(t)}
-                className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-ink text-cream" : "bg-surface ring-1 ring-ink/10"}`}>
+                className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-coral text-on-coral" : "bg-surface ring-1 ring-ink/10"}`}>
                 {t || "All"}
               </button>
             ))}
@@ -136,7 +136,7 @@ export default function GroupsPage() {
               <button className="btn mt-3" onClick={() => setCreating(true)}>+ New group</button>
             </div>
           ) : (
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="pop-in grid gap-3 md:grid-cols-2">
               {found.map((g) => (
                 <div key={g.id} className="card flex flex-col gap-3 p-4">
                   <div className="flex items-start gap-3">

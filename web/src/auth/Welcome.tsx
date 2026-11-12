@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { supabase, supabaseConfigured } from "../lib/supabase";
+import { Logo } from "../components/Logo";
+import { BackgroundShapes } from "../layout/AppLayout";
 import { useAuth } from "./AuthProvider";
 
 // The page people see before signing in: what the app is, sign up / log in,
@@ -21,7 +23,7 @@ export default function Welcome() {
     e.preventDefault();
     setMessage(null);
     if (mode === "signup" && !adult) {
-      setMessage({ tone: "bad", text: "Gap Year Hub is for people aged 18 and over." });
+      setMessage({ tone: "bad", text: "Wayfund is for people aged 18 and over." });
       return;
     }
     setBusy(true);
@@ -41,15 +43,15 @@ export default function Welcome() {
   }
 
   return (
-    <div className="min-h-dvh bg-gradient-to-br from-coral/15 via-cream to-brand/15">
+    <div className="relative isolate min-h-dvh">
+      <BackgroundShapes />
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 md:grid-cols-2 md:items-center md:py-20">
         <section>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-semibold text-brand shadow-sm">
-            <img src="/favicon.svg" alt="" className="h-5 w-5" /> Gap Year Hub
-          </div>
-          <h1 className="text-4xl font-extrabold leading-tight md:text-5xl">
-            Plan it. Budget it. <span className="text-brand">Share it.</span>
+          <div className="mb-6"><Logo size={44} /></div>
+          <h1 className="text-5xl font-extrabold leading-[1.02] md:text-6xl">
+            Plan it.<br />Budget it.<br /><span className="text-brand-strong">Share it.</span>
           </h1>
+          <p className="mt-4 text-lg text-muted">Your gap year, sorted: money, plans and people in one place.</p>
           <ul className="mt-6 grid gap-3 text-lg">
             <li className="flex gap-3"><span>✨</span><span><b>Discover</b> what other travellers are up to, and events near you</span></li>
             <li className="flex gap-3"><span>💬</span><span><b>Groups</b> to chat, plan and find travel buddies</span></li>
@@ -64,7 +66,7 @@ export default function Welcome() {
               <button
                 key={m}
                 onClick={() => { setMode(m); setMessage(null); }}
-                className={`min-h-11 rounded-xl font-semibold ${mode === m ? "bg-surface text-brand shadow-sm" : "text-muted"}`}
+                className={`min-h-11 rounded-xl font-semibold ${mode === m ? "bg-surface text-brand-strong shadow-sm" : "text-muted"}`}
               >
                 {m === "signup" ? "Create account" : "Log in"}
               </button>

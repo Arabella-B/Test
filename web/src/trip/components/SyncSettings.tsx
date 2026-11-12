@@ -77,7 +77,7 @@ export default function SyncSettings() {
             const outcome = await sync.enable(passphrase);
             setSheet(false);
             setMessage(outcome === "created"
-              ? "Sync is on ✓ Now open Gap Year Hub on your other device, go to My Trip → Settings and enter the same passphrase."
+              ? "Sync is on ✓ Now open Wayfund on your other device, go to My Trip → Settings and enter the same passphrase."
               : "Connected ✓ This device now has your synced data.");
           }}
         />

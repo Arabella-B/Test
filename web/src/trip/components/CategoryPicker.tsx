@@ -61,7 +61,7 @@ export function CategoryPicker({
                   key={c.id}
                   onClick={() => onPick(c.id)}
                   className={`flex min-h-12 items-center gap-2 rounded-2xl border-2 px-3 text-left text-sm font-semibold ${
-                    current === c.id ? "border-brand" : "border-transparent"
+                    current === c.id ? "border-brand-strong" : "border-transparent"
                   }`}
                   style={{ backgroundColor: c.colour + "1F" }}
                 >

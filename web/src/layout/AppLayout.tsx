@@ -1,40 +1,57 @@
+import { Compass, Luggage, MessagesSquare, Plus, UserRound, type LucideIcon } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import { Logo } from "../components/Logo";
 
-// The frame around every page: a sidebar on laptops and a bottom tab bar on phones.
+// The frame around every page: a sidebar on laptops, a bottom tab bar on phones,
+// and soft colourful shapes floating in the background.
 
-export const MAIN_TABS = [
-  { to: "/discover", label: "Discover", icon: "✨" },
-  { to: "/groups", label: "Groups", icon: "💬" },
-  { to: "/post", label: "Post", icon: "➕" },
-  { to: "/trip", label: "My Trip", icon: "🔒" },
-  { to: "/profile", label: "Profile", icon: "👤" },
+export const MAIN_TABS: { to: string; label: string; Icon: LucideIcon }[] = [
+  { to: "/discover", label: "Discover", Icon: Compass },
+  { to: "/groups", label: "Groups", Icon: MessagesSquare },
+  { to: "/post", label: "Post", Icon: Plus },
+  { to: "/trip", label: "My Trip", Icon: Luggage },
+  { to: "/profile", label: "Profile", Icon: UserRound },
 ];
+
+/** Big blurred blobs in the theme colours, drifting slowly behind everything. */
+export function BackgroundShapes() {
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
+      <div className="animate-float absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand opacity-[0.16] blur-3xl" />
+      <div className="animate-float absolute -left-28 top-1/3 h-72 w-72 rounded-full bg-coral opacity-[0.11] blur-3xl [animation-delay:-5s]" />
+      <div className="animate-float absolute -bottom-24 right-1/4 h-80 w-96 rounded-full bg-sun opacity-[0.14] blur-3xl [animation-delay:-9s]" />
+      <svg className="absolute bottom-0 left-0 w-full text-brand-strong opacity-[0.07]" viewBox="0 0 1440 160" preserveAspectRatio="none">
+        <path fill="currentColor" d="M0 96c120-30 240-46 360-30s240 62 360 64 240-42 360-58 240 6 360 22v66H0z" />
+      </svg>
+    </div>
+  );
+}
 
 export default function AppLayout() {
   const { demo, displayName, signOut } = useAuth();
   return (
-    <div className="min-h-dvh md:flex">
+    <div className="relative isolate min-h-dvh md:flex">
+      <BackgroundShapes />
+
       {/* Laptop sidebar */}
-      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-1 border-r border-ink/10 bg-surface p-4 md:flex">
-        <div className="mb-6 flex items-center gap-2 px-2 text-lg font-extrabold">
-          <img src="/favicon.svg" alt="" className="h-8 w-8" /> Gap Year Hub
-        </div>
-        {MAIN_TABS.map((t) => (
+      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-1.5 p-4 md:flex">
+        <div className="mb-6 px-2"><Logo size={38} /></div>
+        {MAIN_TABS.map(({ to, label, Icon }) => (
           <NavLink
-            key={t.to}
-            to={t.to}
+            key={to}
+            to={to}
             className={({ isActive }) =>
-              `flex min-h-12 items-center gap-3 rounded-2xl px-4 text-base font-semibold transition ${
-                isActive ? "bg-brand text-white shadow-sm" : "text-ink hover:bg-brand-soft"
+              `group flex min-h-12 items-center gap-3 rounded-2xl px-4 text-base font-bold transition hover:translate-x-0.5 ${
+                isActive ? "bg-brand text-on-brand shadow-md" : "text-ink hover:bg-surface"
               }`
             }
           >
-            <span className="text-xl">{t.icon}</span> {t.label}
+            <Icon size={22} strokeWidth={2.4} className="transition group-hover:scale-110" /> {label}
           </NavLink>
         ))}
-        <div className="mt-auto rounded-2xl bg-cream p-3 text-sm">
-          <div className="font-semibold">{displayName}</div>
+        <div className="mt-auto rounded-2xl bg-surface p-3 text-sm">
+          <div className="font-bold">{displayName}</div>
           <button onClick={signOut} className="text-muted underline">{demo ? "Leave demo" : "Log out"}</button>
         </div>
       </aside>
@@ -46,30 +63,34 @@ export default function AppLayout() {
             <button onClick={signOut} className="underline">Create your own account</button>
           </div>
         )}
-        <main className="mx-auto max-w-5xl px-4 pb-28 pt-5 md:pb-12 md:pt-8">
+        {/* Phone header with the logo */}
+        <header className="flex items-center px-4 pt-4 md:hidden"><Logo size={30} /></header>
+        <main className="mx-auto max-w-5xl px-4 pb-28 pt-4 md:pb-12 md:pt-8">
           <Outlet />
         </main>
       </div>
 
       {/* Phone tab bar */}
-      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-20 border-t border-ink/10 bg-surface/95 backdrop-blur md:hidden">
+      <nav className="safe-bottom fixed inset-x-3 bottom-3 z-20 rounded-[1.75rem] bg-surface/90 shadow-lg ring-1 ring-ink/5 backdrop-blur-xl md:hidden">
         <div className="grid grid-cols-5">
-          {MAIN_TABS.map((t) => (
+          {MAIN_TABS.map(({ to, label, Icon }) => (
             <NavLink
-              key={t.to}
-              to={t.to}
+              key={to}
+              to={to}
               className={({ isActive }) =>
-                `flex min-h-16 flex-col items-center justify-center gap-0.5 text-[11px] font-semibold ${
-                  isActive ? "text-brand" : "text-muted"
+                `flex min-h-16 flex-col items-center justify-center gap-0.5 text-[11px] font-bold transition active:scale-90 ${
+                  isActive ? "text-brand-strong" : "text-muted"
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <span className={`grid h-9 w-12 place-items-center rounded-full text-xl transition ${isActive ? "bg-brand-soft" : ""}`}>
-                    {t.icon}
+                  <span className={`grid h-9 w-12 place-items-center rounded-full transition ${
+                    to === "/post" ? "bg-brand text-on-brand" : isActive ? "bg-brand-soft" : ""
+                  } ${isActive ? "scale-110" : ""}`}>
+                    <Icon size={22} strokeWidth={2.4} />
                   </span>
-                  {t.label}
+                  {label}
                 </>
               )}
             </NavLink>

@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import Celebrations from "../components/Celebrations";
 import LockScreen, { useTripLock } from "../components/LockScreen";
 import QuickAdd from "../components/QuickAdd";
 import { daysBetween, today } from "../money";
@@ -33,7 +34,7 @@ export default function TripLayout() {
     // Extra space at the bottom so the floating "+ Cash" button never hides the last item.
     <div className="grid grid-cols-1 gap-5 pb-20 md:pb-16">
       <div className="flex items-center gap-2">
-        <h1 className="text-3xl font-extrabold">My Trip</h1>
+        <h1 className="text-3xl font-extrabold"><span className="page-title">My Trip</span></h1>
         <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold text-cream">🔒 Private</span>
       </div>
 
@@ -45,7 +46,7 @@ export default function TripLayout() {
             end={t.end}
             className={({ isActive }) =>
               `flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-semibold transition ${
-                isActive ? "bg-ink text-cream" : "bg-surface text-ink ring-1 ring-ink/10"
+                isActive ? "bg-brand text-on-brand shadow-sm" : "bg-surface text-ink ring-1 ring-ink/10"
               }`
             }
           >
@@ -63,6 +64,7 @@ export default function TripLayout() {
 
       {ready ? <Outlet /> : <div className="card text-center text-muted">Loading your trip…</div>}
       {ready && <QuickAdd />}
+      {ready && <Celebrations />}
     </div>
   );
 }

@@ -1,6 +1,6 @@
-# Gap Year Hub
+# Wayfund
 
-One website for a gap year:
+(Formerly "Gap Year Hub".) One website for a gap year:
 
 - **✨ Discover**: a feed of what travellers are up to, and events (**Stage 3, built**)
 - **💬 Groups**: group chats anyone can join or leave (**Stage 2, built**)
@@ -9,6 +9,22 @@ One website for a gap year:
 Built with React + TypeScript + Vite, Tailwind CSS, Recharts and pdf.js.
 Accounts use Supabase. It's a Progressive Web App (PWA), so it can be added to an
 iPhone home screen and works offline.
+
+## Look and feel
+
+- **Name and logo:** Wayfund. The logo (`src/components/Logo.tsx`, `public/favicon.svg`, app icons in
+  `public/`) is a sticker with a dotted path that turns into a £ sign.
+- **Themes:** four soft pastel colour themes (Ocean, the default; Purple pop; Sunset; Earthy), each
+  with a dark version, picked in Profile → Appearance. All colours are variables in `src/index.css`:
+  `brand` (pastel fill) and `brand-strong` (deeper shade for text), `coral` (accent), `sun` (warm),
+  `cream` (tinted page), `surface` (cards). Charts read the same colours (`lib/useThemeColour.ts`).
+- **Type:** Bricolage Grotesque for headings (bundled, works offline), system fonts for body text.
+- **Playful touches:** floating background shapes, highlighter page titles, colour-filled cards, drawn
+  icons (lucide) for navigation, emoji for categories, bouncy buttons and slide-in lists.
+- **Passport stamps** (`components/Stamp.tsx`): on the Route page, on finished checklist items, and a
+  "Welcome to …" stamp when a new country on your route begins.
+- **Confetti** (`lib/celebrate.ts`, `trip/components/Celebrations.tsx`): checklist finished, back on
+  budget, first statement import, new country. All animation turns off if the device asks for reduced motion.
 
 ## Privacy: how My Trip data is kept private
 

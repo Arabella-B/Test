@@ -1,4 +1,4 @@
-import { useRef, useState, type DragEvent } from "react";
+import { useEffect, useRef, useState, type DragEvent } from "react";
 import { Link } from "react-router-dom";
 import { type ImportSummary } from "../importer";
 import { applyMapping, parseCsvStatement, parseRowsStatement, type CsvResult } from "../parsers/csv";
@@ -6,6 +6,7 @@ import { readExcelRows } from "../parsers/excel";
 import { parseOfx, parseQif } from "../parsers/ofx";
 import { extractPdfLines, parsePdfLines } from "../parsers/pdf";
 import { useTrip } from "../store";
+import { celebrate, once } from "../../lib/celebrate";
 import type { ColumnMapping } from "../types";
 
 // Drag-and-drop (or choose) a bank statement. Everything is read here in the
@@ -19,7 +20,7 @@ type State =
   | { step: "error"; name: string; message: string };
 
 export default function ImportPage() {
-  const { importRows, mappings, saveMapping } = useTrip();
+  const { importRows, mappings, saveMapping, scope } = useTrip();
   const [state, setState] = useState<State>({ step: "idle" });
   const [dragging, setDragging] = useState(false);
   const input = useRef<HTMLInputElement>(null);
@@ -91,6 +92,13 @@ export default function ImportPage() {
     setState({ step: "done", name: state.name, summary, skipped });
   }
 
+  // Your first ever import gets confetti.
+  useEffect(() => {
+    if (state.step === "done" && state.summary.added.length > 0 && once(scope, "first-import")) {
+      celebrate(`🎉 First statement in: ${state.summary.added.length} transactions!`);
+    }
+  }, [state, scope]);
+
   function onDrop(e: DragEvent) {
     e.preventDefault();
     setDragging(false);
@@ -105,7 +113,7 @@ export default function ImportPage() {
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
         className={`grid place-items-center gap-4 rounded-3xl border-4 border-dashed p-8 text-center transition md:p-14 ${
-          dragging ? "border-brand bg-brand-soft" : "border-brand/30 bg-surface"
+          dragging ? "border-brand-strong bg-brand-soft" : "border-brand/30 bg-surface"
         }`}
       >
         <div className="text-6xl">📄</div>

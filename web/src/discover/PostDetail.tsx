@@ -109,7 +109,7 @@ export default function PostDetail() {
               <p className="text-xs text-muted">{chatTime(post.createdAt, true)}</p>
             </div>
             <button onClick={like} aria-pressed={post.likedByMe}
-              className={`flex min-h-11 items-center gap-1.5 rounded-full px-4 font-bold ${post.likedByMe ? "bg-coral/15 text-coral" : "bg-cream"}`}>
+              className={`flex min-h-11 items-center gap-1.5 rounded-full px-4 font-bold ${post.likedByMe ? "bg-coral/15 text-coral-strong" : "bg-cream"}`}>
               {post.likedByMe ? "❤️" : "🤍"} {post.likeCount}
             </button>
           </div>

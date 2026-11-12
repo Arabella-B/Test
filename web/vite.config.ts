@@ -14,11 +14,11 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "apple-touch-icon.png"],
       manifest: {
-        name: "Gap Year Hub",
-        short_name: "Gap Year",
+        name: "Wayfund",
+        short_name: "Wayfund",
         description: "Plan, budget and share your gap year.",
-        theme_color: "#7C3AED",
-        background_color: "#FFF8F0",
+        theme_color: "#e2f4f0",
+        background_color: "#e2f4f0",
         display: "standalone",
         start_url: "/",
         icons: [

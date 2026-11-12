@@ -3,45 +3,178 @@
 /* "dark:" classes apply when <html> has the "dark" class. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Brand colours and fonts, usable as Tailwind classes (e.g. bg-brand, text-ink). */
+/*
+  Wayfund's look is built from a few colour names, used as Tailwind classes
+  (bg-brand, text-ink, bg-surface…). Each colour theme (Ocean, Purple, Sunset,
+  Earthy) and dark mode just give those names different values, so every page
+  changes together. Themes are picked in Profile → Appearance.
+
+  brand  = main colour (buttons, highlights)      on-brand = text on brand
+  coral  = accent colour (Cash button, badges)    on-coral = text on accent
+  sun    = warm highlight (stickers, events)
+  cream  = page background   surface = cards, sheets and inputs (a soft tint)
+*/
 @theme {
-  --color-brand: #7c3aed;
-  --color-brand-soft: #ede4ff;
-  --color-coral: #ff6b6b;
-  --color-sun: #ffb020;
-  --color-cream: #fff8f0; /* page background */
-  --color-surface: #ffffff; /* cards, sheets, inputs */
-  --color-ink: #1f1b2d; /* main text */
-  --color-muted: #6b6578; /* secondary text */
+  /* Ocean (the default theme), light: soft pastels on a tinted page */
+  --color-brand: #7fd6cb; /* pastel fill: buttons, active tabs */
+  --color-brand-strong: #0f766e; /* deeper shade for text and links */
+  --color-brand-soft: #d6f3ee;
+  --color-on-brand: #0e3b37; /* text on a brand fill */
+  --color-coral: #a9c4f7; /* pastel accent */
+  --color-coral-strong: #1d4ed8;
+  --color-on-coral: #112a5c;
+  --color-sun: #fcd68f; /* pastel warm highlight */
+  --color-sun-strong: #a35f05;
+  --color-cream: #e2f4f0; /* tinted page background */
+  --color-surface: color-mix(in srgb, var(--color-brand) 10%, #ffffff); /* cards */
+  --color-ink: #12302e;
+  --color-muted: #4b6b67;
   --color-good: #16a34a;
-  --color-warn: #d97706;
+  --color-warn: #c26a04;
   --color-bad: #dc2626;
-  --color-grid: #0000000f; /* chart grid lines */
-  --color-heat-empty: #f1ede6; /* heatmap days with no spending */
-  --font-sans: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --color-grid: #0000000f;
+  --color-heat-empty: color-mix(in srgb, var(--color-brand) 14%, #ffffff);
+  --font-sans: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", -apple-system, system-ui, sans-serif;
 }
 
-/* Dark mode: the same colour names, darker values. Turned on in Profile → Appearance. */
+/* ---- Light themes ---- */
+html[data-palette="purple"] {
+  --color-brand: #c8b6fb;
+  --color-brand-strong: #6d28d9;
+  --color-brand-soft: #ece5fe;
+  --color-on-brand: #2b1460;
+  --color-coral: #ffb8b8;
+  --color-coral-strong: #c2272d;
+  --color-on-coral: #5a1313;
+  --color-sun: #ffdb8f;
+  --color-sun-strong: #9a5b00;
+  --color-cream: #eee8fc;
+  --color-ink: #241b3a;
+  --color-muted: #625a7a;
+}
+html[data-palette="sunset"] {
+  --color-brand: #fdbb8f;
+  --color-brand-strong: #c2410c;
+  --color-brand-soft: #ffeadb;
+  --color-on-brand: #4a1d05;
+  --color-coral: #f8aed6;
+  --color-coral-strong: #be185d;
+  --color-on-coral: #5b0f33;
+  --color-sun: #fde58f;
+  --color-sun-strong: #946200;
+  --color-cream: #fcebdf;
+  --color-ink: #2e1a10;
+  --color-muted: #765745;
+}
+html[data-palette="earthy"] {
+  --color-brand: #a9d8aa;
+  --color-brand-strong: #166534;
+  --color-brand-soft: #e2f3e0;
+  --color-on-brand: #12371d;
+  --color-coral: #f2b88f;
+  --color-coral-strong: #b5400b;
+  --color-on-coral: #4d230b;
+  --color-sun: #f2d38c;
+  --color-sun-strong: #8a5a00;
+  --color-cream: #ebf0e0;
+  --color-ink: #1e261a;
+  --color-muted: #5a6650;
+}
+
+/* ---- Dark versions (Profile → Appearance → Dark). Pastels glow on dark backgrounds. ---- */
 html.dark {
   color-scheme: dark;
-  --color-cream: #13111a;
-  --color-surface: #211d2c;
-  --color-ink: #f2eff8;
-  --color-muted: #a9a3b8;
-  --color-brand-soft: #2f2548;
-  --color-brand: #9f6bff;
-  --color-good: #22c55e;
-  --color-warn: #f59e0b;
+  --color-brand: #7fd6cb;
+  --color-brand-strong: #8fe3d8;
+  --color-brand-soft: #1d3f3b;
+  --color-on-brand: #0b2f2b;
+  --color-coral: #a9c4f7;
+  --color-coral-strong: #b8cffa;
+  --color-on-coral: #0f2552;
+  --color-sun: #fcd68f;
+  --color-sun-strong: #fcd68f;
+  --color-cream: #0f2120;
+  --color-surface: color-mix(in srgb, var(--color-brand) 11%, #152826);
+  --color-ink: #e9f6f4;
+  --color-muted: #9fbab6;
+  --color-good: #4ade80;
+  --color-warn: #fbbf24;
   --color-bad: #f87171;
   --color-grid: #ffffff14;
-  --color-heat-empty: #2a2536;
+  --color-heat-empty: color-mix(in srgb, var(--color-brand) 12%, #1b2e2c);
+}
+html.dark[data-palette="purple"] {
+  --color-brand: #c8b6fb;
+  --color-brand-strong: #d6c8fd;
+  --color-brand-soft: #312652;
+  --color-on-brand: #22104f;
+  --color-coral: #ffb8b8;
+  --color-coral-strong: #ffc7c7;
+  --color-on-coral: #4a0f0f;
+  --color-sun: #ffdb8f;
+  --color-sun-strong: #ffdb8f;
+  --color-cream: #18132a;
+  --color-surface: color-mix(in srgb, var(--color-brand) 11%, #1f1934);
+  --color-ink: #f1edfb;
+  --color-muted: #ada4c7;
+}
+html.dark[data-palette="sunset"] {
+  --color-brand: #fdbb8f;
+  --color-brand-strong: #fdc9a6;
+  --color-brand-soft: #4a2716;
+  --color-on-brand: #3b1604;
+  --color-coral: #f8aed6;
+  --color-coral-strong: #fbc2e1;
+  --color-on-coral: #4d0c2b;
+  --color-sun: #fde58f;
+  --color-sun-strong: #fde58f;
+  --color-cream: #22150e;
+  --color-surface: color-mix(in srgb, var(--color-brand) 11%, #2a1b12);
+  --color-ink: #fcf0e7;
+  --color-muted: #c9ab98;
+}
+html.dark[data-palette="earthy"] {
+  --color-brand: #a9d8aa;
+  --color-brand-strong: #bde3bd;
+  --color-brand-soft: #24402a;
+  --color-on-brand: #0f2e18;
+  --color-coral: #f2b88f;
+  --color-coral-strong: #f6caaa;
+  --color-on-coral: #431d08;
+  --color-sun: #f2d38c;
+  --color-sun-strong: #f2d38c;
+  --color-cream: #141a12;
+  --color-surface: color-mix(in srgb, var(--color-brand) 10%, #1b2318);
+  --color-ink: #eef3e8;
+  --color-muted: #a7b29b;
 }
 
 html,
 body {
   background: var(--color-cream);
   color: var(--color-ink);
+  font-family: var(--font-sans);
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Bold, characterful headings. */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+/* Page titles get a pastel "highlighter" stroke behind the words. */
+.page-title {
+  background-image: linear-gradient(transparent 58%, color-mix(in srgb, var(--color-sun) 75%, transparent) 58%, color-mix(in srgb, var(--color-sun) 75%, transparent) 90%, transparent 90%);
+  background-repeat: no-repeat;
+  padding: 0 0.15em;
+  margin-left: -0.15em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* Space for the iPhone home bar under the bottom tabs. */
@@ -52,24 +185,75 @@ body {
 /* Reusable styles. They're in the "components" layer so extra classes on an element
    (like a coloured background on a card) always win over these defaults. */
 @layer components {
-  /* A reusable rounded card. */
+  /* Colour-filled cards: a soft tint of the theme, no outline. */
   .card {
-    @apply rounded-3xl bg-surface p-5 shadow-sm ring-1 ring-ink/10;
+    @apply rounded-[1.75rem] bg-surface p-5;
+  }
+  .card-accent {
+    background-color: color-mix(in srgb, var(--color-coral) 9%, var(--color-cream));
+  }
+  .card-sun {
+    background-color: color-mix(in srgb, var(--color-sun) 14%, var(--color-cream));
   }
 
   .btn {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand px-5 font-semibold text-white transition active:scale-[0.98] disabled:opacity-50;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand px-5 font-semibold text-on-brand shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-95 disabled:opacity-50;
   }
 
   .btn-soft {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand-soft px-5 font-semibold text-brand transition active:scale-[0.98];
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-brand-soft px-5 font-semibold text-brand-strong transition duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95;
   }
 
   .input {
-    @apply min-h-12 w-full rounded-2xl border border-ink/15 bg-surface px-4 text-base outline-none focus:border-brand focus:ring-2 focus:ring-brand/20;
+    @apply min-h-12 w-full rounded-2xl border-2 border-transparent bg-surface px-4 text-base outline-none transition focus:border-brand-strong focus:bg-surface;
   }
 
   .label {
     @apply grid gap-1.5 text-sm font-semibold text-ink;
+  }
+}
+
+/* ---- Lively animations (switched off if the device asks for less motion) ---- */
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+/* A stamp coming down hard onto the page, then settling at its own tilt (--tilt). */
+@keyframes stamp-thump {
+  0% { opacity: 0; transform: scale(2.4) rotate(calc(var(--tilt, -8deg) - 12deg)); }
+  55% { opacity: 1; transform: scale(0.9) rotate(calc(var(--tilt, -8deg) + 2deg)); }
+  75% { transform: scale(1.04) rotate(var(--tilt, -8deg)); }
+  100% { opacity: 1; transform: scale(1) rotate(var(--tilt, -8deg)); }
+}
+@keyframes float-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(12px, -18px) scale(1.06); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+
+/* Cards and list rows slide in, one after another. */
+.pop-in > * {
+  animation: pop-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+.pop-in > *:nth-child(2) { animation-delay: 0.04s; }
+.pop-in > *:nth-child(3) { animation-delay: 0.08s; }
+.pop-in > *:nth-child(4) { animation-delay: 0.12s; }
+.pop-in > *:nth-child(5) { animation-delay: 0.16s; }
+.pop-in > *:nth-child(6) { animation-delay: 0.2s; }
+.pop-in > *:nth-child(n + 7) { animation-delay: 0.24s; }
+
+.animate-stamp { animation: stamp-thump 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+.animate-float { animation: float-blob 14s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 0.5s ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -13,7 +13,7 @@ export function backupJson(data: TripData): string {
 export function parseBackup(text: string): TripData {
   const parsed = JSON.parse(text);
   if (parsed?.app !== "gap-year-hub" || !Array.isArray(parsed.transactions)) {
-    throw new Error("This file isn't a Gap Year Hub backup.");
+    throw new Error("This file isn't a Wayfund backup.");
   }
   return {
     transactions: parsed.transactions,

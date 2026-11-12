@@ -69,14 +69,14 @@ export default function DiscoverPage() {
   return (
     <div className="grid grid-cols-1 gap-4">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-3xl font-extrabold">Discover</h1>
+        <h1 className="text-3xl font-extrabold"><span className="page-title">Discover</span></h1>
         <Link to="/post" className="btn px-4">+ Post</Link>
       </div>
 
       <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
         {FILTERS.map((f) => (
           <button key={f.key} onClick={() => setFilter(f.key)}
-            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-ink text-cream" : "bg-surface ring-1 ring-ink/10"}`}>
+            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-coral text-on-coral" : "bg-surface ring-1 ring-ink/10"}`}>
             {f.label}
           </button>
         ))}
@@ -84,7 +84,7 @@ export default function DiscoverPage() {
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           aria-label="Filter by country"
-          className={`min-h-10 shrink-0 rounded-full px-3 text-sm font-semibold ring-1 ring-ink/10 ${country ? "bg-brand text-white" : "bg-surface"}`}
+          className={`min-h-10 shrink-0 rounded-full px-3 text-sm font-semibold ring-1 ring-ink/10 ${country ? "bg-brand text-on-brand" : "bg-surface"}`}
         >
           <option value="">🌍 Any country</option>
           {COUNTRIES.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -94,7 +94,7 @@ export default function DiscoverPage() {
       {error && <p className="rounded-2xl bg-bad/10 p-3 text-sm font-semibold text-bad">{error}</p>}
 
       {posts === null ? (
-        <div className="columns-2 gap-3 md:columns-3 lg:columns-4">
+        <div className="pop-in columns-2 gap-3 md:columns-3 lg:columns-4">
           {[220, 160, 260, 180, 240, 200].map((h, i) => (
             <div key={i} className="mb-3 animate-pulse rounded-3xl bg-surface/70" style={{ height: h }} />
           ))}
@@ -107,7 +107,7 @@ export default function DiscoverPage() {
           <Link to="/post" className="btn mt-3">+ Post</Link>
         </div>
       ) : (
-        <div className="columns-2 gap-3 md:columns-3 lg:columns-4">
+        <div className="pop-in columns-2 gap-3 md:columns-3 lg:columns-4">
           {visible.map((p) => <PostCard key={p.id} post={p} onLike={like} />)}
         </div>
       )}

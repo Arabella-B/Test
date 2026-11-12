@@ -25,7 +25,7 @@ export default function PostCard({ post, onLike }: { post: Post; onLike: (post: 
           {isEvent ? (
             <>
               {post.imageUrl && <p className="font-bold leading-tight">{post.eventTitle}</p>}
-              <p className="text-xs font-semibold text-brand">📅 {post.startsAt && eventTime(post.startsAt)}</p>
+              <p className="text-xs font-semibold text-brand-strong">📅 {post.startsAt && eventTime(post.startsAt)}</p>
               {post.location && <p className="line-clamp-1 text-xs text-muted">📍 {post.location}</p>}
               {post.priceText && <p className="text-xs font-semibold">{post.priceText}</p>}
             </>
@@ -43,7 +43,7 @@ export default function PostCard({ post, onLike }: { post: Post; onLike: (post: 
           onClick={() => onLike(post)}
           aria-label={post.likedByMe ? "Unlike" : "Like"}
           aria-pressed={post.likedByMe}
-          className={`flex min-h-9 items-center gap-1 rounded-full px-2.5 text-sm font-bold ${post.likedByMe ? "bg-coral/15 text-coral" : "bg-cream text-muted"}`}
+          className={`flex min-h-9 items-center gap-1 rounded-full px-2.5 text-sm font-bold ${post.likedByMe ? "bg-coral/15 text-coral-strong" : "bg-cream text-muted"}`}
         >
           {post.likedByMe ? "❤️" : "🤍"} {post.likeCount}
         </button>

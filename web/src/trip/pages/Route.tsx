@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, type FormEvent, type PointerEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Sheet from "../../components/Sheet";
+import Stamp from "../../components/Stamp";
 import { COUNTRY_LIST, findCountry } from "../countries";
 import { dailyTotal, getCard } from "../countryInfo";
 import { formatLocal, fromPence } from "../fx";
@@ -70,7 +71,7 @@ export default function RoutePage() {
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      <div className="card grid gap-2 bg-gradient-to-br from-sky-500 to-brand text-white">
+      <div className="card grid gap-2 bg-gradient-to-br from-sky-500 to-brand text-on-brand">
         <p className="text-sm font-semibold opacity-90">
           {stops.length ? `${stops.length} countr${stops.length === 1 ? "y" : "ies"} · planned ${formatMoney(totalPlanned, true)}` : "Plan your route"}
         </p>
@@ -109,7 +110,20 @@ export default function RoutePage() {
           <p className="text-sm text-muted">Add each country with dates and a daily budget. Your spending is matched to countries by date.</p>
         </div>
       ) : (
-        <div ref={listRef} className="grid gap-3" onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
+        <section className="card card-sun">
+          <h2 className="mb-1 text-lg font-extrabold">🛂 Your passport</h2>
+          <p className="mb-4 text-sm text-muted">A stamp for every country you've reached. Faded ones are still to come.</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-6 py-2">
+            {stops.map((s, i) => (
+              <Stamp key={s.id} index={i} title={s.country} icon={s.flag}
+                subtitle={formatDate(s.startDate)} faded={s.startDate > now} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {stops.length > 0 && (
+        <div ref={listRef} className="pop-in grid gap-3" onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
           {shown.map((s, i) => (
             <StopCard
               key={s.id}
@@ -159,7 +173,7 @@ function StopCard(props: {
   const { stop, stats, dragging } = props;
   const pct = stats.actualDaily !== null && stop.dailyBudget > 0 ? stats.actualDaily / stop.dailyBudget : 0;
   return (
-    <div data-stop className={`rounded-3xl bg-surface ring-1 ring-ink/10 transition ${dragging ? "scale-[1.02] shadow-lg ring-brand" : "shadow-sm"}`}>
+    <div data-stop className={`rounded-3xl bg-surface ring-1 ring-ink/10 transition ${dragging ? "scale-[1.02] shadow-lg ring-brand-strong" : "shadow-sm"}`}>
       <div className="flex items-stretch">
         <button
           onPointerDown={props.onHandleDown}
@@ -201,7 +215,7 @@ function StopCard(props: {
         </div>
       </div>
       {stats.daysElapsed > 0 && (
-        <button onClick={props.onShowSpending} className="block w-full border-t border-ink/10 py-2 text-center text-xs font-semibold text-brand">
+        <button onClick={props.onShowSpending} className="block w-full border-t border-ink/10 py-2 text-center text-xs font-semibold text-brand-strong">
           See spending in {stop.country} →
         </button>
       )}

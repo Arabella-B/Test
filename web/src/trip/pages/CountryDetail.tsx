@@ -61,18 +61,18 @@ export default function CountryDetail() {
               {old ? "⚠️ " : ""}Last checked {formatDate(card.lastChecked, "long")}{edited ? " · includes your edits" : ""}
             </p>
           </div>
-          <button onClick={() => setEditing((e) => !e)} className={`rounded-full px-4 py-2 text-sm font-semibold ${editing ? "bg-brand text-white" : "bg-cream"}`}>
+          <button onClick={() => setEditing((e) => !e)} className={`rounded-full px-4 py-2 text-sm font-semibold ${editing ? "bg-brand text-on-brand" : "bg-cream"}`}>
             {editing ? "Done" : "Edit"}
           </button>
         </div>
         <p>{card.summary}</p>
         <div className="rounded-2xl bg-sun/25 p-3 text-sm">
           ⚠️ Rules and prices change. Check the official sites below before you travel, then tap
-          <button onClick={() => update({ lastChecked: today() })} className="mx-1 font-bold text-brand underline">Mark as checked today</button>.
+          <button onClick={() => update({ lastChecked: today() })} className="mx-1 font-bold text-brand-strong underline">Mark as checked today</button>.
         </div>
         <div className="flex flex-wrap gap-2">
           {card.links.map((l) => (
-            <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-brand-soft px-3 py-2 text-sm font-semibold text-brand">
+            <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-brand-soft px-3 py-2 text-sm font-semibold text-brand-strong">
               {l.label} ↗
             </a>
           ))}
@@ -151,7 +151,7 @@ function EuropeBox() {
       <SubList title="Interrail tips" items={e.interrail.tips} />
       <div className="mt-2 flex flex-wrap gap-2">
         {e.links.map((l) => (
-          <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-brand-soft px-3 py-2 text-sm font-semibold text-brand">{l.label} ↗</a>
+          <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-brand-soft px-3 py-2 text-sm font-semibold text-brand-strong">{l.label} ↗</a>
         ))}
       </div>
       <p className="mt-2 text-xs text-muted">Checked {formatDate(e.lastChecked, "long")}.</p>

@@ -69,12 +69,12 @@ export default function NewPostPage() {
 
   return (
     <form onSubmit={submit} className="mx-auto grid w-full max-w-xl grid-cols-1 gap-4">
-      <h1 className="text-3xl font-extrabold">New post</h1>
+      <h1 className="text-3xl font-extrabold"><span className="page-title">New post</span></h1>
 
       <div className="grid grid-cols-2 rounded-2xl bg-surface p-1 ring-1 ring-ink/10">
         {(["update", "event"] as const).map((k) => (
           <button type="button" key={k} onClick={() => setKind(k)}
-            className={`min-h-12 rounded-xl font-semibold ${kind === k ? "bg-brand text-white" : "text-muted"}`}>
+            className={`min-h-12 rounded-xl font-semibold ${kind === k ? "bg-brand text-on-brand" : "text-muted"}`}>
             {k === "update" ? "📸 What I'm up to" : "🎉 Event"}
           </button>
         ))}

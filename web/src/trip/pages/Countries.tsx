@@ -21,7 +21,7 @@ export default function Countries() {
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      <Link to="/trip/afford" className="flex items-center gap-4 rounded-3xl bg-gradient-to-br from-good to-sky-600 p-5 text-white shadow-sm">
+      <Link to="/trip/afford" className="flex items-center gap-4 rounded-3xl bg-gradient-to-br from-good to-sky-600 p-5 text-on-brand shadow-sm">
         <span className="text-4xl">🧮</span>
         <span>
           <span className="block text-lg font-extrabold">Can I afford it?</span>
@@ -46,7 +46,7 @@ function Section({ title, cards }: { title: string; cards: CountryCard[] }) {
   return (
     <section>
       <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-muted">{title}</h2>
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div className="pop-in grid gap-2 sm:grid-cols-2">
         {cards.map((c) => {
           const old = ageInDays(c) > 90;
           return (

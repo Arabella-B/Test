@@ -46,7 +46,7 @@ export default function NewGroupSheet({ onClose, onCreated }: { onClose: () => v
           <div className="flex flex-wrap gap-2">
             {EMOJIS.map((e) => (
               <button type="button" key={e} onClick={() => setEmoji(e)} aria-label={`Emoji ${e}`}
-                className={`grid h-11 w-11 place-items-center rounded-xl text-2xl ${emoji === e ? "bg-brand-soft ring-2 ring-brand" : "bg-cream"}`}>
+                className={`grid h-11 w-11 place-items-center rounded-xl text-2xl ${emoji === e ? "bg-brand-soft ring-2 ring-brand-strong" : "bg-cream"}`}>
                 {e}
               </button>
             ))}
@@ -65,7 +65,7 @@ export default function NewGroupSheet({ onClose, onCreated }: { onClose: () => v
           <div className="flex flex-wrap gap-2">
             {GROUP_TAGS.map((t) => (
               <button type="button" key={t} onClick={() => setTag(t)}
-                className={`min-h-10 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-ink text-cream" : "bg-cream"}`}>
+                className={`min-h-10 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-coral text-on-coral" : "bg-cream"}`}>
                 {t}
               </button>
             ))}

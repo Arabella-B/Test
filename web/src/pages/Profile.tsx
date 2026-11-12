@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useGroups } from "../groups/GroupsProvider";
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
-import { getThemeChoice, setThemeChoice, type ThemeChoice } from "../lib/theme";
+import { PALETTES, getPalette, getThemeChoice, setPalette, setThemeChoice, type Palette, type ThemeChoice } from "../lib/theme";
 
 // Your public profile (just a display name for now) and account options.
 
@@ -20,9 +20,9 @@ export default function Profile() {
 
   return (
     <div className="grid grid-cols-1 gap-5">
-      <h1 className="text-3xl font-extrabold">Profile</h1>
+      <h1 className="text-3xl font-extrabold"><span className="page-title">Profile</span></h1>
       <div className="card flex items-center gap-4">
-        <div className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-coral to-brand text-2xl font-bold text-white">
+        <div className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-coral to-brand text-2xl font-bold text-on-brand">
           {(displayName || "?").slice(0, 1).toUpperCase()}
         </div>
         <div>
@@ -86,20 +86,39 @@ function BlockedPeople() {
   );
 }
 
-/** Light (default), dark, or follow the device's setting. */
+/** Colour theme, plus bright (default), dark, or follow the device's setting. */
 function Appearance() {
   const [choice, setChoice] = useState<ThemeChoice>(getThemeChoice);
-  const options: [ThemeChoice, string][] = [["light", "☀️ Bright"], ["dark", "🌙 Dark"], ["system", "📱 Match device"]];
+  const [palette, setPal] = useState<Palette>(getPalette);
+  const modes: [ThemeChoice, string][] = [["light", "☀️ Bright"], ["dark", "🌙 Dark"], ["system", "📱 Match device"]];
   return (
-    <section className="card grid gap-3">
-      <h2 className="text-lg font-bold">🎨 Appearance</h2>
-      <div className="grid grid-cols-3 gap-2">
-        {options.map(([value, label]) => (
-          <button key={value} onClick={() => { setThemeChoice(value); setChoice(value); }}
-            className={`min-h-12 rounded-2xl px-2 text-sm font-semibold ${choice === value ? "bg-brand text-white" : "bg-cream"}`}>
-            {label}
-          </button>
-        ))}
+    <section className="card grid gap-4">
+      <h2 className="text-xl font-extrabold">🎨 Appearance</h2>
+      <div>
+        <p className="label mb-2">Colour theme</p>
+        <div className="grid grid-cols-2 gap-2">
+          {PALETTES.map((p) => (
+            <button key={p.id} onClick={() => { setPalette(p.id); setPal(p.id); }}
+              aria-pressed={palette === p.id}
+              className={`flex min-h-14 items-center gap-3 rounded-2xl bg-cream px-3 text-left text-sm font-bold transition active:scale-95 ${palette === p.id ? "ring-3 ring-brand-strong" : ""}`}>
+              <span className="flex -space-x-1.5">
+                {p.colours.map((c) => <span key={c} className="h-6 w-6 rounded-full ring-2 ring-cream" style={{ background: c }} />)}
+              </span>
+              {p.name}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p className="label mb-2">Brightness</p>
+        <div className="grid grid-cols-3 gap-2">
+          {modes.map(([value, label]) => (
+            <button key={value} onClick={() => { setThemeChoice(value); setChoice(value); }}
+              className={`min-h-12 rounded-2xl px-2 text-sm font-semibold transition active:scale-95 ${choice === value ? "bg-brand text-on-brand" : "bg-cream"}`}>
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );
