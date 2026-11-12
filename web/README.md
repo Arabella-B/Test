@@ -14,7 +14,7 @@ iPhone home screen and works offline.
 
 - **Name and logo:** Wayfund. The logo (`src/components/Logo.tsx`, `public/favicon.svg`, app icons in
   `public/`) is a sticker with a dotted path that turns into a £ sign.
-- **Themes:** four soft pastel colour themes (Ocean, the default; Purple pop; Sunset; Earthy), each
+- **Themes:** six colour themes (soft pastel Ocean, the default; Purple pop; Sunset; Earthy; plus deeper Navy and Charcoal), each
   with a dark version, picked in Profile → Appearance. All colours are variables in `src/index.css`:
   `brand` (pastel fill) and `brand-strong` (deeper shade for text), `coral` (accent), `sun` (warm),
   `cream` (tinted page), `surface` (cards). Charts read the same colours (`lib/useThemeColour.ts`).

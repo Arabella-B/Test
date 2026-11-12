@@ -20,7 +20,7 @@
           document.documentElement.classList.add("dark");
         }
         var p = localStorage.getItem("gap-year-palette");
-        if (p === "purple" || p === "sunset" || p === "earthy") document.documentElement.setAttribute("data-palette", p);
+        if (["purple", "sunset", "earthy", "navy", "charcoal"].indexOf(p) >= 0) document.documentElement.setAttribute("data-palette", p);
       } catch (e) {}
     </script>
   </head>

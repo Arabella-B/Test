@@ -82,6 +82,36 @@ html[data-palette="earthy"] {
   --color-muted: #5a6650;
 }
 
+/* Deeper, muted themes: solid fills with white text on them. */
+html[data-palette="navy"] {
+  --color-brand: #2f4a6d;
+  --color-brand-strong: #2f4a6d;
+  --color-brand-soft: #dde5ef;
+  --color-on-brand: #ffffff;
+  --color-coral: #c4652a;
+  --color-coral-strong: #a8521d;
+  --color-on-coral: #ffffff;
+  --color-sun: #e0b354;
+  --color-sun-strong: #8a6210;
+  --color-cream: #e4e9ef;
+  --color-ink: #16202c;
+  --color-muted: #536173;
+}
+html[data-palette="charcoal"] {
+  --color-brand: #3a4046;
+  --color-brand-strong: #2c3136;
+  --color-brand-soft: #e2e4e6;
+  --color-on-brand: #ffffff;
+  --color-coral: #2e7d8c;
+  --color-coral-strong: #226472;
+  --color-on-coral: #ffffff;
+  --color-sun: #d8ab5a;
+  --color-sun-strong: #85580f;
+  --color-cream: #e8e9ea;
+  --color-ink: #1b1f23;
+  --color-muted: #595f66;
+}
+
 /* ---- Dark versions (Profile → Appearance → Dark). Pastels glow on dark backgrounds. ---- */
 html.dark {
   color-scheme: dark;
@@ -148,6 +178,37 @@ html.dark[data-palette="earthy"] {
   --color-surface: color-mix(in srgb, var(--color-brand) 10%, #1b2318);
   --color-ink: #eef3e8;
   --color-muted: #a7b29b;
+}
+
+html.dark[data-palette="navy"] {
+  --color-brand: #8fb0d8;
+  --color-brand-strong: #a9c3e3;
+  --color-brand-soft: #22324a;
+  --color-on-brand: #0f1d30;
+  --color-coral: #e8935a;
+  --color-coral-strong: #f0aa7a;
+  --color-on-coral: #3a1a06;
+  --color-sun: #e8c072;
+  --color-sun-strong: #e8c072;
+  --color-cream: #0e141c;
+  --color-surface: color-mix(in srgb, var(--color-brand) 10%, #161e29);
+  --color-ink: #e8edf3;
+  --color-muted: #9aa6b4;
+}
+html.dark[data-palette="charcoal"] {
+  --color-brand: #c3c9cf;
+  --color-brand-strong: #d5dadf;
+  --color-brand-soft: #2c3136;
+  --color-on-brand: #1b1f23;
+  --color-coral: #6fc0cc;
+  --color-coral-strong: #8dd0da;
+  --color-on-coral: #0b2e33;
+  --color-sun: #e2bd78;
+  --color-sun-strong: #e2bd78;
+  --color-cream: #121416;
+  --color-surface: color-mix(in srgb, var(--color-brand) 7%, #1c1f22);
+  --color-ink: #eceef0;
+  --color-muted: #a2a8ae;
 }
 
 html,
