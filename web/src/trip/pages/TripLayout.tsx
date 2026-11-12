@@ -1,0 +1,56 @@
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { daysBetween, today } from "../money";
+import { useTrip } from "../store";
+
+// Frame for the private My Trip section: a row of big buttons for its pages,
+// plus a reminder to back up.
+
+const TRIP_TABS = [
+  { to: "/trip", label: "Dashboard", icon: "📊", end: true },
+  { to: "/trip/import", label: "Import", icon: "📥" },
+  { to: "/trip/transactions", label: "Transactions", icon: "📋" },
+  { to: "/trip/checklist", label: "Checklist", icon: "✅" },
+  { to: "/trip/settings", label: "Settings", icon: "⚙️" },
+];
+
+export default function TripLayout() {
+  const { ready, isDemo, transactions, settings } = useTrip();
+
+  const lastBackup = settings.lastBackupAt?.slice(0, 10);
+  const needsBackup = !isDemo && transactions.length > 0 && (!lastBackup || daysBetween(lastBackup, today()) >= 14);
+
+  return (
+    <div className="grid grid-cols-1 gap-5">
+      <div className="flex items-center gap-2">
+        <h1 className="text-3xl font-extrabold">My Trip</h1>
+        <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold text-white">🔒 Private</span>
+      </div>
+
+      <nav className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
+        {TRIP_TABS.map((t) => (
+          <NavLink
+            key={t.to}
+            to={t.to}
+            end={t.end}
+            className={({ isActive }) =>
+              `flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-semibold transition ${
+                isActive ? "bg-ink text-white" : "bg-white text-ink ring-1 ring-black/5"
+              }`
+            }
+          >
+            <span>{t.icon}</span>{t.label}
+          </NavLink>
+        ))}
+      </nav>
+
+      {needsBackup && (
+        <Link to="/trip/settings#backup" className="flex items-center gap-3 rounded-3xl bg-sun/25 p-4 text-sm font-semibold">
+          <span className="text-2xl">💾</span>
+          <span>{lastBackup ? "It's been a while since your last backup." : "You haven't backed up yet."} Your data lives only on this device. Tap to back up.</span>
+        </Link>
+      )}
+
+      {ready ? <Outlet /> : <div className="card text-center text-muted">Loading your trip…</div>}
+    </div>
+  );
+}
