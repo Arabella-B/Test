@@ -72,7 +72,7 @@ export default function GroupsPage() {
         <button className="btn px-4" onClick={() => setCreating(true)}>+ New group</button>
       </div>
 
-      <div className="grid grid-cols-2 rounded-2xl bg-white p-1 ring-1 ring-black/5">
+      <div className="grid grid-cols-2 rounded-2xl bg-surface p-1 ring-1 ring-ink/10">
         {(["mine", "find"] as const).map((t) => (
           <button key={t} onClick={() => setTab(t)}
             className={`min-h-11 rounded-xl font-semibold ${tab === t ? "bg-brand text-white" : "text-muted"}`}>
@@ -92,9 +92,9 @@ export default function GroupsPage() {
             <button className="btn-soft mt-3" onClick={() => setTab("find")}>Find groups</button>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-3xl bg-white ring-1 ring-black/5">
+          <div className="overflow-hidden rounded-3xl bg-surface ring-1 ring-ink/10">
             {mine.map(({ group: g, last, unread }) => (
-              <Link key={g.id} to={`/groups/${g.id}`} className="flex items-center gap-3 border-b border-black/5 px-4 py-3 last:border-0 active:bg-cream">
+              <Link key={g.id} to={`/groups/${g.id}`} className="flex items-center gap-3 border-b border-ink/10 px-4 py-3 last:border-0 active:bg-cream">
                 <GroupEmoji emoji={g.emoji} />
                 <span className="min-w-0 flex-1">
                   <span className="flex items-baseline justify-between gap-2">
@@ -124,7 +124,7 @@ export default function GroupsPage() {
           <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
             {["", ...GROUP_TAGS].map((t) => (
               <button key={t || "all"} onClick={() => setTag(t)}
-                className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-ink text-white" : "bg-white ring-1 ring-black/5"}`}>
+                className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-ink text-cream" : "bg-surface ring-1 ring-ink/10"}`}>
                 {t || "All"}
               </button>
             ))}

@@ -32,7 +32,7 @@ export default function NewGroupSheet({ onClose, onCreated }: { onClose: () => v
       <form
         onSubmit={submit}
         onClick={(e) => e.stopPropagation()}
-        className="grid max-h-[90dvh] w-full max-w-lg gap-4 overflow-y-auto rounded-t-3xl bg-white p-5 pb-10 md:rounded-3xl md:pb-5"
+        className="grid max-h-[90dvh] w-full max-w-lg gap-4 overflow-y-auto rounded-t-3xl bg-surface p-5 pb-10 md:rounded-3xl md:pb-5"
         role="dialog"
         aria-label="New group"
       >
@@ -65,7 +65,7 @@ export default function NewGroupSheet({ onClose, onCreated }: { onClose: () => v
           <div className="flex flex-wrap gap-2">
             {GROUP_TAGS.map((t) => (
               <button type="button" key={t} onClick={() => setTag(t)}
-                className={`min-h-10 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-ink text-white" : "bg-cream"}`}>
+                className={`min-h-10 rounded-full px-4 text-sm font-semibold ${tag === t ? "bg-ink text-cream" : "bg-cream"}`}>
                 {t}
               </button>
             ))}

@@ -90,7 +90,15 @@ export function applyMapping(dataRows: string[][], mapping: Omit<ColumnMapping, 
  * if this file has the same header row, the saved choice is used.
  */
 export function parseCsvStatement(text: string, savedMappings: ColumnMapping[] = []): CsvResult {
-  const all = readCsvRows(text);
+  return parseRowsStatement(readCsvRows(text), savedMappings);
+}
+
+/**
+ * The same detection for any table of rows (CSV, or a sheet read from an Excel file).
+ * Empty rows are ignored.
+ */
+export function parseRowsStatement(rows: string[][], savedMappings: ColumnMapping[] = []): CsvResult {
+  const all = rows.filter((r) => r.some((c) => c.trim()));
   if (all.length === 0) return { ok: false, reason: "empty" };
 
   // Some banks put account details above the table, so look a few rows down.

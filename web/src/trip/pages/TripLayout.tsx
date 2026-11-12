@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import LockScreen, { useTripLock } from "../components/LockScreen";
 import QuickAdd from "../components/QuickAdd";
 import { daysBetween, today } from "../money";
 import { useTrip } from "../store";
@@ -18,17 +19,22 @@ const TRIP_TABS = [
 ];
 
 export default function TripLayout() {
-  const { ready, isDemo, transactions, settings } = useTrip();
+  const { ready, isDemo, transactions, settings, scope } = useTrip();
+  const lock = useTripLock(scope);
 
   const lastBackup = settings.lastBackupAt?.slice(0, 10);
   const needsBackup = !isDemo && transactions.length > 0 && (!lastBackup || daysBetween(lastBackup, today()) >= 14);
+
+  if (lock.locked) {
+    return <LockScreen scope={scope} onUnlock={lock.unlock} />;
+  }
 
   return (
     // Extra space at the bottom so the floating "+ Cash" button never hides the last item.
     <div className="grid grid-cols-1 gap-5 pb-20 md:pb-16">
       <div className="flex items-center gap-2">
         <h1 className="text-3xl font-extrabold">My Trip</h1>
-        <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold text-white">🔒 Private</span>
+        <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold text-cream">🔒 Private</span>
       </div>
 
       <nav className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
@@ -39,7 +45,7 @@ export default function TripLayout() {
             end={t.end}
             className={({ isActive }) =>
               `flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-4 text-sm font-semibold transition ${
-                isActive ? "bg-ink text-white" : "bg-white text-ink ring-1 ring-black/5"
+                isActive ? "bg-ink text-cream" : "bg-surface text-ink ring-1 ring-ink/10"
               }`
             }
           >

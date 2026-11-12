@@ -50,7 +50,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setDemo(true);
     },
     async signOut() {
-      try { sessionStorage.removeItem(DEMO_KEY); } catch { /* ignore */ }
+      try {
+        sessionStorage.removeItem(DEMO_KEY);
+        // Logging out removes the My Trip passcode lock, so a forgotten passcode
+        // can be reset by logging back in (which needs your account password).
+        localStorage.removeItem(`gap-year-lock-${session?.user.id ?? "demo"}`);
+      } catch { /* ignore */ }
       setDemo(false);
       await supabase.auth.signOut();
     },

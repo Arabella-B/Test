@@ -18,7 +18,9 @@ export interface TripData {
   cardEdits: CardEdits;
 }
 
-type KvKey = "settings" | "checklist" | "rules" | "mappings" | "stops" | "budgets" | "fx" | "cardEdits";
+type KvKey =
+  | "settings" | "checklist" | "rules" | "mappings" | "stops" | "budgets" | "fx" | "cardEdits"
+  | "modified" | "deletedIds" | "syncKey" | "syncInfo";
 
 export class TripDb {
   private db: Promise<IDBPDatabase>;
@@ -66,6 +68,14 @@ export class TripDb {
     const db = await this.db;
     const tx = db.transaction("transactions", "readwrite");
     await Promise.all([...ids.map((id) => tx.store.delete(id)), tx.done]);
+  }
+
+  async get<T>(key: KvKey): Promise<T | undefined> {
+    return (await (await this.db).get("kv", key)) as T | undefined;
+  }
+
+  async delete(key: KvKey): Promise<void> {
+    await (await this.db).delete("kv", key);
   }
 
   async set(key: KvKey, value: unknown): Promise<void> {

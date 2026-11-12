@@ -51,7 +51,7 @@ function Section({ title, cards }: { title: string; cards: CountryCard[] }) {
           const old = ageInDays(c) > 90;
           return (
             <Link key={c.country} to={`/trip/countries/${encodeURIComponent(c.country)}`}
-              className="flex items-center gap-3 rounded-3xl bg-white p-4 ring-1 ring-black/5 active:bg-cream">
+              className="flex items-center gap-3 rounded-3xl bg-surface p-4 ring-1 ring-ink/10 active:bg-cream">
               <span className="text-4xl">{c.flag}</span>
               <span className="min-w-0 flex-1">
                 <span className="block font-bold">{c.country}</span>

@@ -16,7 +16,7 @@ export default function AppLayout() {
   return (
     <div className="min-h-dvh md:flex">
       {/* Laptop sidebar */}
-      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-1 border-r border-black/5 bg-white p-4 md:flex">
+      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-1 border-r border-ink/10 bg-surface p-4 md:flex">
         <div className="mb-6 flex items-center gap-2 px-2 text-lg font-extrabold">
           <img src="/favicon.svg" alt="" className="h-8 w-8" /> Gap Year Hub
         </div>
@@ -41,7 +41,7 @@ export default function AppLayout() {
 
       <div className="min-w-0 flex-1">
         {demo && (
-          <div className="bg-sun px-4 py-2 text-center text-sm font-semibold text-ink">
+          <div className="bg-sun px-4 py-2 text-center text-sm font-semibold text-[#1F1B2D]">
             👀 Demo with made-up data ·{" "}
             <button onClick={signOut} className="underline">Create your own account</button>
           </div>
@@ -52,7 +52,7 @@ export default function AppLayout() {
       </div>
 
       {/* Phone tab bar */}
-      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-20 border-t border-black/5 bg-white/95 backdrop-blur md:hidden">
+      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-20 border-t border-ink/10 bg-surface/95 backdrop-blur md:hidden">
         <div className="grid grid-cols-5">
           {MAIN_TABS.map((t) => (
             <NavLink

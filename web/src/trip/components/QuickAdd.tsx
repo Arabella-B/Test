@@ -37,7 +37,7 @@ export default function QuickAdd() {
       </button>
       {open && <QuickAddSheet onClose={() => setOpen(false)} onDone={done} />}
       {toast && (
-        <div className="fixed inset-x-4 bottom-[calc(10rem+env(safe-area-inset-bottom))] z-50 mx-auto max-w-md rounded-2xl bg-ink px-4 py-3 text-center text-sm font-semibold text-white shadow-lg md:bottom-28">
+        <div className="fixed inset-x-4 bottom-[calc(10rem+env(safe-area-inset-bottom))] z-50 mx-auto max-w-md rounded-2xl bg-ink px-4 py-3 text-center text-sm font-semibold text-cream shadow-lg md:bottom-28">
           {toast}
         </div>
       )}
@@ -91,7 +91,7 @@ function QuickAddSheet({ onClose, onDone }: { onClose: () => void; onDone: (mess
           <select
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
-            className="min-h-16 rounded-2xl border border-black/10 bg-cream px-3 text-lg font-bold"
+            className="min-h-16 rounded-2xl border border-ink/15 bg-cream px-3 text-lg font-bold"
             aria-label="Currency"
           >
             {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -103,7 +103,7 @@ function QuickAddSheet({ onClose, onDone }: { onClose: () => void; onDone: (mess
             inputMode="decimal"
             placeholder="0"
             aria-label="Amount"
-            className="min-h-16 w-0 min-w-0 flex-1 rounded-2xl border border-black/10 px-4 text-right text-3xl font-extrabold outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+            className="min-h-16 w-0 min-w-0 flex-1 rounded-2xl border border-ink/15 px-4 text-right text-3xl font-extrabold outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
           />
         </div>
         <p className="-mt-2 text-right text-sm text-muted">

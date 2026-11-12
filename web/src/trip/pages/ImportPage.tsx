@@ -1,7 +1,9 @@
 import { useRef, useState, type DragEvent } from "react";
 import { Link } from "react-router-dom";
 import { type ImportSummary } from "../importer";
-import { applyMapping, parseCsvStatement } from "../parsers/csv";
+import { applyMapping, parseCsvStatement, parseRowsStatement, type CsvResult } from "../parsers/csv";
+import { readExcelRows } from "../parsers/excel";
+import { parseOfx, parseQif } from "../parsers/ofx";
 import { extractPdfLines, parsePdfLines } from "../parsers/pdf";
 import { useTrip } from "../store";
 import type { ColumnMapping } from "../types";
@@ -44,8 +46,27 @@ export default function ImportPage() {
         const summary = await importRows(result.rows, "pdf");
         return setState({ step: "done", name: file.name, summary, skipped: 0 });
       }
-      if (lower.endsWith(".csv") || lower.endsWith(".txt") || file.type.includes("csv") || file.type.startsWith("text/")) {
-        const result = parseCsvStatement(await file.text(), mappings);
+      if (/\.(ofx|qfx)$/.test(lower) || /\.qif$/.test(lower)) {
+        const text = await file.text();
+        const rows = lower.endsWith(".qif") ? parseQif(text) : parseOfx(text);
+        if (rows.length === 0) {
+          return setState({ step: "error", name: file.name, message: "No transactions were found in this file. Try the CSV download from your bank instead." });
+        }
+        const summary = await importRows(rows, "csv");
+        return setState({ step: "done", name: file.name, summary, skipped: 0 });
+      }
+      if (lower.endsWith(".xls")) {
+        return setState({
+          step: "error", name: file.name,
+          message: "This is an old-style Excel file (.xls). Open it in Excel or Numbers and save it as .xlsx or CSV, then import that.",
+        });
+      }
+      const isExcel = lower.endsWith(".xlsx") || file.type.includes("spreadsheetml");
+      const isText = lower.endsWith(".csv") || lower.endsWith(".txt") || file.type.includes("csv") || file.type.startsWith("text/");
+      if (isExcel || isText) {
+        const result: CsvResult = isExcel
+          ? parseRowsStatement(await readExcelRows(file), mappings)
+          : parseCsvStatement(await file.text(), mappings);
         if (result.ok) {
           const summary = await importRows(result.rows, "csv");
           return setState({ step: "done", name: file.name, summary, skipped: result.skipped });
@@ -55,10 +76,7 @@ export default function ImportPage() {
         }
         return setState({ step: "error", name: file.name, message: "This file is empty." });
       }
-      if (/\.(xlsx|xls|ofx|qif)$/.test(lower)) {
-        return setState({ step: "error", name: file.name, message: "Excel, OFX and QIF files are coming in a later stage. For now, please use CSV or PDF." });
-      }
-      setState({ step: "error", name: file.name, message: "Please choose a CSV or PDF bank statement." });
+      setState({ step: "error", name: file.name, message: "Please choose a bank statement: CSV, PDF, Excel (.xlsx), OFX or QIF." });
     } catch (err) {
       console.error(err);
       setState({ step: "error", name: file.name, message: "Something went wrong reading this file. Try a CSV download from your bank." });
@@ -87,19 +105,19 @@ export default function ImportPage() {
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
         className={`grid place-items-center gap-4 rounded-3xl border-4 border-dashed p-8 text-center transition md:p-14 ${
-          dragging ? "border-brand bg-brand-soft" : "border-brand/30 bg-white"
+          dragging ? "border-brand bg-brand-soft" : "border-brand/30 bg-surface"
         }`}
       >
         <div className="text-6xl">📄</div>
         <div>
           <p className="text-xl font-extrabold">Drop your bank statement here</p>
-          <p className="mt-1 text-muted">CSV or PDF · read on this device, never uploaded</p>
+          <p className="mt-1 text-muted">CSV, PDF, Excel, OFX or QIF · read on this device, never uploaded</p>
         </div>
         <button className="btn" onClick={() => input.current?.click()}>📂 Choose file</button>
         <input
           ref={input}
           type="file"
-          accept=".csv,.pdf,.txt,text/csv,application/pdf"
+          accept=".csv,.pdf,.txt,.xlsx,.xls,.ofx,.qfx,.qif,text/csv,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           className="hidden"
           onChange={(e) => { const f = e.target.files?.[0]; if (f) void handleFile(f); e.target.value = ""; }}
         />
@@ -136,7 +154,7 @@ export default function ImportPage() {
 
       <div className="card grid gap-2 text-sm text-muted">
         <p className="font-bold text-ink">Tips</p>
-        <p>• In your banking app or website, look for <b>Statements</b> or <b>Download transactions</b>. CSV is the most reliable; PDF works too.</p>
+        <p>• In your banking app or website, look for <b>Statements</b> or <b>Download transactions</b>. CSV is the most reliable; PDF, Excel (.xlsx), OFX and QIF work too.</p>
         <p>• It's fine if statements overlap: transactions already imported are skipped.</p>
         <p>• On iPhone, "Choose file" opens the Files app. Save the statement there first.</p>
       </div>
@@ -182,8 +200,8 @@ function ColumnMatcher({
       <label className="label">Date column {select(date, setDate)}</label>
       <label className="label">Description column {select(description, setDescription)}</label>
       <div className="grid grid-cols-2 gap-2 rounded-2xl bg-cream p-1">
-        <button onClick={() => setStyle("single")} className={`min-h-11 rounded-xl text-sm font-semibold ${style === "single" ? "bg-white shadow-sm" : ""}`}>One amount column</button>
-        <button onClick={() => setStyle("split")} className={`min-h-11 rounded-xl text-sm font-semibold ${style === "split" ? "bg-white shadow-sm" : ""}`}>Paid out + Paid in</button>
+        <button onClick={() => setStyle("single")} className={`min-h-11 rounded-xl text-sm font-semibold ${style === "single" ? "bg-surface shadow-sm" : ""}`}>One amount column</button>
+        <button onClick={() => setStyle("split")} className={`min-h-11 rounded-xl text-sm font-semibold ${style === "split" ? "bg-surface shadow-sm" : ""}`}>Paid out + Paid in</button>
       </div>
       {style === "single" ? (
         <label className="label">Amount column {select(amount, setAmount)}</label>

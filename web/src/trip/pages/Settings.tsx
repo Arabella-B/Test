@@ -1,5 +1,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { backupJson, downloadFile, parseBackup, transactionsCsv } from "../backup";
+import LockSettings from "../components/LockSettings";
+import SyncSettings from "../components/SyncSettings";
 import { formatDate, formatMoney, today } from "../money";
 import { useTrip } from "../store";
 
@@ -95,6 +97,10 @@ export default function Settings() {
         </div>
       </form>
 
+      <SyncSettings />
+
+      <LockSettings />
+
       <section id="backup" className="card grid gap-3">
         <h2 className="text-xl font-extrabold">💾 Backup</h2>
         <p className="text-sm text-muted">
@@ -114,7 +120,7 @@ export default function Settings() {
 
       <section className="card grid gap-2 text-sm">
         <h2 className="text-xl font-extrabold">🔒 Privacy and storage</h2>
-        <p>• Statements are read on this device. Transactions, budgets and plans are saved <b>only here</b>, not on the website or Supabase.</p>
+        <p>• Statements are read on this device. Transactions, budgets and plans are saved <b>on this device</b>. If you turn on sync, they're also uploaded <b>encrypted</b> with your passphrase, so the website can't read them.</p>
         <p>• <b>iPhone:</b> add the app to your Home Screen (Safari → Share → Add to Home Screen). Safari can delete website data that isn't used for a while, but home-screen apps are kept. It can still be lost if the app is removed or storage runs out, so keep backups.</p>
         <p>• Each account has its own separate storage, so someone else logging in on this device won't see your data.</p>
         <p className="text-muted">{trip.transactions.length} transactions stored · budget {formatMoney(settings.totalBudget, true)}</p>

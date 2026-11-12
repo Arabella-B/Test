@@ -7,7 +7,7 @@ import { eventTime, type Post } from "./types";
 export default function PostCard({ post, onLike }: { post: Post; onLike: (post: Post) => void }) {
   const isEvent = post.kind === "event";
   return (
-    <article className="mb-3 break-inside-avoid overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-black/5">
+    <article className="mb-3 break-inside-avoid overflow-hidden rounded-3xl bg-surface shadow-sm ring-1 ring-ink/10">
       <Link to={`/discover/${post.id}`} className="block">
         <div className="relative">
           {post.imageUrl ? (
@@ -18,7 +18,7 @@ export default function PostCard({ post, onLike }: { post: Post; onLike: (post: 
             </div>
           )}
           {isEvent && (
-            <span className="absolute left-2 top-2 rounded-full bg-sun px-2.5 py-1 text-xs font-extrabold text-ink shadow">🎉 EVENT</span>
+            <span className="absolute left-2 top-2 rounded-full bg-sun px-2.5 py-1 text-xs font-extrabold text-[#1F1B2D] shadow">🎉 EVENT</span>
           )}
         </div>
         <div className="grid gap-1 p-3">

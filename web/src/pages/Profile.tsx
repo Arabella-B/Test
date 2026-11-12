@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useGroups } from "../groups/GroupsProvider";
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
+import { getThemeChoice, setThemeChoice, type ThemeChoice } from "../lib/theme";
 
 // Your public profile (just a display name for now) and account options.
 
@@ -44,6 +45,8 @@ export default function Profile() {
         </form>
       )}
 
+      <Appearance />
+
       <BlockedPeople />
 
       <button onClick={signOut} className="btn-soft">{demo ? "Leave demo" : "Log out"}</button>
@@ -79,6 +82,25 @@ function BlockedPeople() {
           </div>
         ))
       )}
+    </section>
+  );
+}
+
+/** Light (default), dark, or follow the device's setting. */
+function Appearance() {
+  const [choice, setChoice] = useState<ThemeChoice>(getThemeChoice);
+  const options: [ThemeChoice, string][] = [["light", "☀️ Bright"], ["dark", "🌙 Dark"], ["system", "📱 Match device"]];
+  return (
+    <section className="card grid gap-3">
+      <h2 className="text-lg font-bold">🎨 Appearance</h2>
+      <div className="grid grid-cols-3 gap-2">
+        {options.map(([value, label]) => (
+          <button key={value} onClick={() => { setThemeChoice(value); setChoice(value); }}
+            className={`min-h-12 rounded-2xl px-2 text-sm font-semibold ${choice === value ? "bg-brand text-white" : "bg-cream"}`}>
+            {label}
+          </button>
+        ))}
+      </div>
     </section>
   );
 }

@@ -33,6 +33,7 @@ export interface Transaction {
   currency?: string; // e.g. "THB"
   localAmount?: number; // in that currency, e.g. 250 (positive)
   note?: string;
+  updatedAt?: string; // ISO time you last changed it (used when syncing devices)
 }
 
 /** A transaction read from a statement, before categorising. */

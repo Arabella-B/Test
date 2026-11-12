@@ -40,7 +40,7 @@ export default function Budgets() {
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      <div className="flex items-center justify-between rounded-3xl bg-white p-2 ring-1 ring-black/5">
+      <div className="flex items-center justify-between rounded-3xl bg-surface p-2 ring-1 ring-ink/10">
         <button onClick={() => setMonth(shiftMonth(month, -1))} className="grid h-11 w-11 place-items-center rounded-full hover:bg-cream" aria-label="Previous month">‹</button>
         <div className="text-center">
           <p className="font-extrabold">{monthLabel}</p>
@@ -71,7 +71,7 @@ export default function Budgets() {
             const cat = getCategory(budget.categoryId);
             const left = budget.monthly - spent;
             return (
-              <div key={budget.categoryId} className="rounded-3xl bg-white p-4 ring-1 ring-black/5">
+              <div key={budget.categoryId} className="rounded-3xl bg-surface p-4 ring-1 ring-ink/10">
                 <div className="flex items-center gap-3">
                   <CategoryIcon id={budget.categoryId} size={40} />
                   <button className="min-w-0 flex-1 text-left" onClick={() => navigate(`/trip/transactions?category=${budget.categoryId}&month=${month}`)}>
@@ -82,7 +82,7 @@ export default function Budgets() {
                   </button>
                   <button onClick={() => setEditing(budget)} className="rounded-full bg-cream px-3 py-2 text-sm font-semibold">Edit</button>
                 </div>
-                <div className="mt-3 h-3 overflow-hidden rounded-full bg-black/5" role="progressbar" aria-valuenow={Math.round(share * 100)} aria-valuemin={0} aria-valuemax={100}>
+                <div className="mt-3 h-3 overflow-hidden rounded-full bg-ink/10" role="progressbar" aria-valuenow={Math.round(share * 100)} aria-valuemin={0} aria-valuemax={100}>
                   <div className={`h-full rounded-full ${BAR[status]}`} style={{ width: `${Math.min(100, share * 100)}%` }} />
                 </div>
                 <p className={`mt-1 text-xs font-semibold ${status === "over" ? "text-bad" : status === "close" ? "text-warn" : "text-good"}`}>

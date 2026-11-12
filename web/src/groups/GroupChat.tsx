@@ -128,9 +128,9 @@ export default function GroupChat() {
   const hiddenCount = messages.length - visible.length;
 
   return (
-    <div className="fixed inset-x-0 top-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 flex flex-col bg-cream md:static md:z-auto md:h-[calc(100dvh-8rem)] md:overflow-hidden md:rounded-3xl md:bg-white md:ring-1 md:ring-black/5">
+    <div className="fixed inset-x-0 top-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 flex flex-col bg-cream md:static md:z-auto md:h-[calc(100dvh-8rem)] md:overflow-hidden md:rounded-3xl md:bg-surface md:ring-1 md:ring-ink/10">
       {/* Header */}
-      <header className="flex items-center gap-3 border-b border-black/5 bg-white px-3 py-2.5 pt-[max(0.625rem,env(safe-area-inset-top))]">
+      <header className="flex items-center gap-3 border-b border-ink/10 bg-surface px-3 py-2.5 pt-[max(0.625rem,env(safe-area-inset-top))]">
         <Link to="/groups" className="grid h-10 w-10 place-items-center rounded-full text-xl hover:bg-cream" aria-label="Back to groups">←</Link>
         {group && <GroupEmoji emoji={group.emoji} size={40} />}
         <button className="min-w-0 flex-1 text-left" onClick={() => setShowInfo((s) => !s)}>
@@ -143,7 +143,7 @@ export default function GroupChat() {
       </header>
 
       {showInfo && group && (
-        <div className="border-b border-black/5 bg-white px-4 py-3 text-sm">
+        <div className="border-b border-ink/10 bg-surface px-4 py-3 text-sm">
           <p className="font-semibold">{group.tag}</p>
           <p className="text-muted">{group.purpose || "No description."}</p>
           {group.isOwner && <p className="mt-1 text-xs text-brand">You created this group, so you can remove any message.</p>}
@@ -153,7 +153,7 @@ export default function GroupChat() {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-3 py-4">
         {!group?.isMember ? (
-          <div className="mx-auto mt-6 max-w-sm rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-black/5">
+          <div className="mx-auto mt-6 max-w-sm rounded-3xl bg-surface p-6 text-center shadow-sm ring-1 ring-ink/10">
             <div className="mx-auto mb-2 w-fit"><GroupEmoji emoji={group?.emoji ?? "💬"} size={64} /></div>
             <p className="text-lg font-bold">{group?.name}</p>
             <p className="mt-1 text-sm text-muted">{group?.purpose}</p>
@@ -178,7 +178,7 @@ export default function GroupChat() {
                     <button
                       onClick={() => setSelected(m)}
                       className={`max-w-[80%] rounded-3xl px-4 py-2 text-left shadow-sm ${
-                        mine ? "rounded-br-lg bg-brand text-white" : "rounded-bl-lg bg-white ring-1 ring-black/5"
+                        mine ? "rounded-br-lg bg-brand text-white" : "rounded-bl-lg bg-surface ring-1 ring-ink/10"
                       }`}
                     >
                       {showName && <span className="block text-xs font-bold text-coral">{m.authorName}</span>}
@@ -199,7 +199,7 @@ export default function GroupChat() {
 
       {/* Composer */}
       {group?.isMember && (
-        <form onSubmit={send} className="border-t border-black/5 bg-white p-2">
+        <form onSubmit={send} className="border-t border-ink/10 bg-surface p-2">
           {error && <p className="mb-2 rounded-xl bg-bad/10 px-3 py-2 text-sm font-semibold text-bad">{error}</p>}
           <div className="mx-auto flex max-w-2xl items-end gap-2">
             <textarea

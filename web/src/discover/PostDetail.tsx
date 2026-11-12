@@ -68,12 +68,12 @@ export default function PostDetail() {
     <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-4">
       <div className="flex items-center justify-between">
         <button onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/discover"))} className="flex min-h-11 items-center gap-1 font-semibold">← Back</button>
-        <button onClick={() => setMenu(true)} className="grid h-11 w-11 place-items-center rounded-full bg-white text-xl ring-1 ring-black/5" aria-label="More options">⋯</button>
+        <button onClick={() => setMenu(true)} className="grid h-11 w-11 place-items-center rounded-full bg-surface text-xl ring-1 ring-ink/10" aria-label="More options">⋯</button>
       </div>
 
-      <article className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-black/5">
+      <article className="overflow-hidden rounded-3xl bg-surface shadow-sm ring-1 ring-ink/10">
         {post.imageUrl ? (
-          <img src={post.imageUrl} alt={post.eventTitle ?? post.caption.slice(0, 80)} className="block max-h-[70dvh] w-full object-contain bg-black/5" />
+          <img src={post.imageUrl} alt={post.eventTitle ?? post.caption.slice(0, 80)} className="block max-h-[70dvh] w-full object-contain bg-ink/10" />
         ) : (
           <div className="flex min-h-56 items-center p-6 text-2xl font-extrabold leading-snug text-white" style={{ background: post.colour }}>
             {isEvent ? post.eventTitle : post.caption}
@@ -83,7 +83,7 @@ export default function PostDetail() {
         <div className="grid gap-3 p-5">
           {isEvent && (
             <div className="grid gap-2">
-              <span className="w-fit rounded-full bg-sun px-2.5 py-1 text-xs font-extrabold">🎉 EVENT</span>
+              <span className="w-fit rounded-full bg-sun px-2.5 py-1 text-xs font-extrabold text-[#1F1B2D]">🎉 EVENT</span>
               <h1 className="text-2xl font-extrabold leading-tight">{post.eventTitle}</h1>
               <div className="grid gap-1.5 rounded-2xl bg-cream p-4 text-sm">
                 {post.startsAt && <p>📅 <b>{eventTime(post.startsAt)}</b></p>}
@@ -103,7 +103,7 @@ export default function PostDetail() {
           {post.caption && (isEvent || post.imageUrl) && <p className="whitespace-pre-wrap">{post.caption}</p>}
           {(post.place || post.country) && <p className="text-sm text-muted">📍 {[post.place, post.country].filter(Boolean).join(", ")}</p>}
 
-          <div className="flex items-center justify-between gap-3 border-t border-black/5 pt-3">
+          <div className="flex items-center justify-between gap-3 border-t border-ink/10 pt-3">
             <div className="min-w-0">
               <p className="truncate font-semibold">{post.authorName}</p>
               <p className="text-xs text-muted">{chatTime(post.createdAt, true)}</p>

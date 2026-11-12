@@ -122,7 +122,7 @@ export default function Afford() {
 
 function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
   return (
-    <p className={`flex justify-between gap-3 ${bold ? "border-t border-black/10 pt-1 font-extrabold" : ""}`}>
+    <p className={`flex justify-between gap-3 ${bold ? "border-t border-ink/15 pt-1 font-extrabold" : ""}`}>
       <span>{label}</span><span className="shrink-0">{value}</span>
     </p>
   );

@@ -12,6 +12,7 @@ import GroupsPage from "./groups/GroupsPage";
 import GroupChat from "./groups/GroupChat";
 import Profile from "./pages/Profile";
 import { TripProvider } from "./trip/store";
+import { SyncProvider } from "./trip/SyncProvider";
 import TripLayout from "./trip/pages/TripLayout";
 import Dashboard from "./trip/pages/Dashboard";
 import ImportPage from "./trip/pages/ImportPage";
@@ -35,6 +36,7 @@ export default function Root() {
   const scope = session ? session.user.id : "demo";
   return (
     <TripProvider key={scope} scope={scope}>
+      <SyncProvider>
       <GroupsProvider key={scope}>
       <PostsProvider key={scope}>
         <Routes>
@@ -62,6 +64,7 @@ export default function Root() {
         </Routes>
       </PostsProvider>
       </GroupsProvider>
+      </SyncProvider>
     </TripProvider>
   );
 }

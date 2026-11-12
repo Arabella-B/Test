@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { DEFAULT_CATEGORIES, getCategory } from "../categories";
 
 // A small coloured badge showing a category's emoji and name.
@@ -5,8 +6,8 @@ export function CategoryBadge({ id, small = false }: { id: string; small?: boole
   const c = getCategory(id);
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full font-semibold ${small ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm"}`}
-      style={{ backgroundColor: c.colour + "22", color: darken(c.colour) }}
+      className={`inline-flex items-center gap-1 rounded-full font-semibold text-[var(--badge-dark)] dark:text-[var(--badge-light)] ${small ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm"}`}
+      style={{ backgroundColor: c.colour + "22", "--badge-dark": darken(c.colour), "--badge-light": c.colour } as CSSProperties}
     >
       <span>{c.emoji}</span> {c.name}
     </span>
@@ -42,7 +43,7 @@ export function CategoryPicker({
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/40 md:items-center" onClick={onClose}>
       <div
-        className="max-h-[85dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-white p-5 pb-10 md:rounded-3xl md:pb-5"
+        className="max-h-[85dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-surface p-5 pb-10 md:rounded-3xl md:pb-5"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-label={title}

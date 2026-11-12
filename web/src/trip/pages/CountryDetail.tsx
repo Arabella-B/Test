@@ -100,9 +100,9 @@ export default function CountryDetail() {
               } })}
             />
           ))}
-          <span className="border-t border-black/10 pt-2 font-extrabold">Total per day</span>
-          <span className="border-t border-black/10 pt-2 text-right font-extrabold">£{dailyTotal(card, "budget")}<br /><span className="text-xs font-normal text-muted">{local(dailyTotal(card, "budget"))}</span></span>
-          <span className="border-t border-black/10 pt-2 text-right font-extrabold">£{dailyTotal(card, "midRange")}<br /><span className="text-xs font-normal text-muted">{local(dailyTotal(card, "midRange"))}</span></span>
+          <span className="border-t border-ink/15 pt-2 font-extrabold">Total per day</span>
+          <span className="border-t border-ink/15 pt-2 text-right font-extrabold">£{dailyTotal(card, "budget")}<br /><span className="text-xs font-normal text-muted">{local(dailyTotal(card, "budget"))}</span></span>
+          <span className="border-t border-ink/15 pt-2 text-right font-extrabold">£{dailyTotal(card, "midRange")}<br /><span className="text-xs font-normal text-muted">{local(dailyTotal(card, "midRange"))}</span></span>
         </div>
         <p className="mt-2 text-xs text-muted">Estimates. Backpacker = hostel dorms, cheap eats, local buses. Mid-range = private rooms, restaurants, some tours.</p>
       </Box>
@@ -171,7 +171,7 @@ function SubList({ title, items }: { title: string; items: string[] }) {
 
 function Box({ title, children, tone }: { title: string; children: ReactNode; tone?: "warn" }) {
   return (
-    <section className={`rounded-3xl p-5 ring-1 ring-black/5 ${tone === "warn" ? "bg-sun/20" : "bg-white"}`}>
+    <section className={`rounded-3xl p-5 ring-1 ring-ink/10 ${tone === "warn" ? "bg-sun/20" : "bg-surface"}`}>
       <h3 className="mb-2 text-lg font-extrabold">{title}</h3>
       {children}
     </section>

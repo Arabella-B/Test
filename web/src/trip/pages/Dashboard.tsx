@@ -18,7 +18,7 @@ const STATUS = {
   good: { bg: "bg-good", text: "On track", soft: "bg-good/10 text-good" },
   close: { bg: "bg-warn", text: "Cutting it close", soft: "bg-warn/10 text-warn" },
   over: { bg: "bg-bad", text: "Runs out early", soft: "bg-bad/10 text-bad" },
-  unknown: { bg: "bg-muted", text: "Not enough data", soft: "bg-black/5 text-muted" },
+  unknown: { bg: "bg-muted", text: "Not enough data", soft: "bg-ink/10 text-muted" },
 };
 
 const pounds = (v: unknown) => formatMoney(Math.round(Number(v) * 100), true);
@@ -133,7 +133,7 @@ export default function Dashboard() {
           <div className="h-72">
             <ResponsiveContainer>
               <LineChart data={stats.budgetLine} margin={{ left: 0, right: 8, top: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#0000000f" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-grid)" />
                 <XAxis dataKey="date" tickFormatter={(d) => formatDate(d)} minTickGap={40} fontSize={12} />
                 <YAxis tickFormatter={(v) => `£${Math.round(v / 1000)}k`} width={44} fontSize={12} />
                 <Tooltip formatter={pounds} labelFormatter={(d) => formatDate(String(d), "long")} />
@@ -152,7 +152,7 @@ export default function Dashboard() {
         <div className="h-72">
           <ResponsiveContainer>
             <BarChart data={stats.monthly} margin={{ left: 0, right: 8, top: 8 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#0000000f" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-grid)" vertical={false} />
               <XAxis dataKey="month" fontSize={12} />
               <YAxis tickFormatter={(v) => `£${v >= 1000 ? `${Math.round(v / 100) / 10}k` : v}`} width={48} fontSize={12} />
               <Tooltip formatter={(v, name) => [pounds(v), getCategory(String(name)).name]} />
@@ -190,7 +190,7 @@ export default function Dashboard() {
                 }))}
                 margin={{ left: 0, right: 8, top: 8 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#0000000f" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-grid)" vertical={false} />
                 <XAxis dataKey="name" fontSize={11} interval={0} tickFormatter={(v: string) => (v.length > 12 ? v.slice(0, 11) + "…" : v)} />
                 <YAxis tickFormatter={(v) => `£${v}`} width={40} fontSize={12} />
                 <Tooltip formatter={(v, name) => [v === null ? "Not started" : `${pounds(v)}/day`, name === "target" ? "Target" : "Actual"]} />
@@ -307,7 +307,7 @@ function Heatmap({ daily, onPick }: { daily: Map<string, number>; onPick: (date:
               title={`${formatDate(d, "long")}: ${formatMoney(v)}`}
               aria-label={`${formatDate(d, "long")}: ${formatMoney(v)}`}
               className="aspect-square rounded-[5px]"
-              style={{ background: future ? "transparent" : v === 0 ? "#F1EDE6" : `rgba(124, 58, 237, ${0.18 + 0.82 * (v / max)})` }}
+              style={{ background: future ? "transparent" : v === 0 ? "var(--color-heat-empty)" : `rgba(124, 58, 237, ${0.18 + 0.82 * (v / max)})` }}
             />
           );
         })}

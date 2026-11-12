@@ -71,7 +71,7 @@ export default function NewPostPage() {
     <form onSubmit={submit} className="mx-auto grid w-full max-w-xl grid-cols-1 gap-4">
       <h1 className="text-3xl font-extrabold">New post</h1>
 
-      <div className="grid grid-cols-2 rounded-2xl bg-white p-1 ring-1 ring-black/5">
+      <div className="grid grid-cols-2 rounded-2xl bg-surface p-1 ring-1 ring-ink/10">
         {(["update", "event"] as const).map((k) => (
           <button type="button" key={k} onClick={() => setKind(k)}
             className={`min-h-12 rounded-xl font-semibold ${kind === k ? "bg-brand text-white" : "text-muted"}`}>
@@ -82,15 +82,15 @@ export default function NewPostPage() {
 
       {/* Photo */}
       {photo ? (
-        <div className="relative overflow-hidden rounded-3xl bg-black/5">
+        <div className="relative overflow-hidden rounded-3xl bg-ink/10">
           <img src={photo.url} alt="Your photo" className="block max-h-96 w-full object-contain" />
-          <button type="button" onClick={() => setPhoto(null)} className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold shadow">
+          <button type="button" onClick={() => setPhoto(null)} className="absolute right-3 top-3 rounded-full bg-surface/90 px-3 py-1.5 text-sm font-semibold shadow">
             Remove
           </button>
         </div>
       ) : (
         <button type="button" onClick={() => fileInput.current?.click()}
-          className="grid min-h-40 place-items-center gap-1 rounded-3xl border-4 border-dashed border-brand/30 bg-white p-6 text-center">
+          className="grid min-h-40 place-items-center gap-1 rounded-3xl border-4 border-dashed border-brand/30 bg-surface p-6 text-center">
           <span className="text-4xl">📷</span>
           <span className="font-bold">Add a photo</span>
           <span className="text-xs text-muted">{kind === "update" ? "Optional: you can post just text instead" : "Optional, but events with photos get noticed"}</span>

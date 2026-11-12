@@ -10,8 +10,8 @@ import { useTrip } from "../store";
 const STYLE: Record<Urgency, { dot: string; label: string; ring: string }> = {
   overdue: { dot: "bg-bad", label: "Do now", ring: "ring-bad/40" },
   soon: { dot: "bg-warn", label: "Soon", ring: "ring-warn/40" },
-  upcoming: { dot: "bg-good", label: "Later", ring: "ring-black/5" },
-  done: { dot: "bg-muted", label: "Done", ring: "ring-black/5" },
+  upcoming: { dot: "bg-good", label: "Later", ring: "ring-ink/10" },
+  done: { dot: "bg-muted", label: "Done", ring: "ring-ink/10" },
 };
 
 export default function Checklist() {
@@ -68,12 +68,12 @@ export default function Checklist() {
           const due = dueDate(item, departure);
           const s = STYLE[u];
           return (
-            <div key={item.id} className={`rounded-3xl bg-white ring-2 ${s.ring} ${item.done ? "opacity-60" : ""}`}>
+            <div key={item.id} className={`rounded-3xl bg-surface ring-2 ${s.ring} ${item.done ? "opacity-60" : ""}`}>
               <div className="flex items-center gap-3 p-4">
                 <button
                   onClick={() => toggle(item.id)}
                   aria-label={item.done ? `Mark ${item.title} not done` : `Mark ${item.title} done`}
-                  className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border-2 text-lg font-bold ${item.done ? "border-good bg-good text-white" : "border-black/20"}`}
+                  className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl border-2 text-lg font-bold ${item.done ? "border-good bg-good text-white" : "border-ink/25"}`}
                 >
                   {item.done ? "✓" : ""}
                 </button>
@@ -86,7 +86,7 @@ export default function Checklist() {
                 </button>
               </div>
               {open === item.id && (item.detail || item.custom) && (
-                <div className="border-t border-black/5 px-4 py-3 text-sm text-muted">
+                <div className="border-t border-ink/10 px-4 py-3 text-sm text-muted">
                   {item.detail}
                   {item.custom && <button onClick={() => remove(item.id)} className="mt-2 block font-semibold text-bad">Remove</button>}
                 </div>

@@ -101,6 +101,24 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   Dashboard warns if a country's budget is below typical costs or compares costs on your route.
 - To update the built-in information, edit `src/trip/data/countries.json` (and its `lastChecked` dates).
 
+## My Trip: more imports, lock, sync and dark mode (Stage 4c)
+
+- **Imports:** CSV, PDF, **Excel (.xlsx)**, **OFX/QFX** and **QIF**. Old `.xls` files: save as .xlsx or CSV first.
+  Excel sheets use the same column detection as CSV (`parsers/excel.ts`, `parsers/ofx.ts`, tested).
+- **Lock** (My Trip → Settings): a 4–6 digit passcode, optional Face ID / Touch ID (WebAuthn passkey on
+  the device), auto-lock after leaving the app. Only a PBKDF2 hash of the passcode is stored. Logging
+  out removes the lock (so a forgotten passcode can be reset by logging in again). It's a privacy
+  screen; it doesn't encrypt the data on the device.
+- **Encrypted sync** (My Trip → Settings, signed-in accounts only): data is gzipped and encrypted with
+  AES-256-GCM using a key derived on the device from the user's passphrase (PBKDF2-SHA256, 600,000 rounds).
+  Supabase's `trip_vaults` table holds only ciphertext (one row per user, row-level security).
+  Copies are merged (new transactions from both, later edits win, deletions kept, duplicates removed;
+  route/budgets/settings: most recently changed wins). Syncs on open, ~15 s after changes, and on leaving
+  the app; a version number stops two devices overwriting each other. **A forgotten passphrase can't be
+  recovered**; each device keeps its own copy.
+- **Dark mode** (Profile → Appearance): Bright (default), Dark or Match device. Colours are theme
+  variables in `src/index.css` (`bg-surface`, `text-ink`, …), redefined under `html.dark`.
+
 ## Groups: how they work
 
 - Anyone signed in can see groups, create one, and join or leave freely.
@@ -173,4 +191,4 @@ Safari may clear data for websites you haven't visited in a while. Back up regul
 - **Stage 3 (done):** Discover feed with photos, events, likes, reporting and blocking.
 - **Stage 4a (done):** route with country budgets, multi-currency, cash quick-add, category budgets.
 - **Stage 4b (done):** country info cards, "Can I afford it?", country comparison tips.
-- **Stage 4c:** Excel/OFX import, encrypted sync between devices, passcode lock, dark mode.
+- **Stage 4c (done):** Excel/OFX/QIF import, encrypted sync between devices, passcode/Face ID lock, dark mode.

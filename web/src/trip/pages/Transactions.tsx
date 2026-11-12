@@ -107,7 +107,7 @@ export default function Transactions() {
           <button
             key={f.key}
             onClick={() => setParam("filter", f.key)}
-            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-brand text-white" : "bg-white ring-1 ring-black/5"}`}
+            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-brand text-white" : "bg-surface ring-1 ring-ink/10"}`}
           >
             {f.label}
           </button>
@@ -118,11 +118,11 @@ export default function Transactions() {
         <div className="flex flex-wrap items-center gap-2 text-sm">
           <span className="text-muted">Showing:</span>
           {category && <button onClick={() => setParam("category", "")}><CategoryBadge id={category} small /> ✕</button>}
-          {month && <button onClick={() => setParam("month", "")} className="rounded-full bg-white px-3 py-1 font-semibold ring-1 ring-black/5">{month} ✕</button>}
-          {day && <button onClick={() => setParam("date", "")} className="rounded-full bg-white px-3 py-1 font-semibold ring-1 ring-black/5">{formatDate(day, "long")} ✕</button>}
+          {month && <button onClick={() => setParam("month", "")} className="rounded-full bg-surface px-3 py-1 font-semibold ring-1 ring-ink/10">{month} ✕</button>}
+          {day && <button onClick={() => setParam("date", "")} className="rounded-full bg-surface px-3 py-1 font-semibold ring-1 ring-ink/10">{formatDate(day, "long")} ✕</button>}
           {from && (
             <button onClick={() => { const next = new URLSearchParams(params); next.delete("from"); next.delete("to"); setParams(next, { replace: true }); }}
-              className="rounded-full bg-white px-3 py-1 font-semibold ring-1 ring-black/5">
+              className="rounded-full bg-surface px-3 py-1 font-semibold ring-1 ring-ink/10">
               {formatDate(from)} – {formatDate(to || from, "long")} ✕
             </button>
           )}
@@ -136,12 +136,12 @@ export default function Transactions() {
       {groups.map(([date, items]) => (
         <section key={date}>
           <h2 className="mb-2 text-sm font-bold text-muted">{formatDate(date, "long")}</h2>
-          <div className="overflow-hidden rounded-3xl bg-white ring-1 ring-black/5">
+          <div className="overflow-hidden rounded-3xl bg-surface ring-1 ring-ink/10">
             {items.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setEditing(t)}
-                className="flex w-full items-center gap-3 border-b border-black/5 px-4 py-3 text-left last:border-0 active:bg-cream"
+                className="flex w-full items-center gap-3 border-b border-ink/10 px-4 py-3 text-left last:border-0 active:bg-cream"
               >
                 <CategoryIcon id={t.categoryId} />
                 <span className="min-w-0 flex-1">
@@ -183,7 +183,7 @@ export default function Transactions() {
 
       {confirm && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/40 md:items-center">
-          <div className="w-full max-w-md rounded-t-3xl bg-white p-6 pb-10 md:rounded-3xl md:pb-6" role="dialog">
+          <div className="w-full max-w-md rounded-t-3xl bg-surface p-6 pb-10 md:rounded-3xl md:pb-6" role="dialog">
             <p className="text-lg font-bold">Apply to all {confirm.tx.merchant} transactions?</p>
             <p className="mt-1 text-muted">
               There {confirm.others === 1 ? "is 1 other" : `are ${confirm.others} others`}. I'll also remember this for future imports.
@@ -198,7 +198,7 @@ export default function Transactions() {
       )}
 
       {toast && (
-        <div className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md rounded-2xl bg-ink px-4 py-3 text-center text-sm font-semibold text-white shadow-lg md:bottom-8">
+        <div className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md rounded-2xl bg-ink px-4 py-3 text-center text-sm font-semibold text-cream shadow-lg md:bottom-8">
           {toast}
         </div>
       )}

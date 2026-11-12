@@ -76,7 +76,7 @@ export default function DiscoverPage() {
       <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
         {FILTERS.map((f) => (
           <button key={f.key} onClick={() => setFilter(f.key)}
-            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-ink text-white" : "bg-white ring-1 ring-black/5"}`}>
+            className={`min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold ${filter === f.key ? "bg-ink text-cream" : "bg-surface ring-1 ring-ink/10"}`}>
             {f.label}
           </button>
         ))}
@@ -84,7 +84,7 @@ export default function DiscoverPage() {
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           aria-label="Filter by country"
-          className={`min-h-10 shrink-0 rounded-full px-3 text-sm font-semibold ring-1 ring-black/5 ${country ? "bg-brand text-white" : "bg-white"}`}
+          className={`min-h-10 shrink-0 rounded-full px-3 text-sm font-semibold ring-1 ring-ink/10 ${country ? "bg-brand text-white" : "bg-surface"}`}
         >
           <option value="">🌍 Any country</option>
           {COUNTRIES.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -96,7 +96,7 @@ export default function DiscoverPage() {
       {posts === null ? (
         <div className="columns-2 gap-3 md:columns-3 lg:columns-4">
           {[220, 160, 260, 180, 240, 200].map((h, i) => (
-            <div key={i} className="mb-3 animate-pulse rounded-3xl bg-white/70" style={{ height: h }} />
+            <div key={i} className="mb-3 animate-pulse rounded-3xl bg-surface/70" style={{ height: h }} />
           ))}
         </div>
       ) : visible.length === 0 ? (

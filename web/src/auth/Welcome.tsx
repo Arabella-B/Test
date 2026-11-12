@@ -44,7 +44,7 @@ export default function Welcome() {
     <div className="min-h-dvh bg-gradient-to-br from-coral/15 via-cream to-brand/15">
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 md:grid-cols-2 md:items-center md:py-20">
         <section>
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand shadow-sm">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-semibold text-brand shadow-sm">
             <img src="/favicon.svg" alt="" className="h-5 w-5" /> Gap Year Hub
           </div>
           <h1 className="text-4xl font-extrabold leading-tight md:text-5xl">
@@ -64,7 +64,7 @@ export default function Welcome() {
               <button
                 key={m}
                 onClick={() => { setMode(m); setMessage(null); }}
-                className={`min-h-11 rounded-xl font-semibold ${mode === m ? "bg-white text-brand shadow-sm" : "text-muted"}`}
+                className={`min-h-11 rounded-xl font-semibold ${mode === m ? "bg-surface text-brand shadow-sm" : "text-muted"}`}
               >
                 {m === "signup" ? "Create account" : "Log in"}
               </button>
