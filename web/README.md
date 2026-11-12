@@ -167,7 +167,12 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   tour companies or travellers organising meet-ups). Filters: All, Updates, Upcoming
   events, and by country. Tap a post to see it full size; tap ❤️ to like.
 - **Posting** (the ➕ tab): a photo or a coloured text card, caption, place and country.
-  Events add a title, start time, place, price, an optional `https://` link and a business name.
+  Events add a title, start time, place, price, an optional `https://` link.
+  **Only verified businesses can post events** (to stop scams and unsafe events). The database
+  enforces this: the `verified_businesses` table lists who's verified, and only you can edit it
+  (in the Supabase dashboard). Event posts automatically show the business's verified name and a
+  green tick. See `supabase/events_verified_businesses_only.sql`, which also has the one-line
+  commands to verify or un-verify a business.
 - **Photos** are shrunk on the device (max 1600px JPEG) before upload. Re-drawing the photo
   also **removes hidden location (GPS) data**. They're stored in the private `post-images`
   bucket; the feed shows them using links that expire after an hour.

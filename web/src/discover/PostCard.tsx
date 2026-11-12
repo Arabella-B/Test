@@ -38,7 +38,12 @@ export default function PostCard({ post, onLike }: { post: Post; onLike: (post: 
         </div>
       </Link>
       <div className="flex items-center justify-between gap-2 px-3 pb-3">
-        <span className="truncate text-xs font-semibold text-muted">{post.businessName ?? post.authorName}</span>
+        <span className="flex min-w-0 items-center gap-1 text-xs font-semibold text-muted">
+          <span className="truncate">{post.businessName ?? post.authorName}</span>
+          {isEvent && post.businessName && (
+            <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-good text-[10px] text-white" title="Verified business" aria-label="Verified business">✓</span>
+          )}
+        </span>
         <button
           onClick={() => onLike(post)}
           aria-label={post.likedByMe ? "Unlike" : "Like"}

@@ -38,10 +38,10 @@ function seed(): Post[] {
     base({ kind: "update", userId: "demo-leah", authorName: "Leah", caption: "Campervan life 🚐 found a free campsite with this view", place: "Lake Tekapo", country: "New Zealand", imageUrl: picture("🏔️", "#22C55E", "#0EA5E9", 600, 900), createdAt: hoursAgo(20), likeCount: 40 }),
     base({ kind: "event", userId: "demo-tours", authorName: "Mekong Trails", businessName: "Mekong Trails", caption: "Small-group day trip with lunch, a boat ride and a local cooking demo. Hotel pick-up included.", eventTitle: "Mekong Delta day trip", startsAt: inDays(4, 7), location: "Pick-up from District 1, Ho Chi Minh City", priceText: "£28", linkUrl: "https://example.com", country: "Vietnam", imageUrl: picture("🛶", "#14B8A6", "#2563EB", 600, 750), createdAt: hoursAgo(26), likeCount: 7 }),
     base({ kind: "update", userId: "demo-sam", authorName: "Sam", caption: "Banh mi number 4 of the day. No regrets 🥖", place: "Hoi An", country: "Vietnam", imageUrl: picture("🥖", "#F97316", "#EAB308", 600, 600), createdAt: hoursAgo(30), likeCount: 18 }),
-    base({ kind: "event", userId: "demo-sam", authorName: "Sam", caption: "Free walking tour meet-up. Anyone welcome, just bring water and comfy shoes!", eventTitle: "Free walking tour meet-up 🚶", startsAt: inDays(1, 10), location: "Hoan Kiem Lake, Hanoi", priceText: "Free (tip what you like)", country: "Vietnam", colour: "#DB2777", createdAt: hoursAgo(34), likeCount: 5 }),
+    base({ kind: "event", userId: "demo-walks", authorName: "Hanoi Free Walks", businessName: "Hanoi Free Walks", caption: "Two-hour walking tour of the Old Quarter with a local student guide. Bring water and comfy shoes!", eventTitle: "Old Quarter walking tour 🚶", startsAt: inDays(1, 10), location: "Hoan Kiem Lake, Hanoi", priceText: "Free (tip what you like)", country: "Vietnam", colour: "#DB2777", createdAt: hoursAgo(34), likeCount: 5 }),
     base({ kind: "update", userId: "demo-priya", authorName: "Priya", caption: "Learned to make green curry today 🍛 recipe in the Budget tips group!", place: "Chiang Mai", country: "Thailand", imageUrl: picture("🍛", "#16A34A", "#EAB308", 600, 800), createdAt: hoursAgo(50), likeCount: 22 }),
     base({ kind: "update", userId: "demo-tom", authorName: "Tom", caption: "Seat reservations on the fast trains sell out. Book a few days ahead!", place: "Barcelona", country: "Spain", colour: "#0EA5E9", createdAt: hoursAgo(60), likeCount: 15 }),
-    base({ kind: "event", userId: "demo-leah", authorName: "Leah", caption: "Sharing a campervan relocation, 2 spare seats. Split fuel costs.", eventTitle: "Christchurch → Queenstown road trip", startsAt: inDays(6, 9), location: "Christchurch city centre", priceText: "Share fuel", country: "New Zealand", imageUrl: picture("🚐", "#EAB308", "#22C55E", 600, 500), createdAt: hoursAgo(70), likeCount: 3 }),
+    base({ kind: "update", userId: "demo-leah", authorName: "Leah", caption: "Driving Christchurch → Queenstown next week. Ask in the New Zealand group if you want to share fuel!", place: "Christchurch", country: "New Zealand", imageUrl: picture("🚐", "#EAB308", "#22C55E", 600, 500), createdAt: hoursAgo(70), likeCount: 3 }),
     base({ kind: "update", userId: "demo-kai", authorName: "Kai", caption: "Salt flats made me feel like I was on another planet 🤯", place: "Uyuni", country: "Bolivia", imageUrl: picture("🧂", "#E0E7FF", "#A78BFA", 600, 700), createdAt: hoursAgo(90), likeCount: 52 }),
   ];
 }
@@ -67,14 +67,16 @@ export function createDemoPostsApi(): PostsApi {
       return list.slice(offset, offset + limit).map((p) => ({ ...p }));
     },
     async getPost(id) { await wait(); const p = all().find((x) => x.id === id); return p ? { ...p } : null; },
+    async getMyBusiness() { return null; }, // the demo account isn't a verified business
     async createPost(input: NewPost) {
       await wait(300);
+      if (input.kind === "event") throw new Error("Only verified businesses can post events.");
       const post: Post = {
         id: `demo-post-${nextId++}`, userId: ME.id, authorName: ME.name, kind: input.kind, caption: input.caption.trim(),
         place: input.place.trim(), country: input.country.trim(), colour: input.colour,
         imageUrl: input.image ? URL.createObjectURL(input.image) : undefined,
         eventTitle: input.eventTitle, startsAt: input.startsAt, location: input.location, priceText: input.priceText,
-        linkUrl: input.linkUrl, businessName: input.businessName, createdAt: new Date().toISOString(), likeCount: 0, likedByMe: false,
+        linkUrl: input.linkUrl, createdAt: new Date().toISOString(), likeCount: 0, likedByMe: false,
       };
       all().push(post);
       return { ...post };

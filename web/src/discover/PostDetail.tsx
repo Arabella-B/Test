@@ -89,7 +89,7 @@ export default function PostDetail() {
                 {post.startsAt && <p>📅 <b>{eventTime(post.startsAt)}</b></p>}
                 {post.location && <p>📍 {post.location}</p>}
                 {post.priceText && <p>💷 {post.priceText}</p>}
-                {post.businessName && <p>🏢 Posted by {post.businessName}</p>}
+                {post.businessName && <p>🏢 Posted by <b>{post.businessName}</b> <span className="font-semibold text-good">✔︎ Verified business</span></p>}
               </div>
               {post.linkUrl && (
                 <a href={post.linkUrl} target="_blank" rel="noopener noreferrer nofollow" className="btn">

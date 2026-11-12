@@ -4,7 +4,7 @@ import { shrinkImage } from "../lib/images";
 import { usePosts } from "./PostsProvider";
 import { COUNTRIES, POST_COLOURS, type PostKind } from "./types";
 
-// Share what you're up to, or advertise an event.
+// Share what you're up to, or (verified businesses only) advertise an event.
 // Photos are shrunk on your device first, which also strips their hidden
 // location data before anything is uploaded.
 
@@ -23,9 +23,17 @@ export default function NewPostPage() {
   const [location, setLocation] = useState("");
   const [priceText, setPriceText] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
-  const [businessName, setBusinessName] = useState("");
+  // Only verified businesses can post events. undefined = still checking.
+  const [business, setBusiness] = useState<string | null | undefined>(undefined);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let live = true;
+    api.getMyBusiness().then((b) => { if (live) setBusiness(b); }, () => { if (live) setBusiness(null); });
+    return () => { live = false; };
+  }, [api]);
+  const eventsLocked = kind === "event" && !business;
 
   // Free the preview image's memory when it changes or the page closes.
   useEffect(() => () => { if (photo) URL.revokeObjectURL(photo.url); }, [photo]);
@@ -48,6 +56,7 @@ export default function NewPostPage() {
     setError(null);
     if (kind === "update" && !photo && !caption.trim()) return setError("Add a photo or write something.");
     if (kind === "event") {
+      if (!business) return setError("Only verified businesses can post events.");
       if (eventTitle.trim().length < 3) return setError("Give your event a title.");
       if (!startsAt) return setError("When does the event start?");
       if (new Date(startsAt) < new Date()) return setError("The event start time is in the past.");
@@ -58,7 +67,7 @@ export default function NewPostPage() {
       const post = await api.createPost({
         kind, caption, place, country, colour, image: photo?.blob,
         eventTitle, startsAt: startsAt ? new Date(startsAt).toISOString() : undefined,
-        location, priceText, linkUrl, businessName,
+        location, priceText, linkUrl,
       });
       navigate(`/discover/${post.id}`, { replace: true });
     } catch (err) {
@@ -79,6 +88,30 @@ export default function NewPostPage() {
           </button>
         ))}
       </div>
+
+      {eventsLocked ? (
+        <div className="card card-sun grid gap-2 p-5">
+          <p className="text-3xl">🛡️</p>
+          {business === undefined ? (
+            <p className="font-semibold">Checking…</p>
+          ) : (
+            <>
+              <p className="text-lg font-extrabold">Events are for verified businesses</p>
+              <p className="text-sm">
+                To keep everyone safe from scams and unsafe events, only businesses we've checked (like hostels and
+                tour companies) can post events. Every event shows a green ✓ verified tick.
+              </p>
+              <p className="text-sm">
+                Want to meet up with other travellers? Share it in a <b>group</b> or post a <b>"What I'm up to"</b> update instead.
+              </p>
+            </>
+          )}
+        </div>
+      ) : (
+      <>
+      {kind === "event" && business && (
+        <p className="rounded-2xl bg-good/10 p-3 text-sm font-semibold">✔︎ Posting as <b>{business}</b> (verified business)</p>
+      )}
 
       {/* Photo */}
       {photo ? (
@@ -130,9 +163,6 @@ export default function NewPostPage() {
           <label className="label">Link for info or booking (optional)
             <input className="input" type="url" inputMode="url" maxLength={300} value={linkUrl} onChange={(e) => setLinkUrl(e.target.value)} placeholder="https://" />
           </label>
-          <label className="label">Business name (if you're posting for one)
-            <input className="input" maxLength={60} value={businessName} onChange={(e) => setBusinessName(e.target.value)} placeholder="e.g. Lucky Hostel" />
-          </label>
         </>
       )}
 
@@ -165,6 +195,8 @@ export default function NewPostPage() {
 
       {error && <p className="rounded-2xl bg-bad/10 p-3 text-sm font-semibold text-bad">{error}</p>}
       <button className="btn" disabled={!!busy}>{busy ?? (kind === "event" ? "Post event" : "Post")}</button>
+      </>
+      )}
     </form>
   );
 }

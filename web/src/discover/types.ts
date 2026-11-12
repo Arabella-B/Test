@@ -35,7 +35,6 @@ export interface NewPost {
   location?: string;
   priceText?: string;
   linkUrl?: string;
-  businessName?: string;
 }
 
 export type FeedFilter = "all" | "updates" | "events";
@@ -46,6 +45,8 @@ export interface PostsApi {
   /** A page of the feed, newest first (events: soonest first, upcoming only). */
   listPosts(options: { filter: FeedFilter; country?: string; offset: number; limit: number }): Promise<Post[]>;
   getPost(id: string): Promise<Post | null>;
+  /** Your verified business name, or null if you're not a verified business (only they can post events). */
+  getMyBusiness(): Promise<string | null>;
   createPost(post: NewPost): Promise<Post>;
   deletePost(id: string): Promise<void>;
   setLike(id: string, liked: boolean): Promise<void>;

@@ -31,7 +31,7 @@ interface PostRow {
 
 function friendly(message: string): string {
   console.error("Discover:", message); // the real error, for debugging
-  if (/posted a lot/.test(message)) return message;
+  if (/posted a lot|verified businesses/.test(message)) return message;
   if (/check constraint|violates/i.test(message)) return "Something in the form isn't quite right. Please check it and try again.";
   if (/fetch|network/i.test(message)) return "No connection. Check your internet and try again.";
   if (/exceeded|too large|payload/i.test(message)) return "That photo is too big. Please choose a smaller one.";
@@ -72,6 +72,11 @@ export function createSupabasePostsApi(me: { id: string; name: string }): PostsA
     }));
   }
 
+  async function myBusiness(): Promise<string | null> {
+    const { data } = await supabase.from("verified_businesses").select("business_name").eq("user_id", me.id).maybeSingle();
+    return data?.business_name ?? null;
+  }
+
   return {
     me,
     isDemo: false,
@@ -93,7 +98,10 @@ export function createSupabasePostsApi(me: { id: string; name: string }): PostsA
       return data ? (await hydrate([data as unknown as PostRow]))[0] : null;
     },
 
+    getMyBusiness: myBusiness,
+
     async createPost(post: NewPost) {
+      if (post.kind === "event" && !(await myBusiness())) throw new Error("Only verified businesses can post events.");
       let imagePath: string | null = null;
       if (post.image) {
         imagePath = `${me.id}/${crypto.randomUUID()}.jpg`;
@@ -115,7 +123,7 @@ export function createSupabasePostsApi(me: { id: string; name: string }): PostsA
           location: isEvent ? post.location?.trim() || null : null,
           price_text: isEvent ? post.priceText?.trim() || null : null,
           link_url: isEvent ? post.linkUrl?.trim() || null : null,
-          business_name: isEvent ? post.businessName?.trim() || null : null,
+          // business_name is filled in by the database from the verified businesses list.
         })
         .select(FIELDS)
         .single();
