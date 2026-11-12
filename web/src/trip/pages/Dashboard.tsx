@@ -7,6 +7,7 @@ import { getCategory } from "../categories";
 import { CategoryIcon } from "../components/CategoryPicker";
 import { computeInsights, type Insight } from "../insights";
 import { addDays, formatDate, formatMoney, today } from "../money";
+import { countableTransactions, stopStats } from "../route";
 import { computeStats } from "../stats";
 import { useTrip } from "../store";
 
@@ -23,10 +24,14 @@ const STATUS = {
 const pounds = (v: unknown) => formatMoney(Math.round(Number(v) * 100), true);
 
 export default function Dashboard() {
-  const { transactions, settings, hasSettings, isDemo } = useTrip();
+  const { transactions, settings, hasSettings, isDemo, stops, budgets } = useTrip();
   const navigate = useNavigate();
   const stats = useMemo(() => computeStats(transactions, settings), [transactions, settings]);
-  const insights = useMemo(() => computeInsights(transactions, settings), [transactions, settings]);
+  const insights = useMemo(() => computeInsights(transactions, settings, { stops, budgets }), [transactions, settings, stops, budgets]);
+  const countries = useMemo(() => {
+    const countable = countableTransactions(transactions, settings);
+    return stops.map((s) => stopStats(s, countable));
+  }, [stops, transactions, settings]);
 
   if (transactions.length === 0) return <GetStarted hasSettings={hasSettings} />;
 
@@ -166,6 +171,47 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
       </section>
+
+      {/* Spend per country */}
+      {countries.length > 0 && (
+        <section className="card">
+          <h2 className="mb-1 text-lg font-extrabold">Spend per country</h2>
+          <p className="mb-2 text-sm text-muted">Your average spend per day so far, against your target. Tap a country to see its spending.</p>
+          <div className="h-64">
+            <ResponsiveContainer>
+              <BarChart
+                data={countries.map((c) => ({
+                  name: `${c.stop.flag} ${c.stop.country}`,
+                  target: c.stop.dailyBudget / 100,
+                  actual: c.actualDaily !== null ? c.actualDaily / 100 : null,
+                  status: c.status,
+                  from: c.stop.startDate,
+                  to: c.stop.endDate,
+                }))}
+                margin={{ left: 0, right: 8, top: 8 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#0000000f" vertical={false} />
+                <XAxis dataKey="name" fontSize={11} interval={0} tickFormatter={(v: string) => (v.length > 12 ? v.slice(0, 11) + "…" : v)} />
+                <YAxis tickFormatter={(v) => `£${v}`} width={40} fontSize={12} />
+                <Tooltip formatter={(v, name) => [v === null ? "Not started" : `${pounds(v)}/day`, name === "target" ? "Target" : "Actual"]} />
+                <Legend formatter={(v) => (v === "target" ? "Target per day" : "Actual per day")} />
+                <Bar dataKey="target" fill="#C4B5FD" radius={[6, 6, 0, 0]} />
+                <Bar
+                  dataKey="actual"
+                  fill="#16A34A"
+                  radius={[6, 6, 0, 0]}
+                  className="cursor-pointer"
+                  onClick={(d) => { const p = (d as unknown as { payload: { from: string; to: string } }).payload; go(`from=${p.from}&to=${p.to}`); }}
+                >
+                  {countries.map((c) => (
+                    <Cell key={c.stop.id} fill={c.status === "over" ? "#DC2626" : c.status === "close" ? "#D97706" : "#16A34A"} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
+      )}
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Top merchants */}

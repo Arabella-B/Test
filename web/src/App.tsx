@@ -18,6 +18,8 @@ import ImportPage from "./trip/pages/ImportPage";
 import Transactions from "./trip/pages/Transactions";
 import Checklist from "./trip/pages/Checklist";
 import Settings from "./trip/pages/Settings";
+import RoutePage from "./trip/pages/Route";
+import Budgets from "./trip/pages/Budgets";
 
 export default function Root() {
   const { loading, session, demo } = useAuth();
@@ -43,6 +45,8 @@ export default function Root() {
               <Route index element={<Dashboard />} />
               <Route path="import" element={<ImportPage />} />
               <Route path="transactions" element={<Transactions />} />
+              <Route path="route" element={<RoutePage />} />
+              <Route path="budgets" element={<Budgets />} />
               <Route path="checklist" element={<Checklist />} />
               <Route path="settings" element={<Settings />} />
             </Route>

@@ -1,5 +1,6 @@
 import { DEFAULT_CATEGORIES, getCategory } from "./categories";
 import { addDays, daysBetween, today } from "./money";
+import { countableTransactions } from "./route";
 import type { Transaction, TripSettings } from "./types";
 
 // Calculations for the dashboard. Everything works in pence.
@@ -44,7 +45,8 @@ export interface DashboardStats {
 }
 
 export function computeStats(all: Transaction[], settings: TripSettings, now = today()): DashboardStats {
-  const txs = all.filter((t) => inBudget(t, settings));
+  // Once you log cash spending by hand, ATM withdrawals are left out so nothing is counted twice.
+  const txs = countableTransactions(all, settings).filter((t) => inBudget(t, settings));
   const spent = txs.reduce((s, t) => s + spendingOf(t), 0);
   const income = txs.reduce((s, t) => s + incomeOf(t), 0);
   const moneyLeft = settings.totalBudget - spent + income;

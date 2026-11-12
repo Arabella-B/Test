@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getCategory } from "../categories";
 import { CategoryBadge, CategoryIcon, CategoryPicker } from "../components/CategoryPicker";
+import { formatLocal } from "../fx";
 import { formatDate, formatMoney } from "../money";
 import { useTrip } from "../store";
 import type { Transaction } from "../types";
@@ -19,7 +20,7 @@ const QUICK_FILTERS = [
 ];
 
 export default function Transactions() {
-  const { transactions, setCategory } = useTrip();
+  const { transactions, setCategory, settings } = useTrip();
   const [params, setParams] = useSearchParams();
   const [editing, setEditing] = useState<Transaction | null>(null);
   const [confirm, setConfirm] = useState<{ tx: Transaction; categoryId: string; others: number } | null>(null);
@@ -31,6 +32,8 @@ export default function Transactions() {
   const month = params.get("month") ?? "";
   const day = params.get("date") ?? "";
   const search = params.get("search") ?? "";
+  const from = params.get("from") ?? "";
+  const to = params.get("to") ?? "";
 
   const setParam = (key: string, value: string) => {
     const next = new URLSearchParams(params);
@@ -49,11 +52,13 @@ export default function Transactions() {
         if (category && t.categoryId !== category) return false;
         if (month && !t.date.startsWith(month)) return false;
         if (day && t.date !== day) return false;
+        if (from && t.date < from) return false;
+        if (to && t.date > to) return false;
         if (q && !t.description.toUpperCase().includes(q) && !t.merchant.includes(q)) return false;
         return true;
       })
       .sort((a, b) => b.date.localeCompare(a.date) || a.amount - b.amount);
-  }, [transactions, filter, category, month, day, search]);
+  }, [transactions, filter, category, month, day, search, from, to]);
 
   const total = list.reduce((s, t) => s + t.amount, 0);
   const groups = useMemo(() => {
@@ -109,12 +114,18 @@ export default function Transactions() {
         ))}
       </div>
 
-      {(category || month || day) && (
+      {(category || month || day || from) && (
         <div className="flex flex-wrap items-center gap-2 text-sm">
           <span className="text-muted">Showing:</span>
           {category && <button onClick={() => setParam("category", "")}><CategoryBadge id={category} small /> ✕</button>}
           {month && <button onClick={() => setParam("month", "")} className="rounded-full bg-white px-3 py-1 font-semibold ring-1 ring-black/5">{month} ✕</button>}
           {day && <button onClick={() => setParam("date", "")} className="rounded-full bg-white px-3 py-1 font-semibold ring-1 ring-black/5">{formatDate(day, "long")} ✕</button>}
+          {from && (
+            <button onClick={() => { const next = new URLSearchParams(params); next.delete("from"); next.delete("to"); setParams(next, { replace: true }); }}
+              className="rounded-full bg-white px-3 py-1 font-semibold ring-1 ring-black/5">
+              {formatDate(from)} – {formatDate(to || from, "long")} ✕
+            </button>
+          )}
         </div>
       )}
 
@@ -139,10 +150,17 @@ export default function Transactions() {
                     {getCategory(t.categoryId).name}
                     {t.categorySource === "unsure" && <span className="rounded-full bg-sun/30 px-2 font-bold text-ink">⚠️ Check</span>}
                     {t.isForeign && <span>🌍</span>}
+                    {t.source === "manual" && <span className="rounded-full bg-good/15 px-2 font-bold text-good">💵 Cash</span>}
+                    {settings.trackCashSpending && t.categoryId === "cash" && <span>(not counted: you log cash spending)</span>}
                   </span>
                 </span>
-                <span className={`shrink-0 font-bold ${t.amount > 0 ? "text-good" : ""}`}>
-                  {t.amount > 0 ? "+" : ""}{formatMoney(t.amount)}
+                <span className="shrink-0 text-right">
+                  <span className={`block font-bold ${t.amount > 0 ? "text-good" : ""}`}>
+                    {t.amount > 0 ? "+" : ""}{formatMoney(t.amount)}
+                  </span>
+                  {t.localAmount !== undefined && t.currency && t.currency !== "GBP" && (
+                    <span className="block text-xs text-muted">{formatLocal(-t.localAmount, t.currency)}</span>
+                  )}
                 </span>
               </button>
             ))}

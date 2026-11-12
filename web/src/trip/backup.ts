@@ -21,13 +21,15 @@ export function parseBackup(text: string): TripData {
     checklist: parsed.checklist ?? null,
     rules: parsed.rules ?? [],
     mappings: parsed.mappings ?? [],
+    stops: parsed.stops ?? [],
+    budgets: parsed.budgets ?? [],
   };
 }
 
 /** A spreadsheet-friendly CSV of all transactions. */
 export function transactionsCsv(data: TripData): string {
   const escape = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
-  const lines = ["Date,Description,Merchant,Category,Amount (GBP),Balance (GBP)"];
+  const lines = ["Date,Description,Merchant,Category,Amount (GBP),Balance (GBP),Local amount,Currency"];
   for (const t of [...data.transactions].sort((a, b) => a.date.localeCompare(b.date))) {
     lines.push([
       t.date,
@@ -36,6 +38,8 @@ export function transactionsCsv(data: TripData): string {
       escape(getCategory(t.categoryId).name),
       (t.amount / 100).toFixed(2),
       t.balance !== undefined ? (t.balance / 100).toFixed(2) : "",
+      t.localAmount !== undefined ? String(t.localAmount) : "",
+      t.currency ?? "",
     ].join(","));
   }
   return lines.join("\n");

@@ -1,5 +1,6 @@
 import { openDB, type IDBPDatabase } from "idb";
-import type { ChecklistItem, ColumnMapping, MerchantRule, Transaction, TripSettings } from "./types";
+import type { FxRates } from "./fx";
+import type { CategoryBudget, ChecklistItem, ColumnMapping, MerchantRule, Transaction, TripSettings, TripStop } from "./types";
 
 // Private storage on THIS device only (IndexedDB, built into the browser).
 // Nothing here is sent to the website, Supabase or anyone else.
@@ -11,9 +12,11 @@ export interface TripData {
   checklist: ChecklistItem[] | null;
   rules: MerchantRule[];
   mappings: ColumnMapping[];
+  stops: TripStop[];
+  budgets: CategoryBudget[];
 }
 
-type KvKey = "settings" | "checklist" | "rules" | "mappings";
+type KvKey = "settings" | "checklist" | "rules" | "mappings" | "stops" | "budgets" | "fx";
 
 export class TripDb {
   private db: Promise<IDBPDatabase>;
@@ -30,14 +33,24 @@ export class TripDb {
 
   async load(): Promise<TripData> {
     const db = await this.db;
-    const [transactions, settings, checklist, rules, mappings] = await Promise.all([
+    const [transactions, settings, checklist, rules, mappings, stops, budgets] = await Promise.all([
       db.getAll("transactions") as Promise<Transaction[]>,
       db.get("kv", "settings"),
       db.get("kv", "checklist"),
       db.get("kv", "rules"),
       db.get("kv", "mappings"),
+      db.get("kv", "stops"),
+      db.get("kv", "budgets"),
     ]);
-    return { transactions, settings: settings ?? null, checklist: checklist ?? null, rules: rules ?? [], mappings: mappings ?? [] };
+    return {
+      transactions, settings: settings ?? null, checklist: checklist ?? null, rules: rules ?? [], mappings: mappings ?? [],
+      stops: stops ?? [], budgets: budgets ?? [],
+    };
+  }
+
+  /** Exchange rates are kept separately: they aren't personal, so they're not in backups. */
+  async loadRates(): Promise<FxRates | null> {
+    return ((await (await this.db).get("kv", "fx")) as FxRates | undefined) ?? null;
   }
 
   async putTransactions(list: Transaction[]): Promise<void> {

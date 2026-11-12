@@ -1,5 +1,6 @@
+import { toPence, type FxRates } from "./fx";
 import { addDays, today } from "./money";
-import type { ParsedRow, TripSettings } from "./types";
+import type { CategoryBudget, ParsedRow, Transaction, TripSettings, TripStop } from "./types";
 
 // Made-up sample data for "Alex", an imaginary traveller, so you can see the
 // app working before using your own statements. None of this is real.
@@ -21,7 +22,44 @@ export function demoSettings(now = today()): TripSettings {
     familySupportMonthly: 25_000, // £250
     familySenders: ["MUM"],
     homeCurrency: "GBP",
+    trackCashSpending: true, // Alex logs cash spending by hand
   };
+}
+
+/** Alex's made-up route: Thailand → Vietnam → Cambodia → Australia. */
+export function demoStops(now = today()): TripStop[] {
+  return [
+    { id: "demo-th", country: "Thailand", flag: "🇹🇭", currency: "THB", startDate: addDays(now, -60), endDate: addDays(now, -26), dailyBudget: 3500 },
+    { id: "demo-vn", country: "Vietnam", flag: "🇻🇳", currency: "VND", startDate: addDays(now, -25), endDate: addDays(now, 9), dailyBudget: 3000 },
+    { id: "demo-kh", country: "Cambodia", flag: "🇰🇭", currency: "USD", startDate: addDays(now, 10), endDate: addDays(now, 30), dailyBudget: 3000 },
+    { id: "demo-au", country: "Australia", flag: "🇦🇺", currency: "AUD", startDate: addDays(now, 31), endDate: addDays(now, 95), dailyBudget: 7000 },
+  ];
+}
+
+export function demoBudgets(): CategoryBudget[] {
+  return [
+    { categoryId: "eating_out", monthly: 25_000 },
+    { categoryId: "accommodation", monthly: 45_000 },
+    { categoryId: "going_out", monthly: 6_000 },
+    { categoryId: "activities", monthly: 15_000 },
+    { categoryId: "local_transport", monthly: 8_000 },
+  ];
+}
+
+/** A few cash purchases in Vietnamese dong that Alex logged by hand. */
+export function demoCash(fx: FxRates, now = today()): Transaction[] {
+  const items: [number, number, string, string][] = [
+    [-1, 65000, "eating_out", "Pho stall"],
+    [-1, 30000, "coffee", "Egg coffee"],
+    [-2, 120000, "activities", "Temple entry"],
+    [-3, 50000, "local_transport", "Motorbike taxi"],
+    [-4, 80000, "laundry", "Laundry"],
+  ];
+  return items.map(([days, vnd, categoryId, note], i) => ({
+    id: `demo-cash-${i}`, date: addDays(now, days), description: `Cash: ${note}`, merchant: note.toUpperCase(),
+    amount: -toPence(vnd, "VND", fx), categoryId, categorySource: "user", isForeign: true, source: "manual",
+    importId: "manual", dedupeKey: `demo-cash-${i}`, currency: "VND", localAmount: vnd, note,
+  }));
 }
 
 export function demoRows(now = today()): ParsedRow[] {

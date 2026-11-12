@@ -2,10 +2,13 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { categorise } from "./categorise";
 import { DEFAULT_CHECKLIST } from "./checklist";
 import { TripDb, requestPersistentStorage, type TripData } from "./db";
-import { demoRows, demoSettings } from "./demo";
+import { demoBudgets, demoCash, demoRows, demoSettings, demoStops } from "./demo";
+import { BUILT_IN_RATES, fetchRates, ratesAreStale, toPence, type FxRates } from "./fx";
 import { buildImport, type ImportSummary } from "./importer";
 import { addDays, today } from "./money";
-import type { ChecklistItem, ColumnMapping, MerchantRule, ParsedRow, Transaction, TripSettings } from "./types";
+import type {
+  CategoryBudget, ChecklistItem, ColumnMapping, MerchantRule, ParsedRow, Transaction, TripSettings, TripStop,
+} from "./types";
 
 // Holds the private trip data in memory while the app is open, and saves every
 // change straight to this device's storage.
@@ -23,6 +26,14 @@ export function defaultSettings(): TripSettings {
   };
 }
 
+export interface CashEntry {
+  date: string;
+  localAmount: number; // in `currency`
+  currency: string;
+  categoryId: string;
+  note: string;
+}
+
 interface TripContextValue {
   ready: boolean;
   isDemo: boolean;
@@ -32,12 +43,20 @@ interface TripContextValue {
   checklist: ChecklistItem[];
   rules: MerchantRule[];
   mappings: ColumnMapping[];
+  stops: TripStop[];
+  budgets: CategoryBudget[];
+  fx: FxRates;
   importRows(rows: ParsedRow[], source: Transaction["source"]): Promise<ImportSummary>;
+  /** Log cash spending by hand. Returns true if this switched on cash tracking. */
+  addCash(entry: CashEntry): Promise<boolean>;
   setCategory(id: string, categoryId: string, applyToMerchant: boolean): Promise<number>;
   deleteTransaction(id: string): Promise<void>;
   saveSettings(settings: TripSettings): Promise<void>;
   saveChecklist(items: ChecklistItem[]): Promise<void>;
   saveMapping(mapping: ColumnMapping): Promise<void>;
+  saveStops(stops: TripStop[]): Promise<void>;
+  saveBudgets(budgets: CategoryBudget[]): Promise<void>;
+  refreshRates(): Promise<boolean>;
   markBackedUp(): Promise<void>;
   exportData(): TripData;
   replaceAll(data: TripData): Promise<void>;
@@ -45,6 +64,8 @@ interface TripContextValue {
 }
 
 const TripContext = createContext<TripContextValue | null>(null);
+
+const EMPTY: TripData = { transactions: [], settings: null, checklist: null, rules: [], mappings: [], stops: [], budgets: [] };
 
 export function TripProvider({ scope, children }: { scope: string; children: ReactNode }) {
   const isDemo = scope === "demo";
@@ -56,6 +77,9 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
   const [checklist, setChecklist] = useState<ChecklistItem[]>(DEFAULT_CHECKLIST);
   const [rules, setRules] = useState<MerchantRule[]>([]);
   const [mappings, setMappings] = useState<ColumnMapping[]>([]);
+  const [stops, setStops] = useState<TripStop[]>([]);
+  const [budgets, setBudgets] = useState<CategoryBudget[]>([]);
+  const [fx, setFx] = useState<FxRates>(BUILT_IN_RATES);
 
   const apply = useCallback((data: TripData) => {
     setTransactions(data.transactions);
@@ -64,7 +88,17 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     setChecklist(data.checklist ?? DEFAULT_CHECKLIST);
     setRules(data.rules);
     setMappings(data.mappings);
+    setStops(data.stops);
+    setBudgets(data.budgets);
   }, []);
+
+  const refreshRates = useCallback(async () => {
+    const fresh = await fetchRates();
+    if (!fresh) return false;
+    setFx(fresh);
+    await db.set("fx", fresh);
+    return true;
+  }, [db]);
 
   useEffect(() => {
     let cancelled = false;
@@ -76,15 +110,26 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
         const result = buildImport(demoRows(), new Set(), { rules: [], familySenders: s.familySenders, source: "demo", importId: "demo" });
         const checklist = DEFAULT_CHECKLIST.map((c) => ({ ...c, done: ["clinic", "passport", "visas", "insurance", "card"].includes(c.id) }));
         // Fixed ids make this safe to run twice (React may start effects twice in development).
-        await db.putTransactions(result.added.map((t) => ({ ...t, id: `demo-${t.dedupeKey}` })));
+        await db.putTransactions([
+          ...result.added.map((t) => ({ ...t, id: `demo-${t.dedupeKey}` })),
+          ...demoCash(BUILT_IN_RATES),
+        ]);
         await db.set("settings", s);
         await db.set("checklist", checklist);
+        await db.set("stops", demoStops());
+        await db.set("budgets", demoBudgets());
         data = await db.load();
       }
-      if (!cancelled) { apply(data); setReady(true); }
+      const savedRates = await db.loadRates();
+      if (cancelled) return;
+      apply(data);
+      if (savedRates) setFx(savedRates);
+      setReady(true);
+      // Fetch fresh exchange rates in the background when online.
+      if (!savedRates || ratesAreStale(savedRates)) void refreshRates();
     })();
     return () => { cancelled = true; };
-  }, [db, isDemo, apply]);
+  }, [db, isDemo, apply, refreshRates]);
 
   const importRows = useCallback(async (rows: ParsedRow[], source: Transaction["source"]) => {
     const existing = new Set(transactions.map((t) => t.dedupeKey));
@@ -96,6 +141,38 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     if (!isDemo) void requestPersistentStorage();
     return summary;
   }, [db, transactions, rules, settings.familySenders, isDemo]);
+
+  const addCash = useCallback(async (entry: CashEntry) => {
+    const id = crypto.randomUUID();
+    const pence = toPence(entry.localAmount, entry.currency, fx);
+    const label = entry.note.trim() || "Cash";
+    const t: Transaction = {
+      id,
+      date: entry.date,
+      description: `Cash: ${label}`,
+      merchant: label.toUpperCase(),
+      amount: -Math.abs(pence),
+      categoryId: entry.categoryId,
+      categorySource: "user",
+      isForeign: entry.currency !== "GBP",
+      source: "manual",
+      importId: "manual",
+      dedupeKey: `manual-${id}`,
+      currency: entry.currency,
+      localAmount: Math.abs(entry.localAmount),
+      note: entry.note.trim() || undefined,
+    };
+    await db.putTransactions([t]);
+    setTransactions((prev) => [...prev, t]);
+    if (!settings.trackCashSpending) {
+      // From now on, ATM withdrawals aren't counted as spending (no double counting).
+      const next = { ...settings, trackCashSpending: true };
+      setSettings(next);
+      await db.set("settings", next);
+      return true;
+    }
+    return false;
+  }, [db, fx, settings]);
 
   const setCategory = useCallback(async (id: string, categoryId: string, applyToMerchant: boolean) => {
     const target = transactions.find((t) => t.id === id);
@@ -150,6 +227,16 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     await db.set("mappings", next);
   }, [db, mappings]);
 
+  const saveStops = useCallback(async (next: TripStop[]) => {
+    setStops(next);
+    await db.set("stops", next);
+  }, [db]);
+
+  const saveBudgets = useCallback(async (next: CategoryBudget[]) => {
+    setBudgets(next);
+    await db.set("budgets", next);
+  }, [db]);
+
   const markBackedUp = useCallback(async () => {
     const next = { ...settings, lastBackupAt: new Date().toISOString() };
     setSettings(next);
@@ -157,8 +244,8 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
   }, [db, settings]);
 
   const exportData = useCallback(
-    (): TripData => ({ transactions, settings: hasSettings ? settings : null, checklist, rules, mappings }),
-    [transactions, settings, hasSettings, checklist, rules, mappings],
+    (): TripData => ({ transactions, settings: hasSettings ? settings : null, checklist, rules, mappings, stops, budgets }),
+    [transactions, settings, hasSettings, checklist, rules, mappings, stops, budgets],
   );
 
   const replaceAll = useCallback(async (data: TripData) => {
@@ -168,18 +255,20 @@ export function TripProvider({ scope, children }: { scope: string; children: Rea
     if (data.checklist) await db.set("checklist", data.checklist);
     await db.set("rules", data.rules);
     await db.set("mappings", data.mappings);
+    await db.set("stops", data.stops);
+    await db.set("budgets", data.budgets);
     apply(data);
   }, [db, apply]);
 
   const clearAll = useCallback(async () => {
     await db.clear();
-    apply({ transactions: [], settings: null, checklist: null, rules: [], mappings: [] });
+    apply(EMPTY);
   }, [db, apply]);
 
   const value: TripContextValue = {
-    ready, isDemo, transactions, settings, hasSettings, checklist, rules, mappings,
-    importRows, setCategory, deleteTransaction, saveSettings, saveChecklist, saveMapping, markBackedUp,
-    exportData, replaceAll, clearAll,
+    ready, isDemo, transactions, settings, hasSettings, checklist, rules, mappings, stops, budgets, fx,
+    importRows, addCash, setCategory, deleteTransaction, saveSettings, saveChecklist, saveMapping, saveStops, saveBudgets,
+    refreshRates, markBackedUp, exportData, replaceAll, clearAll,
   };
   return <TripContext.Provider value={value}>{children}</TripContext.Provider>;
 }

@@ -6,7 +6,7 @@ export default function Sheet({ children, onClose }: { children: ReactNode; onCl
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 md:items-center" onClick={onClose}>
       <div
-        className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-white p-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] md:rounded-3xl md:pb-5"
+        className="max-h-[90dvh] w-full max-w-md overflow-y-auto overflow-x-hidden rounded-t-3xl bg-white p-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] md:rounded-3xl md:pb-5"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
       >

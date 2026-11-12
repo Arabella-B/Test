@@ -1,7 +1,8 @@
 import { getCategory } from "./categories";
 import { addDays, daysBetween, formatDate, formatMoney, today } from "./money";
 import { computeStats, spendingOf } from "./stats";
-import type { Transaction, TripSettings } from "./types";
+import { budgetStatuses, countableTransactions, stopForDate, stopStats } from "./route";
+import type { CategoryBudget, Transaction, TripSettings, TripStop } from "./types";
 
 // Friendly, plain-English tips worked out from your own transactions.
 // This runs on your device: nothing is sent anywhere.
@@ -18,11 +19,65 @@ export interface Insight {
 
 const pct = (n: number) => `${Math.round(n * 100)}%`;
 
-export function computeInsights(txs: Transaction[], settings: TripSettings, now = today()): Insight[] {
+export function computeInsights(
+  allTxs: Transaction[],
+  settings: TripSettings,
+  extras: { stops?: TripStop[]; budgets?: CategoryBudget[]; now?: string } = {},
+): Insight[] {
+  const now = extras.now ?? today();
   const out: Insight[] = [];
-  const stats = computeStats(txs, settings, now);
+  const stats = computeStats(allTxs, settings, now);
+  const txs = countableTransactions(allTxs, settings);
   const month = now.slice(0, 7);
   const thisMonth = txs.filter((t) => t.date.startsWith(month));
+
+  // 0a. The country you're in now: on track for its budget?
+  const here = stopForDate(now, extras.stops ?? []);
+  if (here) {
+    const st = stopStats(here, txs, now);
+    if (st.status === "over" || st.status === "close") {
+      const over = st.spent - here.dailyBudget * st.daysElapsed;
+      out.push({
+        id: "country",
+        emoji: here.flag || "🗺️",
+        tone: "warn",
+        title: `Over your ${here.country} budget`,
+        text: `You're ${formatMoney(over, true)} over your ${here.country} budget with ${st.daysLeft} day${st.daysLeft === 1 ? "" : "s"} left.` +
+          (st.aimDaily !== null && st.daysLeft > 0 ? ` Aim for ${formatMoney(st.aimDaily, true)}/day to get back on track.` : ""),
+        priority: 95,
+        link: "/trip/route",
+      });
+    } else if (st.status === "good" && st.daysElapsed >= 3) {
+      out.push({
+        id: "country-good",
+        emoji: here.flag || "🗺️",
+        tone: "good",
+        title: `${here.country} is on budget`,
+        text: `You're averaging ${formatMoney(st.actualDaily ?? 0, true)}/day against a target of ${formatMoney(here.dailyBudget, true)}. Keep it up!`,
+        priority: 25,
+        link: "/trip/route",
+      });
+    }
+  }
+
+  // 0b. Category budgets that are nearly used up or over this month
+  const lastDay = new Date(Date.UTC(+month.slice(0, 4), +month.slice(5, 7), 0)).getUTCDate();
+  const daysLeftInMonth = lastDay - +now.slice(8, 10);
+  for (const b of budgetStatuses(extras.budgets ?? [], txs, month)) {
+    if (b.status === "good") continue;
+    const name = getCategory(b.budget.categoryId).name;
+    out.push({
+      id: `budget-${b.budget.categoryId}`,
+      emoji: getCategory(b.budget.categoryId).emoji,
+      tone: "warn",
+      title: b.status === "over" ? `${name} budget used up` : `${name} budget nearly used`,
+      text: b.status === "over"
+        ? `You've spent ${formatMoney(b.spent, true)} on ${name.toLowerCase()} this month, ${formatMoney(b.spent - b.budget.monthly, true)} over your ${formatMoney(b.budget.monthly, true)} budget.`
+        : `You've used ${Math.round(b.share * 100)}% of your ${name.toLowerCase()} budget with ${daysLeftInMonth} day${daysLeftInMonth === 1 ? "" : "s"} left this month.`,
+      priority: b.status === "over" ? 85 : 65,
+      link: "/trip/budgets",
+    });
+  }
 
   // 1. Will the money last?
   const { runway } = stats;
@@ -113,7 +168,7 @@ export function computeInsights(txs: Transaction[], settings: TripSettings, now 
   }
 
   // 6. Lots of cash withdrawals
-  const withdrawals = thisMonth.filter((t) => t.categoryId === "cash" && t.amount < 0);
+  const withdrawals = allTxs.filter((t) => t.date.startsWith(month) && t.categoryId === "cash" && t.amount < 0);
   if (withdrawals.length >= 4) {
     out.push({
       id: "atm",

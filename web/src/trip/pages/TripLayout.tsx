@@ -1,4 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
+import QuickAdd from "../components/QuickAdd";
 import { daysBetween, today } from "../money";
 import { useTrip } from "../store";
 
@@ -9,6 +10,8 @@ const TRIP_TABS = [
   { to: "/trip", label: "Dashboard", icon: "📊", end: true },
   { to: "/trip/import", label: "Import", icon: "📥" },
   { to: "/trip/transactions", label: "Transactions", icon: "📋" },
+  { to: "/trip/route", label: "Route", icon: "🗺️" },
+  { to: "/trip/budgets", label: "Budgets", icon: "🎯" },
   { to: "/trip/checklist", label: "Checklist", icon: "✅" },
   { to: "/trip/settings", label: "Settings", icon: "⚙️" },
 ];
@@ -20,7 +23,8 @@ export default function TripLayout() {
   const needsBackup = !isDemo && transactions.length > 0 && (!lastBackup || daysBetween(lastBackup, today()) >= 14);
 
   return (
-    <div className="grid grid-cols-1 gap-5">
+    // Extra space at the bottom so the floating "+ Cash" button never hides the last item.
+    <div className="grid grid-cols-1 gap-5 pb-20 md:pb-16">
       <div className="flex items-center gap-2">
         <h1 className="text-3xl font-extrabold">My Trip</h1>
         <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold text-white">🔒 Private</span>
@@ -51,6 +55,7 @@ export default function TripLayout() {
       )}
 
       {ready ? <Outlet /> : <div className="card text-center text-muted">Loading your trip…</div>}
+      {ready && <QuickAdd />}
     </div>
   );
 }

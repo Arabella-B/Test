@@ -29,6 +29,10 @@ export interface Transaction {
   source: "csv" | "pdf" | "demo" | "manual";
   importId: string;
   dedupeKey: string;
+  // Cash spending added by hand in another currency:
+  currency?: string; // e.g. "THB"
+  localAmount?: number; // in that currency, e.g. 250 (positive)
+  note?: string;
 }
 
 /** A transaction read from a statement, before categorising. */
@@ -48,6 +52,28 @@ export interface TripSettings {
   familySenders: string[]; // words that identify family payments, e.g. "MUM"
   homeCurrency: "GBP";
   lastBackupAt?: string; // ISO date-time
+  /**
+   * True once you log cash spending by hand. Then ATM withdrawals aren't counted as
+   * spending (the cash you spend is), so nothing is counted twice.
+   */
+  trackCashSpending?: boolean;
+}
+
+/** One country on your route. */
+export interface TripStop {
+  id: string;
+  country: string;
+  flag: string;
+  currency: string;
+  startDate: string; // YYYY-MM-DD, first day there
+  endDate: string; // YYYY-MM-DD, last day there
+  dailyBudget: number; // pence per day
+}
+
+/** A monthly spending limit for one category. */
+export interface CategoryBudget {
+  categoryId: string;
+  monthly: number; // pence
 }
 
 export interface ChecklistItem {

@@ -63,6 +63,29 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
 | `src/trip/db.ts` | On-device storage |
 | `src/trip/pages/` | The My Trip screens |
 
+## My Trip: route, currencies and budgets (Stage 4a)
+
+- **Route** (`/trip/route`): add countries with dates and a daily budget (in pounds). Drag the ≡
+  handle, or use ▲ ▼, to reorder; "Fix dates to follow this order" moves dates to match.
+  Spending is matched to a country by date. Each country shows actual £/day vs target
+  (🟢 on budget, 🟠 up to 10% over, 🔴 more) and what to aim for to finish on budget.
+- **Budgets** (`/trip/budgets`): a monthly limit per category (🟢 under 80%, 🟠 80–100%, 🔴 over).
+- **+ Cash** (floating button on every My Trip page): type an amount, tap a category, done.
+  The currency is guessed from where your route says you are. Once you log cash, ATM
+  withdrawals stop counting as spending, so cash isn't counted twice.
+- **Exchange rates** come from ExchangeRate-API's free service (all rates are downloaded at once,
+  so it learns nothing about your plans), refresh every 12 hours, and are saved for offline use.
+  Built-in backup rates in `src/trip/fx.ts` are used until the first download.
+- The Dashboard adds a **Spend per country** chart and tips for the country you're in and your budgets.
+
+| File | What's in it |
+|---|---|
+| `src/trip/route.ts` | Route and budget calculations (tested in `route.test.ts`) |
+| `src/trip/fx.ts` | Exchange rates and currency formatting |
+| `src/trip/countries.ts` | Countries with flags and currencies |
+| `src/trip/pages/Route.tsx`, `Budgets.tsx` | The Route and Budgets screens |
+| `src/trip/components/QuickAdd.tsx` | The + Cash button |
+
 ## Groups: how they work
 
 - Anyone signed in can see groups, create one, and join or leave freely.
@@ -133,5 +156,6 @@ Safari may clear data for websites you haven't visited in a while. Back up regul
   transactions, dashboard and charts, runway, first tips, checklist, backups, demo.
 - **Stage 2 (done):** Groups with live chat; reporting, blocking and anti-spam.
 - **Stage 3 (done):** Discover feed with photos, events, likes, reporting and blocking.
-- **Stage 4:** budgets per category/country, trips and multi-currency, cash quick-add,
-  country info cards, "Can I afford it?", Excel/OFX import, optional sync between devices.
+- **Stage 4a (done):** route with country budgets, multi-currency, cash quick-add, category budgets.
+- **Stage 4b:** country info cards, "Can I afford it?", country comparison tips.
+- **Stage 4c:** Excel/OFX import, encrypted sync between devices, passcode lock, dark mode.
