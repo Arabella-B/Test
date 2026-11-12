@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
-import { getCategory } from "../categories";
+import { CHART_GROUPS, GROUP_COLOURS as colours, getGroup, groupOf, totalsByGroup } from "../chartGroups";
 import { CategoryIcon } from "../components/CategoryPicker";
 import { computeInsights, type Insight } from "../insights";
 import { addDays, formatDate, formatMoney, today } from "../money";
@@ -27,9 +27,23 @@ const pounds = (v: unknown) => formatMoney(Math.round(Number(v) * 100), true);
 export default function Dashboard() {
   const { transactions, settings, hasSettings, isDemo, stops, budgets, cardEdits } = useTrip();
   const navigate = useNavigate();
-  const theme = useThemeColours(["brand", "brand-strong", "coral-strong", "grid"]);
+  const theme = useThemeColours(["brand", "brand-strong", "grid"]);
   const stats = useMemo(() => computeStats(transactions, settings), [transactions, settings]);
   const insights = useMemo(() => computeInsights(transactions, settings, { stops, budgets, cardEdits }), [transactions, settings, stops, budgets, cardEdits]);
+  const groups = useMemo(() => totalsByGroup(stats.byCategory), [stats.byCategory]);
+  const monthlyGroups = useMemo(() => {
+    const rows = stats.monthly.map((row) => {
+      const out: Record<string, number | string> = { month: row.month, key: row.key };
+      for (const [k, v] of Object.entries(row)) {
+        if (k === "month" || k === "key" || typeof v !== "number") continue;
+        const g = groupOf(k);
+        out[g] = ((out[g] as number) ?? 0) + v;
+      }
+      return out;
+    });
+    const used = CHART_GROUPS.map((g) => g.id).filter((id) => rows.some((r) => typeof r[id] === "number"));
+    return { rows, used };
+  }, [stats.monthly]);
   const countries = useMemo(() => {
     const countable = countableTransactions(transactions, settings);
     return stops.map((s) => stopStats(s, countable));
@@ -97,31 +111,31 @@ export default function Dashboard() {
             <ResponsiveContainer>
               <PieChart>
                 <Pie
-                  data={stats.byCategory.map((c) => ({ ...c, value: c.total / 100, name: getCategory(c.categoryId).name }))}
+                  data={groups.map((g) => ({ ...g, value: g.total / 100, name: getGroup(g.groupId).name }))}
                   dataKey="value"
                   nameKey="name"
                   innerRadius="58%"
                   outerRadius="95%"
-                  paddingAngle={2}
-                  cornerRadius={6}
-                  onClick={(entry) => go(`category=${(entry as unknown as { categoryId: string }).categoryId}`)}
+                  paddingAngle={3}
+                  cornerRadius={8}
+                  onClick={(entry) => go(`group=${(entry as unknown as { groupId: string }).groupId}`)}
                   className="cursor-pointer"
                 >
-                  {stats.byCategory.map((c) => <Cell key={c.categoryId} fill={getCategory(c.categoryId).colour} stroke="none" />)}
+                  {groups.map((g) => <Cell key={g.groupId} fill={colours[g.groupId]} stroke="none" />)}
                 </Pie>
                 <Tooltip formatter={pounds} />
               </PieChart>
             </ResponsiveContainer>
           </div>
           <div className="mt-3 grid gap-1">
-            {stats.byCategory.slice(0, 7).map((c) => {
-              const cat = getCategory(c.categoryId);
+            {groups.map((g) => {
+              const group = getGroup(g.groupId);
               return (
-                <button key={c.categoryId} onClick={() => go(`category=${c.categoryId}`)} className="flex items-center gap-2 rounded-xl px-1 py-1 text-left text-sm hover:bg-cream">
-                  <span className="h-3 w-3 rounded-full" style={{ background: cat.colour }} />
-                  <span className="flex-1">{cat.emoji} {cat.name}</span>
-                  <span className="font-semibold">{formatMoney(c.total, true)}</span>
-                  <span className="w-10 text-right text-muted">{Math.round((c.total / Math.max(1, stats.spent)) * 100)}%</span>
+                <button key={g.groupId} onClick={() => go(`group=${g.groupId}`)} className="flex items-center gap-2 rounded-xl px-1 py-1 text-left text-sm hover:bg-cream">
+                  <span className="h-3.5 w-3.5 rounded-full" style={{ background: colours[g.groupId] }} />
+                  <span className="flex-1">{group.emoji} {group.name}</span>
+                  <span className="font-semibold">{formatMoney(g.total, true)}</span>
+                  <span className="w-10 text-right text-muted">{Math.round((g.total / Math.max(1, stats.spent)) * 100)}%</span>
                 </button>
               );
             })}
@@ -153,19 +167,20 @@ export default function Dashboard() {
         <h2 className="mb-2 text-lg font-extrabold">Each month</h2>
         <div className="h-72">
           <ResponsiveContainer>
-            <BarChart data={stats.monthly} margin={{ left: 0, right: 8, top: 8 }}>
+            <BarChart data={monthlyGroups.rows} margin={{ left: 0, right: 8, top: 8 }}>
               <CartesianGrid strokeDasharray="3 3" stroke={theme.grid} vertical={false} />
               <XAxis dataKey="month" fontSize={12} />
               <YAxis tickFormatter={(v) => `£${v >= 1000 ? `${Math.round(v / 100) / 10}k` : v}`} width={48} fontSize={12} />
-              <Tooltip formatter={(v, name) => [pounds(v), getCategory(String(name)).name]} />
-              {stats.monthlyCategories.map((id, i) => (
+              <Tooltip formatter={(v, name) => [pounds(v), getGroup(String(name)).name]} />
+              <Legend formatter={(id) => getGroup(String(id)).name} iconType="circle" wrapperStyle={{ fontSize: 12 }} />
+              {monthlyGroups.used.map((id, i) => (
                 <Bar
                   key={id}
                   dataKey={id}
                   stackId="month"
-                  fill={getCategory(id).colour}
-                  radius={i === stats.monthlyCategories.length - 1 ? [8, 8, 0, 0] : 0}
-                  onClick={(d) => go(`month=${(d as unknown as { payload: { key: string } }).payload.key}&category=${id}`)}
+                  fill={colours[id]}
+                  radius={i === monthlyGroups.used.length - 1 ? [8, 8, 0, 0] : 0}
+                  onClick={(d) => go(`month=${(d as unknown as { payload: { key: string } }).payload.key}&group=${id}`)}
                   className="cursor-pointer"
                 />
               ))}

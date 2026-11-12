@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getCategory } from "../categories";
+import { categoriesIn, getGroup } from "../chartGroups";
 import { CategoryBadge, CategoryIcon, CategoryPicker } from "../components/CategoryPicker";
 import { formatLocal } from "../fx";
 import { formatDate, formatMoney } from "../money";
@@ -32,6 +33,7 @@ export default function Transactions() {
   const month = params.get("month") ?? "";
   const day = params.get("date") ?? "";
   const search = params.get("search") ?? "";
+  const group = params.get("group") ?? "";
   const from = params.get("from") ?? "";
   const to = params.get("to") ?? "";
 
@@ -50,6 +52,7 @@ export default function Transactions() {
         if (filter === "foreign" && !t.isForeign) return false;
         if (filter === "in" && t.amount <= 0) return false;
         if (category && t.categoryId !== category) return false;
+        if (group && !categoriesIn(group)(t.categoryId)) return false;
         if (month && !t.date.startsWith(month)) return false;
         if (day && t.date !== day) return false;
         if (from && t.date < from) return false;
@@ -58,7 +61,7 @@ export default function Transactions() {
         return true;
       })
       .sort((a, b) => b.date.localeCompare(a.date) || a.amount - b.amount);
-  }, [transactions, filter, category, month, day, search, from, to]);
+  }, [transactions, filter, category, group, month, day, search, from, to]);
 
   const total = list.reduce((s, t) => s + t.amount, 0);
   const groups = useMemo(() => {
@@ -114,10 +117,11 @@ export default function Transactions() {
         ))}
       </div>
 
-      {(category || month || day || from) && (
+      {(category || group || month || day || from) && (
         <div className="flex flex-wrap items-center gap-2 text-sm">
           <span className="text-muted">Showing:</span>
           {category && <button onClick={() => setParam("category", "")}><CategoryBadge id={category} small /> ✕</button>}
+          {group && <button onClick={() => setParam("group", "")} className="rounded-full bg-surface px-3 py-1 font-semibold">{getGroup(group).emoji} {getGroup(group).name} ✕</button>}
           {month && <button onClick={() => setParam("month", "")} className="rounded-full bg-surface px-3 py-1 font-semibold ring-1 ring-ink/10">{month} ✕</button>}
           {day && <button onClick={() => setParam("date", "")} className="rounded-full bg-surface px-3 py-1 font-semibold ring-1 ring-ink/10">{formatDate(day, "long")} ✕</button>}
           {from && (

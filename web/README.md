@@ -21,6 +21,9 @@ iPhone home screen and works offline.
 - **Type:** Bricolage Grotesque for headings (bundled, works offline), system fonts for body text.
 - **Playful touches:** floating background shapes, highlighter page titles, colour-filled cards, drawn
   icons (lucide) for navigation, emoji for categories, bouncy buttons and slide-in lists.
+- **Charts** group the 26 categories into 8 (`trip/chartGroups.ts`: food and drink, getting around,
+  places to stay, fun and shopping, essentials and admin, cash, bank fees, other), each with a fixed soft
+  pastel so a group keeps its colour in every theme. Tapping a group opens its transactions.
 - **Passport stamps** (`components/Stamp.tsx`): on the Route page, on finished checklist items, and a
   "Welcome to …" stamp when a new country on your route begins.
 - **Confetti** (`lib/celebrate.ts`, `trip/components/Celebrations.tsx`): checklist finished, back on
