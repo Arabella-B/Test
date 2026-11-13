@@ -5,29 +5,42 @@ import { chatTime } from "../groups/GroupsProvider";
 import * as admin from "./adminApi";
 import SuspendSheet from "./SuspendSheet";
 
-// Admin tools: deal with reports, and choose which businesses can post events.
-// Only shown to admins; the database also refuses these actions for anyone else.
+// Admin tools: deal with reports, suspensions, moderators and verified businesses.
+// Moderators see only the reports inbox. The database also refuses these actions for anyone else.
 
 export default function AdminPage() {
-  const { isAdmin } = useAuth();
+  const { isAdmin, isModerator } = useAuth();
   const [suspendedVersion, setSuspendedVersion] = useState(0); // reloads the suspended list after a suspension
-  if (!isAdmin) return <Navigate to="/profile" replace />;
+  if (!isAdmin && !isModerator) return <Navigate to="/profile" replace />;
+  if (!isAdmin) {
+    return (
+      <div className="grid grid-cols-1 gap-5">
+        <h1 className="text-3xl font-extrabold"><span className="page-title">Moderation</span></h1>
+        <p className="text-sm text-muted">
+          🛡️ You're a Wayfund moderator. Check each report: remove the post or message if it breaks the rules, or dismiss
+          the report if it's fine. If someone keeps causing problems, let an admin know.
+        </p>
+        <Reports canSuspend={false} onSuspended={() => {}} />
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-1 gap-5">
       <h1 className="text-3xl font-extrabold"><span className="page-title">Admin</span></h1>
       <p className="text-sm text-muted">
-        🛡️ You're a Wayfund admin. You can post events as <b>Wayfund team</b>, deal with reports, suspend accounts,
+        🛡️ You're a Wayfund admin. You can post events as <b>Wayfund team</b>, deal with reports, suspend accounts, appoint moderators,
         remove any post or message (a post's ⋯ menu, or tap a message in a group), delete any group (tap its name at the top of the chat), and
         verify businesses.
       </p>
-      <Reports onSuspended={() => setSuspendedVersion((v) => v + 1)} />
+      <Reports canSuspend onSuspended={() => setSuspendedVersion((v) => v + 1)} />
       <Suspended version={suspendedVersion} />
+      <Moderators />
       <VerifiedBusinesses />
     </div>
   );
 }
 
-function Reports({ onSuspended }: { onSuspended: () => void }) {
+function Reports({ canSuspend, onSuspended }: { canSuspend: boolean; onSuspended: () => void }) {
   const [list, setList] = useState<admin.Report[] | null>(null);
   const [suspending, setSuspending] = useState<admin.Report | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -42,8 +55,8 @@ function Reports({ onSuspended }: { onSuspended: () => void }) {
     setError(null);
     try {
       if (action === "remove") {
-        if (r.postId) await admin.removePost(r.postId);
-        else if (r.messageId) await admin.removeMessage(r.messageId);
+        if (r.postId) await admin.removeReportedPost(r.postId);
+        else if (r.messageId) await admin.removeReportedMessage(r.messageId);
       }
       await admin.dismissReport(r.id);
       setList((l) => (l ?? []).filter((x) => x.id !== r.id));
@@ -83,9 +96,11 @@ function Reports({ onSuspended }: { onSuspended: () => void }) {
                 <button disabled={busy === r.id} onClick={() => act(r, "dismiss")} className="btn-soft min-h-10 px-3 text-sm">
                   {gone ? "Clear" : "Dismiss, it's fine"}
                 </button>
-                <button disabled={busy === r.id} onClick={() => setSuspending(r)} className="min-h-10 rounded-2xl px-3 text-sm font-semibold text-bad ring-1 ring-bad/30">
-                  Suspend {r.reportedName}
-                </button>
+                {canSuspend && (
+                  <button disabled={busy === r.id} onClick={() => setSuspending(r)} className="min-h-10 rounded-2xl px-3 text-sm font-semibold text-bad ring-1 ring-bad/30">
+                    Suspend {r.reportedName}
+                  </button>
+                )}
               </div>
             </div>
           );
@@ -145,6 +160,79 @@ function Suspended({ version }: { version: number }) {
           </div>
         ))
       )}
+    </section>
+  );
+}
+
+/** Admins appoint and remove moderators. */
+function Moderators() {
+  const [list, setList] = useState<admin.Moderator[] | null>(null);
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState<admin.Person[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => { admin.listModerators().then(setList).catch((e) => { setError(e.message); setList([]); }); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => { admin.findPeople(search).then(setResults).catch(() => setResults([])); }, 250);
+    return () => clearTimeout(t);
+  }, [search]);
+
+  async function appoint(p: admin.Person) {
+    if (!confirm(`Make ${p.name} a moderator? They'll be able to read reports and remove reported posts and messages.`)) return;
+    setError(null);
+    try {
+      await admin.addModerator(p.id);
+      setList(await admin.listModerators());
+      setSearch("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Couldn't add them.");
+    }
+  }
+
+  async function remove(m: admin.Moderator) {
+    if (!confirm(`Remove ${m.name} as a moderator?`)) return;
+    try {
+      await admin.removeModerator(m.userId);
+      setList((l) => (l ?? []).filter((x) => x.userId !== m.userId));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Couldn't remove them.");
+    }
+  }
+
+  const already = new Set((list ?? []).map((m) => m.userId));
+  return (
+    <section className="card grid gap-3">
+      <h2 className="text-lg font-bold">🧑‍⚖️ Moderators</h2>
+      <p className="text-sm text-muted">
+        Moderators can read reports, dismiss them, and remove reported posts and messages. They can't suspend people,
+        verify businesses, delete groups or appoint anyone. Only admins can add or remove them.
+      </p>
+      {list === null ? (
+        <p className="text-sm text-muted">Loading…</p>
+      ) : list.length === 0 ? (
+        <p className="text-sm text-muted">No moderators yet.</p>
+      ) : (
+        list.map((m) => (
+          <div key={m.userId} className="flex items-center justify-between gap-3 rounded-2xl bg-cream p-3">
+            <div className="min-w-0">
+              <p className="truncate font-semibold">{m.name}</p>
+              <p className="text-xs text-muted">Moderator since {new Date(m.addedAt).toLocaleDateString("en-GB")}</p>
+            </div>
+            <button onClick={() => remove(m)} className="shrink-0 rounded-full px-3 py-2 text-sm font-semibold text-bad hover:bg-bad/10">Remove</button>
+          </div>
+        ))
+      )}
+      <label className="label border-t border-ink/10 pt-3">Add a moderator
+        <input className="input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Type their display name" />
+      </label>
+      {results.filter((p) => !already.has(p.id)).map((p) => (
+        <button type="button" key={p.id} onClick={() => appoint(p)} className="flex min-h-11 items-center justify-between rounded-xl bg-cream px-3 text-left text-sm">
+          <b className="truncate">{p.name}</b>
+          <span className="shrink-0 text-xs text-muted">joined {new Date(p.joinedAt).toLocaleDateString("en-GB")} · Make moderator</span>
+        </button>
+      ))}
+      {search.trim().length >= 2 && results.length === 0 && <p className="text-xs text-muted">No accounts match.</p>}
+      {error && <p className="rounded-xl bg-bad/10 p-2 text-sm font-semibold text-bad">{error}</p>}
     </section>
   );
 }

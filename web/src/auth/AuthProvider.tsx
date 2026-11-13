@@ -14,6 +14,8 @@ interface AuthValue {
   isAdmin: boolean;
   /** Suspended by an admin: can look around but not post, message, like or join. */
   isSuspended: boolean;
+  /** Moderator (appointed by an admin): can deal with reports. */
+  isModerator: boolean;
   startDemo(): void;
   signOut(): Promise<void>;
 }
@@ -32,6 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [displayName, setDisplayName] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuspended, setIsSuspended] = useState(false);
+  const [isModerator, setIsModerator] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => { setSession(data.session); setLoading(false); });
@@ -40,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!session) { setDisplayName(""); setIsAdmin(false); setIsSuspended(false); return; }
+    if (!session) { setDisplayName(""); setIsAdmin(false); setIsSuspended(false); setIsModerator(false); return; }
     setDisplayName((session.user.user_metadata?.display_name as string) ?? "");
     supabase.from("profiles").select("display_name").eq("id", session.user.id).maybeSingle()
       .then(({ data }) => { if (data?.display_name) setDisplayName(data.display_name); });
@@ -49,6 +52,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => setIsAdmin(!!data), () => setIsAdmin(false));
     supabase.from("suspended_users").select("user_id").eq("user_id", session.user.id).maybeSingle()
       .then(({ data }) => setIsSuspended(!!data), () => setIsSuspended(false));
+    supabase.from("moderators").select("user_id").eq("user_id", session.user.id).maybeSingle()
+      .then(({ data }) => setIsModerator(!!data), () => setIsModerator(false));
   }, [session]);
 
   const value: AuthValue = {
@@ -58,6 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     displayName: session ? displayName || "Traveller" : "Alex (demo)",
     isAdmin: !!session && isAdmin,
     isSuspended: !!session && isSuspended,
+    isModerator: !!session && isModerator && !isSuspended,
     startDemo() {
       try { sessionStorage.setItem(DEMO_KEY, "1"); } catch { /* private mode: still works for this visit */ }
       setDemo(true);

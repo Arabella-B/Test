@@ -86,8 +86,43 @@ export async function dismissReport(id: number): Promise<void> {
 }
 
 /** Remove a reported chat message for everyone (works without being in the group, and without reading the chat). */
-export async function removeMessage(id: number): Promise<void> {
-  check(await supabase.rpc("admin_remove_message", { message_id: id }));
+export async function removeReportedMessage(id: number): Promise<void> {
+  check(await supabase.rpc("remove_reported_message", { target: id }));
+}
+
+/** Remove a reported post (and its photo) for everyone. */
+export async function removeReportedPost(id: string): Promise<void> {
+  const row = check(await supabase.from("posts").select("image_path").eq("id", id).maybeSingle()) as { image_path: string | null } | null;
+  // The photo goes first: moderators may only delete photos of posts that are still there and reported.
+  if (row?.image_path) await supabase.storage.from("post-images").remove([row.image_path]);
+  check(await supabase.rpc("remove_reported_post", { target: id }));
+}
+
+// ---- Moderators (appointed by admins) ----
+
+export interface Moderator {
+  userId: string;
+  name: string;
+  addedAt: string;
+}
+
+export async function listModerators(): Promise<Moderator[]> {
+  const rows = check(await supabase.from("moderators").select("user_id, added_at").order("added_at")) as { user_id: string; added_at: string }[];
+  if (rows.length === 0) return [];
+  const names = check(await supabase.from("profiles").select("id, display_name").in("id", rows.map((r) => r.user_id))) as { id: string; display_name: string }[];
+  const byId = new Map(names.map((n) => [n.id, n.display_name]));
+  return rows.map((r) => ({ userId: r.user_id, name: byId.get(r.user_id) ?? "Traveller", addedAt: r.added_at }));
+}
+
+export async function addModerator(userId: string): Promise<void> {
+  const { data: { user } } = await supabase.auth.getUser();
+  const res = await supabase.from("moderators").insert({ user_id: userId, added_by: user?.id });
+  if (res.error?.code === "23505") throw new Error("That account is already a moderator.");
+  check(res);
+}
+
+export async function removeModerator(userId: string): Promise<void> {
+  check(await supabase.from("moderators").delete().eq("user_id", userId));
 }
 
 /** How many reports are waiting. */
@@ -137,13 +172,6 @@ export async function listSuspended(): Promise<Suspension[]> {
 /** Delete a whole group, with all its messages. */
 export async function deleteGroup(id: string): Promise<void> {
   check(await supabase.from("groups").delete().eq("id", id));
-}
-
-/** Remove a post (and its photo) for everyone. */
-export async function removePost(id: string): Promise<void> {
-  const row = check(await supabase.from("posts").select("image_path").eq("id", id).maybeSingle()) as { image_path: string | null } | null;
-  check(await supabase.from("posts").delete().eq("id", id));
-  if (row?.image_path) await supabase.storage.from("post-images").remove([row.image_path]);
 }
 
 export async function listVerified(): Promise<VerifiedBusiness[]> {

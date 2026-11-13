@@ -9,11 +9,11 @@ import { PALETTES, getPalette, getThemeChoice, setPalette, setThemeChoice, type 
 // Your public profile (just a display name for now) and account options.
 
 export default function Profile() {
-  const { session, demo, displayName, isAdmin, signOut } = useAuth();
+  const { session, demo, displayName, isAdmin, isModerator, signOut } = useAuth();
   const [name, setName] = useState(displayName);
   const [saved, setSaved] = useState<string | null>(null);
   const [reportCount, setReportCount] = useState(0);
-  useEffect(() => { if (isAdmin) countReports().then(setReportCount); }, [isAdmin]);
+  useEffect(() => { if (isAdmin || isModerator) countReports().then(setReportCount); }, [isAdmin, isModerator]);
 
   async function save(e: FormEvent) {
     e.preventDefault();
@@ -33,6 +33,7 @@ export default function Profile() {
           <div className="flex flex-wrap items-center gap-2 text-xl font-bold">
             {displayName}
             {isAdmin && <span className="rounded-full bg-brand px-2 py-0.5 text-xs font-extrabold text-on-brand">🛡️ Admin</span>}
+            {!isAdmin && isModerator && <span className="rounded-full bg-brand px-2 py-0.5 text-xs font-extrabold text-on-brand">🧑‍⚖️ Moderator</span>}
           </div>
           <div className="text-sm text-muted">{demo ? "Demo account" : session?.user.email}</div>
         </div>
@@ -52,12 +53,12 @@ export default function Profile() {
         </form>
       )}
 
-      {isAdmin && (
+      {(isAdmin || isModerator) && (
         <Link to="/admin" className="card card-accent flex items-center justify-between gap-3">
           <span>
-            <span className="block text-lg font-bold">🛡️ Admin tools</span>
+            <span className="block text-lg font-bold">{isAdmin ? "🛡️ Admin tools" : "🧑‍⚖️ Moderation"}</span>
             <span className="block text-sm">
-              {reportCount > 0 ? <b>{reportCount} report{reportCount === 1 ? "" : "s"} waiting</b> : "No reports waiting"} · suspensions · verified businesses
+              {reportCount > 0 ? <b>{reportCount} report{reportCount === 1 ? "" : "s"} waiting</b> : "No reports waiting"} {isAdmin && " · suspensions · moderators · verified businesses"}
             </span>
           </span>
           <span className="text-2xl">→</span>

@@ -185,6 +185,12 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   Admins can also **delete any group**, and Profile shows how many reports are waiting. Removing a
   reported chat message works without the admin being able to read private group chats.
   See `supabase/admin_suspensions.sql`.
+- **Moderators** are appointed and removed by admins (Admin page → Moderators). They get a
+  🧑‍⚖️ Moderator badge and a **Moderation** page with just the reports inbox: they can dismiss
+  reports and remove posts and chat messages **that have been reported**. The database checks
+  there's a report before removing anything. They can't suspend people, verify businesses, delete
+  groups, post events or appoint anyone, and a suspended moderator loses these powers.
+  See `supabase/moderators.sql`.
 - **Photos** are shrunk on the device (max 1600px JPEG) before upload. Re-drawing the photo
   also **removes hidden location (GPS) data**. They're stored in the private `post-images`
   bucket; the feed shows them using links that expire after an hour.
