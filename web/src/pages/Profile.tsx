@@ -9,7 +9,7 @@ import { PALETTES, getPalette, getThemeChoice, setPalette, setThemeChoice, type 
 // Your public profile (just a display name for now) and account options.
 
 export default function Profile() {
-  const { session, demo, displayName, isAdmin, isModerator, signOut } = useAuth();
+  const { session, demo, displayName, isAdmin, isModerator, businessName, signOut } = useAuth();
   const [name, setName] = useState(displayName);
   const [saved, setSaved] = useState<string | null>(null);
   const [reportCount, setReportCount] = useState(0);
@@ -34,6 +34,7 @@ export default function Profile() {
             {displayName}
             {isAdmin && <span className="rounded-full bg-brand px-2 py-0.5 text-xs font-extrabold text-on-brand">🛡️ Admin</span>}
             {!isAdmin && isModerator && <span className="rounded-full bg-brand px-2 py-0.5 text-xs font-extrabold text-on-brand">🧑‍⚖️ Moderator</span>}
+            {businessName && <span className="rounded-full bg-good px-2 py-0.5 text-xs font-extrabold text-white">✓ Verified business</span>}
           </div>
           <div className="text-sm text-muted">{demo ? "Demo account" : session?.user.email}</div>
         </div>
@@ -51,6 +52,16 @@ export default function Profile() {
             {saved && <span className="text-sm font-semibold text-good">{saved}</span>}
           </div>
         </form>
+      )}
+
+      {businessName && (
+        <Link to="/post" className="card flex items-center justify-between gap-3">
+          <span>
+            <span className="block text-lg font-bold">🎉 Post an event</span>
+            <span className="block text-sm text-muted">Your events show as <b>{businessName}</b> with a green verified tick.</span>
+          </span>
+          <span className="text-2xl">→</span>
+        </Link>
       )}
 
       {(isAdmin || isModerator) && (

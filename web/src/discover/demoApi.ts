@@ -1,4 +1,4 @@
-import { blockGuest, getDemoRole } from "../lib/demoRole";
+import { DEMO_BUSINESS, blockGuest, demoEventName, getDemoRole } from "../lib/demoRole";
 import type { NewPost, Post, PostsApi } from "./types";
 
 // Pretend Discover feed for the demo: made-up posts with drawn "photos"
@@ -68,15 +68,16 @@ export function createDemoPostsApi(): PostsApi {
       return list.slice(offset, offset + limit).map((p) => ({ ...p }));
     },
     async getPost(id) { await wait(); const p = all().find((x) => x.id === id); return p ? { ...p } : null; },
-    // In the demo, the Admin view posts events as "Wayfund team"; other views can't post events.
-    async getMyBusiness() { return getDemoRole() === "admin" ? "Wayfund team" : null; },
+    // In the demo, the Admin view posts events as "Wayfund team" and the Verified business view
+    // as its business; other views can't post events.
+    async getMyBusiness() { return demoEventName(); },
     async createPost(input: NewPost) {
       blockGuest();
       await wait(300);
-      const business = getDemoRole() === "admin" ? "Wayfund team" : null;
+      const business = demoEventName();
       if (input.kind === "event" && !business) throw new Error("Only verified businesses can post events.");
       const post: Post = {
-        id: `demo-post-${nextId++}`, userId: ME.id, authorName: ME.name, kind: input.kind, caption: input.caption.trim(),
+        id: `demo-post-${nextId++}`, userId: ME.id, authorName: getDemoRole() === "business" ? DEMO_BUSINESS : ME.name, kind: input.kind, caption: input.caption.trim(),
         place: input.place.trim(), country: input.country.trim(), colour: input.colour,
         imageUrl: input.image ? URL.createObjectURL(input.image) : undefined,
         eventTitle: input.eventTitle, startsAt: input.startsAt, location: input.location, priceText: input.priceText,

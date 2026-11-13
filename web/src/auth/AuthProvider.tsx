@@ -1,7 +1,7 @@
 import type { Session } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { supabase } from "../lib/supabase";
-import { getDemoRole, saveDemoRole, setDemoActive, type DemoRole } from "../lib/demoRole";
+import { DEMO_BUSINESS, getDemoRole, saveDemoRole, setDemoActive, type DemoRole } from "../lib/demoRole";
 
 // Keeps track of who is signed in. "Demo mode" lets anyone try the app with
 // made-up data, without an account; it is remembered only for this browser tab.
@@ -17,6 +17,8 @@ interface AuthValue {
   isSuspended: boolean;
   /** Moderator (appointed by an admin): can deal with reports. */
   isModerator: boolean;
+  /** Your verified business name (you can post events), or null. */
+  businessName: string | null;
   /** Demo "Guest" view: can look around but not change anything. */
   isGuest: boolean;
   /** Demo only: which kind of account you're viewing as. */
@@ -41,6 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuspended, setIsSuspended] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
+  const [businessName, setBusinessName] = useState<string | null>(null);
   const [demoRole, setRole] = useState<DemoRole>(getDemoRole);
 
   useEffect(() => {
@@ -50,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!session) { setDisplayName(""); setIsAdmin(false); setIsSuspended(false); setIsModerator(false); return; }
+    if (!session) { setDisplayName(""); setIsAdmin(false); setIsSuspended(false); setIsModerator(false); setBusinessName(null); return; }
     setDisplayName((session.user.user_metadata?.display_name as string) ?? "");
     supabase.from("profiles").select("display_name").eq("id", session.user.id).maybeSingle()
       .then(({ data }) => { if (data?.display_name) setDisplayName(data.display_name); });
@@ -61,6 +64,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => setIsSuspended(!!data), () => setIsSuspended(false));
     supabase.from("moderators").select("user_id").eq("user_id", session.user.id).maybeSingle()
       .then(({ data }) => setIsModerator(!!data), () => setIsModerator(false));
+    supabase.from("verified_businesses").select("business_name").eq("user_id", session.user.id).maybeSingle()
+      .then(({ data }) => setBusinessName(data?.business_name ?? null), () => setBusinessName(null));
   }, [session]);
 
   const inDemo = demo && !session;
@@ -70,11 +75,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     session,
     demo: inDemo,
-    displayName: session ? displayName || "Traveller" : inDemo && demoRole === "guest" ? "Guest" : "Alex (demo)",
+    displayName: session
+      ? displayName || "Traveller"
+      : inDemo && demoRole === "guest" ? "Guest" : inDemo && demoRole === "business" ? DEMO_BUSINESS : "Alex (demo)",
     isAdmin: session ? isAdmin : inDemo && demoRole === "admin",
     isSuspended: !!session && isSuspended,
     isModerator: session ? isModerator && !isSuspended : inDemo && demoRole === "moderator",
     isGuest: inDemo && demoRole === "guest",
+    businessName: session ? businessName : inDemo && demoRole === "business" ? DEMO_BUSINESS : null,
     demoRole,
     setDemoRole(role) { saveDemoRole(role); setRole(role); },
     startDemo() {

@@ -196,6 +196,7 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   admins can lift a suspension. See `supabase/moderator_suspensions.sql`.
 - **Demo views:** in the demo, the yellow bar has a **Viewing as** menu to see the app as a
   **Guest** (look only: can't post, like, message, join or report), a **Normal user**, a
+  **Verified business** (posts events as "Beachside Hostel" with the verified tick), a
   **Moderator** or an **Admin** (with made-up reports, moderators, suspensions and verified
   businesses, in `src/admin/demoAdmin.ts`), or **Logged out** (the welcome page). This only
   changes the demo; real accounts get their role from the database.
