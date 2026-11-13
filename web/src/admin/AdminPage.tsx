@@ -210,8 +210,9 @@ function Moderators() {
     <section className="card grid gap-3">
       <h2 className="text-lg font-bold">🧑‍⚖️ Moderators</h2>
       <p className="text-sm text-muted">
-        Moderators can read reports, dismiss them, and remove reported posts and messages. They can't suspend people,
-        verify businesses, delete groups or appoint anyone. Only admins can add or remove them.
+        Moderators can read reports, dismiss them, remove reported posts and messages, and suspend people who've been
+        reported. They can't lift suspensions, verify businesses, delete groups or appoint anyone. Only admins can add
+        or remove them.
       </p>
       {list === null ? (
         <p className="text-sm text-muted">Loading…</p>

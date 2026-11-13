@@ -188,8 +188,8 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
 - **Moderators** are appointed and removed by admins (Admin page → Moderators). They get a
   🧑‍⚖️ Moderator badge and a **Moderation** page with just the reports inbox: they can dismiss
   reports and remove posts and chat messages **that have been reported**. The database checks
-  there's a report before removing anything. They can't suspend people, verify businesses, delete
-  groups, post events or appoint anyone, and a suspended moderator loses these powers.
+  there's a report before removing anything. They can't verify businesses, delete groups, post
+  events or appoint anyone, and a suspended moderator loses these powers.
   See `supabase/moderators.sql`.
   Moderators can also **suspend someone who has been reported** (from the report), optionally
   removing everything they've posted. They can't suspend admins or other moderators, and only
