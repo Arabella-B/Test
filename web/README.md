@@ -178,6 +178,13 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   message, or dismiss the report) and a **verified businesses** list (find an account by name and
   verify it, or remove it). Admins can also post events as "Wayfund team" and remove any post or
   chat message. See `supabase/admin_role.sql`.
+- Admins can also **suspend** an account (from a report, or a post's ⋯ menu), optionally removing
+  everything they've posted. Suspended people can still log in and use My Trip, but the database
+  stops them posting, messaging, liking, reporting, or creating/joining groups; they see a notice
+  explaining why. Admins can't be suspended. Suspensions are listed (and lifted) on the Admin page.
+  Admins can also **delete any group**, and Profile shows how many reports are waiting. Removing a
+  reported chat message works without the admin being able to read private group chats.
+  See `supabase/admin_suspensions.sql`.
 - **Photos** are shrunk on the device (max 1600px JPEG) before upload. Re-drawing the photo
   also **removes hidden location (GPS) data**. They're stored in the private `post-images`
   bucket; the feed shows them using links that expire after an hour.

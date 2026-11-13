@@ -85,9 +85,58 @@ export async function dismissReport(id: number): Promise<void> {
   check(await supabase.from("reports").delete().eq("id", id));
 }
 
-/** Remove a reported chat message for everyone. */
+/** Remove a reported chat message for everyone (works without being in the group, and without reading the chat). */
 export async function removeMessage(id: number): Promise<void> {
-  check(await supabase.from("messages_chat").delete().eq("id", id));
+  check(await supabase.rpc("admin_remove_message", { message_id: id }));
+}
+
+/** How many reports are waiting. */
+export async function countReports(): Promise<number> {
+  const { count, error } = await supabase.from("reports").select("id", { count: "exact", head: true });
+  return error ? 0 : count ?? 0;
+}
+
+// ---- Suspensions ----
+
+export interface Suspension {
+  userId: string;
+  name: string;
+  reason: string;
+  suspendedAt: string;
+}
+
+/** Suspend someone. Optionally also remove every post and chat message they've made. */
+export async function suspend(userId: string, reason: string, removeEverything: boolean): Promise<void> {
+  const { data: { user } } = await supabase.auth.getUser();
+  const res = await supabase.from("suspended_users").insert({ user_id: userId, reason: reason.trim().slice(0, 300), suspended_by: user?.id });
+  if (res.error?.code === "23505") throw new Error("That account is already suspended.");
+  if (res.error) {
+    console.error("Admin:", res.error.message);
+    throw new Error(/row-level security/.test(res.error.message) ? "Admins can't be suspended." : "Couldn't suspend. Please try again.");
+  }
+  if (removeEverything) {
+    const paths = check(await supabase.rpc("admin_remove_all_content", { target: userId })) as string[] | null;
+    if (paths?.length) await supabase.storage.from("post-images").remove(paths);
+  }
+}
+
+export async function unsuspend(userId: string): Promise<void> {
+  check(await supabase.from("suspended_users").delete().eq("user_id", userId));
+}
+
+export async function listSuspended(): Promise<Suspension[]> {
+  const rows = check(
+    await supabase.from("suspended_users").select("user_id, reason, suspended_at").order("suspended_at", { ascending: false }),
+  ) as { user_id: string; reason: string; suspended_at: string }[];
+  if (rows.length === 0) return [];
+  const names = check(await supabase.from("profiles").select("id, display_name").in("id", rows.map((r) => r.user_id))) as { id: string; display_name: string }[];
+  const byId = new Map(names.map((n) => [n.id, n.display_name]));
+  return rows.map((r) => ({ userId: r.user_id, name: byId.get(r.user_id) ?? "Traveller", reason: r.reason, suspendedAt: r.suspended_at }));
+}
+
+/** Delete a whole group, with all its messages. */
+export async function deleteGroup(id: string): Promise<void> {
+  check(await supabase.from("groups").delete().eq("id", id));
 }
 
 /** Remove a post (and its photo) for everyone. */

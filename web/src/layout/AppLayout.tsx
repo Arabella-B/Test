@@ -29,7 +29,7 @@ export function BackgroundShapes() {
 }
 
 export default function AppLayout() {
-  const { demo, displayName, signOut } = useAuth();
+  const { demo, displayName, isSuspended, signOut } = useAuth();
   return (
     <div className="relative isolate min-h-dvh md:flex">
       <BackgroundShapes />
@@ -61,6 +61,12 @@ export default function AppLayout() {
           <div className="bg-sun px-4 py-2 text-center text-sm font-semibold text-[#1F1B2D]">
             👀 Demo with made-up data ·{" "}
             <button onClick={signOut} className="underline">Create your own account</button>
+          </div>
+        )}
+        {isSuspended && (
+          <div className="bg-bad px-4 py-2 text-center text-sm font-semibold text-white">
+            Your account has been suspended for breaking the community rules. You can still look around and use My Trip,
+            but you can't post, message, like or join groups.
           </div>
         )}
         {/* Phone header with the logo */}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useGroups } from "../groups/GroupsProvider";
 import { useAuth } from "../auth/AuthProvider";
 import { supabase } from "../lib/supabase";
+import { countReports } from "../admin/adminApi";
 import { PALETTES, getPalette, getThemeChoice, setPalette, setThemeChoice, type Palette, type ThemeChoice } from "../lib/theme";
 
 // Your public profile (just a display name for now) and account options.
@@ -11,6 +12,8 @@ export default function Profile() {
   const { session, demo, displayName, isAdmin, signOut } = useAuth();
   const [name, setName] = useState(displayName);
   const [saved, setSaved] = useState<string | null>(null);
+  const [reportCount, setReportCount] = useState(0);
+  useEffect(() => { if (isAdmin) countReports().then(setReportCount); }, [isAdmin]);
 
   async function save(e: FormEvent) {
     e.preventDefault();
@@ -53,7 +56,9 @@ export default function Profile() {
         <Link to="/admin" className="card card-accent flex items-center justify-between gap-3">
           <span>
             <span className="block text-lg font-bold">🛡️ Admin tools</span>
-            <span className="block text-sm">Reports, verified businesses</span>
+            <span className="block text-sm">
+              {reportCount > 0 ? <b>{reportCount} report{reportCount === 1 ? "" : "s"} waiting</b> : "No reports waiting"} · suspensions · verified businesses
+            </span>
           </span>
           <span className="text-2xl">→</span>
         </Link>

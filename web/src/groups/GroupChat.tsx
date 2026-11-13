@@ -3,6 +3,7 @@ import ReportSheet from "../components/ReportSheet";
 import Sheet from "../components/Sheet";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import { deleteGroup } from "../admin/adminApi";
 import { GroupEmoji } from "./GroupsPage";
 import { chatTime, markRead, useGroups } from "./GroupsProvider";
 import type { ChatMessage, Group } from "./types";
@@ -149,6 +150,18 @@ export default function GroupChat() {
           <p className="font-semibold">{group.tag}</p>
           <p className="text-muted">{group.purpose || "No description."}</p>
           {group.isOwner && <p className="mt-1 text-xs text-brand-strong">You created this group, so you can remove any message.</p>}
+          {isAdmin && !api.isDemo && (
+            <button
+              onClick={async () => {
+                if (!confirm(`Delete "${group.name}" and all its messages for everyone? This can't be undone.`)) return;
+                try { await deleteGroup(group.id); navigate("/groups"); }
+                catch (e) { setError(e instanceof Error ? e.message : "Couldn't delete the group."); }
+              }}
+              className="mt-2 rounded-full px-3 py-1.5 text-xs font-semibold text-bad ring-1 ring-bad/30"
+            >
+              🛡️ Delete group (admin)
+            </button>
+          )}
         </div>
       )}
 

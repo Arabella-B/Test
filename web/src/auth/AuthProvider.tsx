@@ -12,6 +12,8 @@ interface AuthValue {
   displayName: string;
   /** Wayfund admin (set only in the Supabase dashboard). Never true in the demo. */
   isAdmin: boolean;
+  /** Suspended by an admin: can look around but not post, message, like or join. */
+  isSuspended: boolean;
   startDemo(): void;
   signOut(): Promise<void>;
 }
@@ -29,6 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [demo, setDemo] = useState(readDemoFlag);
   const [displayName, setDisplayName] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSuspended, setIsSuspended] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => { setSession(data.session); setLoading(false); });
@@ -37,13 +40,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!session) { setDisplayName(""); setIsAdmin(false); return; }
+    if (!session) { setDisplayName(""); setIsAdmin(false); setIsSuspended(false); return; }
     setDisplayName((session.user.user_metadata?.display_name as string) ?? "");
     supabase.from("profiles").select("display_name").eq("id", session.user.id).maybeSingle()
       .then(({ data }) => { if (data?.display_name) setDisplayName(data.display_name); });
     // Only shows admin tools. The database itself decides what an admin may do.
     supabase.from("admins").select("user_id").eq("user_id", session.user.id).maybeSingle()
       .then(({ data }) => setIsAdmin(!!data), () => setIsAdmin(false));
+    supabase.from("suspended_users").select("user_id").eq("user_id", session.user.id).maybeSingle()
+      .then(({ data }) => setIsSuspended(!!data), () => setIsSuspended(false));
   }, [session]);
 
   const value: AuthValue = {
@@ -52,6 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     demo: demo && !session,
     displayName: session ? displayName || "Traveller" : "Alex (demo)",
     isAdmin: !!session && isAdmin,
+    isSuspended: !!session && isSuspended,
     startDemo() {
       try { sessionStorage.setItem(DEMO_KEY, "1"); } catch { /* private mode: still works for this visit */ }
       setDemo(true);

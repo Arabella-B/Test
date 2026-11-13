@@ -3,28 +3,33 @@ import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import { chatTime } from "../groups/GroupsProvider";
 import * as admin from "./adminApi";
+import SuspendSheet from "./SuspendSheet";
 
 // Admin tools: deal with reports, and choose which businesses can post events.
 // Only shown to admins; the database also refuses these actions for anyone else.
 
 export default function AdminPage() {
   const { isAdmin } = useAuth();
+  const [suspendedVersion, setSuspendedVersion] = useState(0); // reloads the suspended list after a suspension
   if (!isAdmin) return <Navigate to="/profile" replace />;
   return (
     <div className="grid grid-cols-1 gap-5">
       <h1 className="text-3xl font-extrabold"><span className="page-title">Admin</span></h1>
       <p className="text-sm text-muted">
-        🛡️ You're a Wayfund admin. You can post events as <b>Wayfund team</b>, deal with reports, remove any post or
-        message (a post's ⋯ menu, or tap a message in a group), and verify businesses.
+        🛡️ You're a Wayfund admin. You can post events as <b>Wayfund team</b>, deal with reports, suspend accounts,
+        remove any post or message (a post's ⋯ menu, or tap a message in a group), delete any group (tap its name at the top of the chat), and
+        verify businesses.
       </p>
-      <Reports />
+      <Reports onSuspended={() => setSuspendedVersion((v) => v + 1)} />
+      <Suspended version={suspendedVersion} />
       <VerifiedBusinesses />
     </div>
   );
 }
 
-function Reports() {
+function Reports({ onSuspended }: { onSuspended: () => void }) {
   const [list, setList] = useState<admin.Report[] | null>(null);
+  const [suspending, setSuspending] = useState<admin.Report | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<number | null>(null);
 
@@ -78,10 +83,67 @@ function Reports() {
                 <button disabled={busy === r.id} onClick={() => act(r, "dismiss")} className="btn-soft min-h-10 px-3 text-sm">
                   {gone ? "Clear" : "Dismiss, it's fine"}
                 </button>
+                <button disabled={busy === r.id} onClick={() => setSuspending(r)} className="min-h-10 rounded-2xl px-3 text-sm font-semibold text-bad ring-1 ring-bad/30">
+                  Suspend {r.reportedName}
+                </button>
               </div>
             </div>
           );
         })
+      )}
+      {suspending && (
+        <SuspendSheet
+          userId={suspending.reportedUserId}
+          name={suspending.reportedName}
+          onClose={() => setSuspending(null)}
+          onDone={async () => {
+            const done = suspending;
+            setSuspending(null);
+            try { await admin.dismissReport(done.id); } catch { /* already gone with their content */ }
+            setList(await admin.listReports().catch(() => []));
+            onSuspended();
+          }}
+        />
+      )}
+    </section>
+  );
+}
+
+function Suspended({ version }: { version: number }) {
+  const [list, setList] = useState<admin.Suspension[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => { admin.listSuspended().then(setList).catch((e) => { setError(e.message); setList([]); }); }, [version]);
+
+  async function lift(s: admin.Suspension) {
+    if (!confirm(`Lift ${s.name}'s suspension? They'll be able to post and message again.`)) return;
+    try {
+      await admin.unsuspend(s.userId);
+      setList((l) => (l ?? []).filter((x) => x.userId !== s.userId));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Couldn't lift it.");
+    }
+  }
+
+  return (
+    <section className="card grid gap-3">
+      <h2 className="text-lg font-bold">⛔ Suspended accounts</h2>
+      <p className="text-sm text-muted">Suspend someone from a report, or from the ⋯ menu on one of their posts.</p>
+      {error && <p className="rounded-xl bg-bad/10 p-2 text-sm font-semibold text-bad">{error}</p>}
+      {list === null ? (
+        <p className="text-sm text-muted">Loading…</p>
+      ) : list.length === 0 ? (
+        <p className="text-sm text-muted">Nobody is suspended.</p>
+      ) : (
+        list.map((s) => (
+          <div key={s.userId} className="flex items-center justify-between gap-3 rounded-2xl bg-cream p-3">
+            <div className="min-w-0">
+              <p className="truncate font-semibold">{s.name}</p>
+              <p className="text-xs text-muted">{s.reason || "No reason given"} · since {new Date(s.suspendedAt).toLocaleDateString("en-GB")}</p>
+            </div>
+            <button onClick={() => lift(s)} className="shrink-0 rounded-full px-3 py-2 text-sm font-semibold text-brand-strong hover:bg-brand-soft">Lift</button>
+          </div>
+        ))
       )}
     </section>
   );

@@ -4,6 +4,7 @@ import ReportSheet from "../components/ReportSheet";
 import Sheet from "../components/Sheet";
 import { chatTime, useGroups } from "../groups/GroupsProvider";
 import { useAuth } from "../auth/AuthProvider";
+import SuspendSheet from "../admin/SuspendSheet";
 import { usePosts } from "./PostsProvider";
 import { eventTime, type Post } from "./types";
 
@@ -18,6 +19,7 @@ export default function PostDetail() {
   const [post, setPost] = useState<Post | null | undefined>(undefined);
   const [menu, setMenu] = useState(false);
   const [reporting, setReporting] = useState(false);
+  const [suspending, setSuspending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -132,13 +134,22 @@ export default function PostDetail() {
                 <button className="btn-soft" onClick={() => { setMenu(false); setReporting(true); }}>🚩 Report post</button>
                 <button className="btn-soft" onClick={block}>🚫 Block {post.authorName}</button>
                 {isAdmin && (
-                  <button className="min-h-12 rounded-2xl font-semibold text-bad ring-1 ring-bad/30" onClick={remove}>🛡️ Remove post (admin)</button>
+                  <>
+                    <button className="min-h-12 rounded-2xl font-semibold text-bad ring-1 ring-bad/30" onClick={remove}>🛡️ Remove post (admin)</button>
+                    <button className="min-h-12 rounded-2xl font-semibold text-bad ring-1 ring-bad/30" onClick={() => { setMenu(false); setSuspending(true); }}>
+                      ⛔ Suspend {post.authorName} (admin)
+                    </button>
+                  </>
                 )}
               </>
             )}
             <button className="btn-soft" onClick={() => setMenu(false)}>Cancel</button>
           </div>
         </Sheet>
+      )}
+
+      {suspending && (
+        <SuspendSheet userId={post.userId} name={post.authorName} onClose={() => setSuspending(false)} onDone={() => navigate("/discover")} />
       )}
 
       {reporting && (
