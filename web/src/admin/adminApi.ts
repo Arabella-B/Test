@@ -1,7 +1,10 @@
 import { supabase } from "../lib/supabase";
+import { isDemoMode } from "../lib/demoRole";
+import { demoAdmin } from "./demoAdmin";
 
 // Tools for Wayfund admins. The database only lets admins do these things,
 // so even if someone opened this page without being an admin, nothing would work.
+// In the demo, every function uses made-up data instead (see demoAdmin.ts).
 
 export interface Report {
   id: number;
@@ -53,6 +56,7 @@ interface ReportRow {
 }
 
 export async function listReports(): Promise<Report[]> {
+  if (isDemoMode()) return demoAdmin.listReports();
   const rows = check(
     await supabase
       .from("reports")
@@ -82,16 +86,19 @@ export async function listReports(): Promise<Report[]> {
 
 /** Mark a report as dealt with (removes it from the inbox). */
 export async function dismissReport(id: number): Promise<void> {
+  if (isDemoMode()) return demoAdmin.dismissReport(id);
   check(await supabase.from("reports").delete().eq("id", id));
 }
 
 /** Remove a reported chat message for everyone (works without being in the group, and without reading the chat). */
 export async function removeReportedMessage(id: number): Promise<void> {
+  if (isDemoMode()) return demoAdmin.removeReportedMessage(id);
   check(await supabase.rpc("remove_reported_message", { target: id }));
 }
 
 /** Remove a reported post (and its photo) for everyone. */
 export async function removeReportedPost(id: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.removeReportedPost(id);
   const row = check(await supabase.from("posts").select("image_path").eq("id", id).maybeSingle()) as { image_path: string | null } | null;
   // The photo goes first: moderators may only delete photos of posts that are still there and reported.
   if (row?.image_path) await supabase.storage.from("post-images").remove([row.image_path]);
@@ -107,6 +114,7 @@ export interface Moderator {
 }
 
 export async function listModerators(): Promise<Moderator[]> {
+  if (isDemoMode()) return demoAdmin.listModerators();
   const rows = check(await supabase.from("moderators").select("user_id, added_at").order("added_at")) as { user_id: string; added_at: string }[];
   if (rows.length === 0) return [];
   const names = check(await supabase.from("profiles").select("id, display_name").in("id", rows.map((r) => r.user_id))) as { id: string; display_name: string }[];
@@ -115,6 +123,7 @@ export async function listModerators(): Promise<Moderator[]> {
 }
 
 export async function addModerator(userId: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.addModerator(userId);
   const { data: { user } } = await supabase.auth.getUser();
   const res = await supabase.from("moderators").insert({ user_id: userId, added_by: user?.id });
   if (res.error?.code === "23505") throw new Error("That account is already a moderator.");
@@ -122,11 +131,13 @@ export async function addModerator(userId: string): Promise<void> {
 }
 
 export async function removeModerator(userId: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.removeModerator(userId);
   check(await supabase.from("moderators").delete().eq("user_id", userId));
 }
 
 /** How many reports are waiting. */
 export async function countReports(): Promise<number> {
+  if (isDemoMode()) return demoAdmin.countReports();
   const { count, error } = await supabase.from("reports").select("id", { count: "exact", head: true });
   return error ? 0 : count ?? 0;
 }
@@ -142,6 +153,7 @@ export interface Suspension {
 
 /** Suspend someone. Optionally also remove every post and chat message they've made. */
 export async function suspend(userId: string, reason: string, removeEverything: boolean): Promise<void> {
+  if (isDemoMode()) return demoAdmin.suspend(userId, reason, removeEverything);
   const { data: { user } } = await supabase.auth.getUser();
   const res = await supabase.from("suspended_users").insert({ user_id: userId, reason: reason.trim().slice(0, 300), suspended_by: user?.id });
   if (res.error?.code === "23505") throw new Error("That account is already suspended.");
@@ -156,10 +168,12 @@ export async function suspend(userId: string, reason: string, removeEverything: 
 }
 
 export async function unsuspend(userId: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.unsuspend(userId);
   check(await supabase.from("suspended_users").delete().eq("user_id", userId));
 }
 
 export async function listSuspended(): Promise<Suspension[]> {
+  if (isDemoMode()) return demoAdmin.listSuspended();
   const rows = check(
     await supabase.from("suspended_users").select("user_id, reason, suspended_at").order("suspended_at", { ascending: false }),
   ) as { user_id: string; reason: string; suspended_at: string }[];
@@ -171,10 +185,12 @@ export async function listSuspended(): Promise<Suspension[]> {
 
 /** Delete a whole group, with all its messages. */
 export async function deleteGroup(id: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.deleteGroup(id);
   check(await supabase.from("groups").delete().eq("id", id));
 }
 
 export async function listVerified(): Promise<VerifiedBusiness[]> {
+  if (isDemoMode()) return demoAdmin.listVerified();
   const rows = check(
     await supabase.from("verified_businesses").select("user_id, business_name, verified_at").order("business_name"),
   ) as { user_id: string; business_name: string; verified_at: string }[];
@@ -193,6 +209,7 @@ export async function listVerified(): Promise<VerifiedBusiness[]> {
 
 /** Find accounts by display name, to verify one as a business. */
 export async function findPeople(search: string): Promise<Person[]> {
+  if (isDemoMode()) return demoAdmin.findPeople(search);
   const q = search.trim().replace(/[%_,()]/g, "");
   if (q.length < 2) return [];
   const rows = check(
@@ -202,11 +219,13 @@ export async function findPeople(search: string): Promise<Person[]> {
 }
 
 export async function verify(userId: string, businessName: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.verify(userId, businessName);
   const res = await supabase.from("verified_businesses").insert({ user_id: userId, business_name: businessName.trim() });
   if (res.error?.code === "23505") throw new Error("That account is already verified.");
   check(res);
 }
 
 export async function unverify(userId: string): Promise<void> {
+  if (isDemoMode()) return demoAdmin.unverify(userId);
   check(await supabase.from("verified_businesses").delete().eq("user_id", userId));
 }

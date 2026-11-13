@@ -1,6 +1,7 @@
 import type { Session } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { supabase } from "../lib/supabase";
+import { getDemoRole, saveDemoRole, setDemoActive, type DemoRole } from "../lib/demoRole";
 
 // Keeps track of who is signed in. "Demo mode" lets anyone try the app with
 // made-up data, without an account; it is remembered only for this browser tab.
@@ -10,12 +11,17 @@ interface AuthValue {
   session: Session | null;
   demo: boolean;
   displayName: string;
-  /** Wayfund admin (set only in the Supabase dashboard). Never true in the demo. */
+  /** Wayfund admin (set only in the Supabase dashboard; in the demo, the "Admin" view). */
   isAdmin: boolean;
   /** Suspended by an admin: can look around but not post, message, like or join. */
   isSuspended: boolean;
   /** Moderator (appointed by an admin): can deal with reports. */
   isModerator: boolean;
+  /** Demo "Guest" view: can look around but not change anything. */
+  isGuest: boolean;
+  /** Demo only: which kind of account you're viewing as. */
+  demoRole: DemoRole;
+  setDemoRole(role: DemoRole): void;
   startDemo(): void;
   signOut(): Promise<void>;
 }
@@ -35,6 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuspended, setIsSuspended] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
+  const [demoRole, setRole] = useState<DemoRole>(getDemoRole);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => { setSession(data.session); setLoading(false); });
@@ -56,14 +63,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => setIsModerator(!!data), () => setIsModerator(false));
   }, [session]);
 
+  const inDemo = demo && !session;
+  setDemoActive(inDemo); // lets the demo data know (admin tools, guest limits)
+
   const value: AuthValue = {
     loading,
     session,
-    demo: demo && !session,
-    displayName: session ? displayName || "Traveller" : "Alex (demo)",
-    isAdmin: !!session && isAdmin,
+    demo: inDemo,
+    displayName: session ? displayName || "Traveller" : inDemo && demoRole === "guest" ? "Guest" : "Alex (demo)",
+    isAdmin: session ? isAdmin : inDemo && demoRole === "admin",
     isSuspended: !!session && isSuspended,
-    isModerator: !!session && isModerator && !isSuspended,
+    isModerator: session ? isModerator && !isSuspended : inDemo && demoRole === "moderator",
+    isGuest: inDemo && demoRole === "guest",
+    demoRole,
+    setDemoRole(role) { saveDemoRole(role); setRole(role); },
     startDemo() {
       try { sessionStorage.setItem(DEMO_KEY, "1"); } catch { /* private mode: still works for this visit */ }
       setDemo(true);

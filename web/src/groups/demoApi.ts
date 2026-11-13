@@ -1,3 +1,4 @@
+import { blockGuest } from "../lib/demoRole";
 import type { ChatMessage, Group, GroupsApi, NewGroup } from "./types";
 
 // A pretend Groups service for the demo. Everything is made up, kept in memory
@@ -93,12 +94,13 @@ export function createDemoGroupsApi(): GroupsApi {
     async listGroups() { await wait(); return db().groups.map(view).sort((a, b) => b.createdAt.localeCompare(a.createdAt)); },
     async getGroup(id) { await wait(); const g = db().groups.find((x) => x.id === id); return g ? view(g) : null; },
     async createGroup(input: NewGroup) {
+      blockGuest();
       await wait();
       const g = { id: `demo-new-${nextId++}`, ...input, createdBy: ME.id, createdAt: new Date().toISOString(), members: new Set([ME.id]) };
       db().groups.push(g);
       return view(g);
     },
-    async join(id) { await wait(); db().groups.find((g) => g.id === id)?.members.add(ME.id); },
+    async join(id) { blockGuest(); await wait(); db().groups.find((g) => g.id === id)?.members.add(ME.id); },
     async leave(id) { await wait(); db().groups.find((g) => g.id === id)?.members.delete(ME.id); },
     async listMessages(groupId) {
       await wait();
@@ -110,6 +112,7 @@ export function createDemoGroupsApi(): GroupsApi {
       return db().messages.filter((m) => ids.includes(m.groupId)).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
     async sendMessage(groupId, body) {
+      blockGuest();
       await wait(100);
       const msg: ChatMessage = { id: String(nextId++), groupId, userId: ME.id, authorName: ME.name, body: body.trim(), createdAt: new Date().toISOString() };
       db().messages.push(msg);
@@ -139,9 +142,33 @@ export function createDemoGroupsApi(): GroupsApi {
       listeners.set(groupId, set);
       return () => { set.delete(handlers); };
     },
-    async report() { await wait(); },
+    async report() { blockGuest(); await wait(); },
     async listBlocked() { return [...db().blocked].map((id) => ({ id, name: PEOPLE[id] ?? "Traveller" })); },
-    async block(id) { db().blocked.add(id); },
+    async block(id) { blockGuest(); db().blocked.add(id); },
     async unblock(id) { db().blocked.delete(id); },
   };
+}
+
+/** Demo admin tools: remove a chat message for everyone. */
+export function demoRemoveMessage(id: string): void {
+  const msg = db().messages.find((m) => m.id === id);
+  db().messages = db().messages.filter((m) => m.id !== id);
+  if (msg) emit(msg.groupId, "delete", id);
+}
+
+/** Demo admin tools: delete a group and its messages. */
+export function demoDeleteGroup(id: string): void {
+  db().groups = db().groups.filter((g) => g.id !== id);
+  db().messages = db().messages.filter((m) => m.groupId !== id);
+}
+
+/** Demo admin tools: find a message, to make made-up reports. */
+export function demoFindMessage(match: (m: ChatMessage) => boolean): (ChatMessage & { groupName: string }) | undefined {
+  const m = db().messages.find(match);
+  return m && { ...m, groupName: db().groups.find((g) => g.id === m.groupId)?.name ?? "" };
+}
+
+/** Demo admin tools: remove everything someone has said. */
+export function demoRemoveMessagesBy(userId: string): void {
+  for (const m of db().messages.filter((x) => x.userId === userId)) demoRemoveMessage(m.id);
 }

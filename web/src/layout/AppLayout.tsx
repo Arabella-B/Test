@@ -1,7 +1,8 @@
 import { Compass, Luggage, MessagesSquare, Plus, UserRound, type LucideIcon } from "lucide-react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import { Logo } from "../components/Logo";
+import { DEMO_ROLES, type DemoRole } from "../lib/demoRole";
 
 // The frame around every page: a sidebar on laptops, a bottom tab bar on phones,
 // and soft colourful shapes floating in the background.
@@ -29,7 +30,14 @@ export function BackgroundShapes() {
 }
 
 export default function AppLayout() {
-  const { demo, displayName, isSuspended, signOut } = useAuth();
+  const { demo, displayName, isSuspended, signOut, demoRole, setDemoRole } = useAuth();
+  const navigate = useNavigate();
+
+  function switchView(value: string) {
+    if (value === "loggedout") { void signOut(); return; } // shows the welcome page; "Try the demo" comes back
+    setDemoRole(value as DemoRole);
+    if (value === "admin" || value === "moderator") navigate("/admin");
+  }
   return (
     <div className="relative isolate min-h-dvh md:flex">
       <BackgroundShapes />
@@ -58,8 +66,20 @@ export default function AppLayout() {
 
       <div className="min-w-0 flex-1">
         {demo && (
-          <div className="bg-sun px-4 py-2 text-center text-sm font-semibold text-[#1F1B2D]">
-            👀 Demo with made-up data ·{" "}
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 bg-sun px-4 py-2 text-center text-sm font-semibold text-[#1F1B2D]">
+            <span>👀 Demo with made-up data</span>
+            <label className="flex items-center gap-1">
+              Viewing as
+              <select
+                value={demoRole}
+                onChange={(e) => switchView(e.target.value)}
+                className="rounded-full bg-white/70 px-2 py-0.5 font-bold text-[#1F1B2D] ring-1 ring-black/10"
+                aria-label="View the demo as"
+              >
+                {DEMO_ROLES.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
+                <option value="loggedout">Logged out</option>
+              </select>
+            </label>
             <button onClick={signOut} className="underline">Create your own account</button>
           </div>
         )}

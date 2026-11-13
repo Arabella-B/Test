@@ -59,8 +59,9 @@ export default function DiscoverPage() {
     setPosts((list) => list?.map(change) ?? list);
     try {
       await api.setLike(post.id, liked);
-    } catch {
+    } catch (e) {
       setPosts((list) => list?.map((p) => (p.id === post.id ? post : p)) ?? list);
+      if (e instanceof Error && e.message.startsWith("Guests")) alert(e.message);
     }
   }
 

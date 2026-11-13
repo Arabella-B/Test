@@ -43,7 +43,10 @@ export default function PostDetail() {
     if (!post) return;
     const liked = !post.likedByMe;
     setPost({ ...post, likedByMe: liked, likeCount: post.likeCount + (liked ? 1 : -1) });
-    try { await api.setLike(post.id, liked); } catch { setPost(post); }
+    try { await api.setLike(post.id, liked); } catch (e) {
+      setPost(post);
+      if (e instanceof Error && e.message.startsWith("Guests")) setError(e.message);
+    }
   }
 
   async function remove() {

@@ -150,7 +150,7 @@ export default function GroupChat() {
           <p className="font-semibold">{group.tag}</p>
           <p className="text-muted">{group.purpose || "No description."}</p>
           {group.isOwner && <p className="mt-1 text-xs text-brand-strong">You created this group, so you can remove any message.</p>}
-          {isAdmin && !api.isDemo && (
+          {isAdmin && (
             <button
               onClick={async () => {
                 if (!confirm(`Delete "${group.name}" and all its messages for everyone? This can't be undone.`)) return;

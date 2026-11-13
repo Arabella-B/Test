@@ -1,3 +1,4 @@
+import { blockGuest, getDemoRole } from "../lib/demoRole";
 import type { NewPost, Post, PostsApi } from "./types";
 
 // Pretend Discover feed for the demo: made-up posts with drawn "photos"
@@ -67,25 +68,41 @@ export function createDemoPostsApi(): PostsApi {
       return list.slice(offset, offset + limit).map((p) => ({ ...p }));
     },
     async getPost(id) { await wait(); const p = all().find((x) => x.id === id); return p ? { ...p } : null; },
-    async getMyBusiness() { return null; }, // the demo account isn't a verified business
+    // In the demo, the Admin view posts events as "Wayfund team"; other views can't post events.
+    async getMyBusiness() { return getDemoRole() === "admin" ? "Wayfund team" : null; },
     async createPost(input: NewPost) {
+      blockGuest();
       await wait(300);
-      if (input.kind === "event") throw new Error("Only verified businesses can post events.");
+      const business = getDemoRole() === "admin" ? "Wayfund team" : null;
+      if (input.kind === "event" && !business) throw new Error("Only verified businesses can post events.");
       const post: Post = {
         id: `demo-post-${nextId++}`, userId: ME.id, authorName: ME.name, kind: input.kind, caption: input.caption.trim(),
         place: input.place.trim(), country: input.country.trim(), colour: input.colour,
         imageUrl: input.image ? URL.createObjectURL(input.image) : undefined,
         eventTitle: input.eventTitle, startsAt: input.startsAt, location: input.location, priceText: input.priceText,
-        linkUrl: input.linkUrl, createdAt: new Date().toISOString(), likeCount: 0, likedByMe: false,
+        linkUrl: input.linkUrl, businessName: input.kind === "event" ? business ?? undefined : undefined, createdAt: new Date().toISOString(), likeCount: 0, likedByMe: false,
       };
       all().push(post);
       return { ...post };
     },
     async deletePost(id) { posts = all().filter((p) => p.id !== id); },
     async setLike(id, liked) {
+      blockGuest();
       const p = all().find((x) => x.id === id);
       if (p && p.likedByMe !== liked) { p.likedByMe = liked; p.likeCount += liked ? 1 : -1; }
     },
-    async report() { await wait(); },
+    async report() { blockGuest(); await wait(); },
   };
+}
+
+/** Demo admin tools: remove a post. Returns false if it wasn't there. */
+export function demoRemovePost(id: string): boolean {
+  const before = all().length;
+  posts = all().filter((p) => p.id !== id);
+  return posts.length < before;
+}
+
+/** Demo admin tools: a post's author and text, to make made-up reports. */
+export function demoFindPost(match: (p: Post) => boolean): Post | undefined {
+  return all().find(match);
 }

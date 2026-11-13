@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { shrinkImage } from "../lib/images";
+import { useAuth } from "../auth/AuthProvider";
 import { usePosts } from "./PostsProvider";
 import { COUNTRIES, POST_COLOURS, type PostKind } from "./types";
 
@@ -10,6 +11,7 @@ import { COUNTRIES, POST_COLOURS, type PostKind } from "./types";
 
 export default function NewPostPage() {
   const api = usePosts();
+  const { isGuest, signOut } = useAuth();
   const navigate = useNavigate();
   const fileInput = useRef<HTMLInputElement>(null);
   const [kind, setKind] = useState<PostKind>("update");
@@ -74,6 +76,20 @@ export default function NewPostPage() {
       setError(err instanceof Error ? err.message : "Couldn't post.");
       setBusy(null);
     }
+  }
+
+  if (isGuest) {
+    return (
+      <div className="mx-auto grid w-full max-w-xl gap-4">
+        <h1 className="text-3xl font-extrabold"><span className="page-title">New post</span></h1>
+        <div className="card card-sun grid gap-2 p-5">
+          <p className="text-3xl">👋</p>
+          <p className="text-lg font-extrabold">Create an account to post</p>
+          <p className="text-sm">Guests can look around Discover and Groups, but need a free account to post, like, message or join groups.</p>
+          <button className="btn mt-2" onClick={signOut}>Create a free account</button>
+        </div>
+      </div>
+    );
   }
 
   return (
