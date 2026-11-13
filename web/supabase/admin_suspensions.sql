@@ -11,13 +11,20 @@ create table public.suspended_users (
   suspended_by uuid references auth.users(id) on delete set null
 );
 alter table public.suspended_users enable row level security;
+-- Is this account an admin? (Can see every admin, unlike the admins table's own rules.)
+create or replace function private.is_admin_user(target uuid) returns boolean
+language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.admins where user_id = target);
+$$;
+grant execute on function private.is_admin_user(uuid) to authenticated;
+
 create policy "You can see if you're suspended" on public.suspended_users
   for select to authenticated using (user_id = (select auth.uid()) or (select private.is_admin()));
 create policy "Admins can suspend" on public.suspended_users
   for insert to authenticated with check (
     (select private.is_admin())
     and suspended_by = (select auth.uid())
-    and not exists (select 1 from public.admins a where a.user_id = suspended_users.user_id)
+    and not private.is_admin_user(suspended_users.user_id)
   );
 create policy "Admins can lift suspensions" on public.suspended_users
   for delete to authenticated using ((select private.is_admin()));
