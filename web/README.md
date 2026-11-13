@@ -191,6 +191,9 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
   there's a report before removing anything. They can't suspend people, verify businesses, delete
   groups, post events or appoint anyone, and a suspended moderator loses these powers.
   See `supabase/moderators.sql`.
+  Moderators can also **suspend someone who has been reported** (from the report), optionally
+  removing everything they've posted. They can't suspend admins or other moderators, and only
+  admins can lift a suspension. See `supabase/moderator_suspensions.sql`.
 - **Demo views:** in the demo, the yellow bar has a **Viewing as** menu to see the app as a
   **Guest** (look only: can't post, like, message, join or report), a **Normal user**, a
   **Moderator** or an **Admin** (with made-up reports, moderators, suspensions and verified

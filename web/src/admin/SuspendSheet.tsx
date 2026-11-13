@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
 import Sheet from "../components/Sheet";
+import { useAuth } from "../auth/AuthProvider";
 import { suspend } from "./adminApi";
 
-// Admin pop-up: suspend someone, with a reason and an option to remove everything they've posted.
+// Admin and moderator pop-up: suspend someone, with a reason and an option to remove everything they've posted.
 
 export default function SuspendSheet({ userId, name, onClose, onDone }: {
   userId: string;
@@ -10,6 +11,7 @@ export default function SuspendSheet({ userId, name, onClose, onDone }: {
   onClose: () => void;
   onDone: () => void;
 }) {
+  const { isAdmin } = useAuth();
   const [reason, setReason] = useState("");
   const [removeEverything, setRemoveEverything] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -33,10 +35,10 @@ export default function SuspendSheet({ userId, name, onClose, onDone }: {
       <form onSubmit={submit} className="grid gap-3">
         <h2 className="text-lg font-bold">🛡️ Suspend {name}?</h2>
         <p className="text-sm text-muted">
-          They'll still be able to log in and use My Trip, but won't be able to post, message, like, report or join groups.
-          You can lift it any time from the Admin page.
+          They'll still be able to log in and use My Trip, but won't be able to post, message, like, report or join groups.{" "}
+          {isAdmin ? "You can lift it any time from the Admin page." : "Only an admin can lift it."}
         </p>
-        <label className="label">Reason (only admins see this)
+        <label className="label">Reason (only admins and moderators see this)
           <input className="input" maxLength={300} value={reason} onChange={(e) => setReason(e.target.value)} placeholder="e.g. Scam event, harassment" />
         </label>
         <label className="flex items-start gap-3 rounded-2xl bg-cream p-3 text-sm">

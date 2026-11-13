@@ -18,9 +18,11 @@ export default function AdminPage() {
         <h1 className="text-3xl font-extrabold"><span className="page-title">Moderation</span></h1>
         <p className="text-sm text-muted">
           🛡️ You're a Wayfund moderator. Check each report: remove the post or message if it breaks the rules, or dismiss
-          the report if it's fine. If someone keeps causing problems, let an admin know.
+          the report if it's fine. If someone is causing real problems, you can suspend them. Only admins can lift a
+          suspension, so if you make a mistake, let an admin know.
         </p>
-        <Reports canSuspend={false} onSuspended={() => {}} />
+        <Reports canSuspend onSuspended={() => setSuspendedVersion((v) => v + 1)} />
+        <Suspended version={suspendedVersion} canLift={false} />
       </div>
     );
   }
@@ -33,7 +35,7 @@ export default function AdminPage() {
         verify businesses.
       </p>
       <Reports canSuspend onSuspended={() => setSuspendedVersion((v) => v + 1)} />
-      <Suspended version={suspendedVersion} />
+      <Suspended version={suspendedVersion} canLift />
       <Moderators />
       <VerifiedBusinesses />
     </div>
@@ -124,7 +126,7 @@ function Reports({ canSuspend, onSuspended }: { canSuspend: boolean; onSuspended
   );
 }
 
-function Suspended({ version }: { version: number }) {
+function Suspended({ version, canLift }: { version: number; canLift: boolean }) {
   const [list, setList] = useState<admin.Suspension[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -143,7 +145,9 @@ function Suspended({ version }: { version: number }) {
   return (
     <section className="card grid gap-3">
       <h2 className="text-lg font-bold">⛔ Suspended accounts</h2>
-      <p className="text-sm text-muted">Suspend someone from a report, or from the ⋯ menu on one of their posts.</p>
+      <p className="text-sm text-muted">
+        {canLift ? "Suspend someone from a report, or from the ⋯ menu on one of their posts." : "Suspend someone from a report. Only admins can lift a suspension."}
+      </p>
       {error && <p className="rounded-xl bg-bad/10 p-2 text-sm font-semibold text-bad">{error}</p>}
       {list === null ? (
         <p className="text-sm text-muted">Loading…</p>
@@ -156,7 +160,9 @@ function Suspended({ version }: { version: number }) {
               <p className="truncate font-semibold">{s.name}</p>
               <p className="text-xs text-muted">{s.reason || "No reason given"} · since {new Date(s.suspendedAt).toLocaleDateString("en-GB")}</p>
             </div>
-            <button onClick={() => lift(s)} className="shrink-0 rounded-full px-3 py-2 text-sm font-semibold text-brand-strong hover:bg-brand-soft">Lift</button>
+            {canLift && (
+              <button onClick={() => lift(s)} className="shrink-0 rounded-full px-3 py-2 text-sm font-semibold text-brand-strong hover:bg-brand-soft">Lift</button>
+            )}
           </div>
         ))
       )}

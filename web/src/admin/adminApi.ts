@@ -159,7 +159,11 @@ export async function suspend(userId: string, reason: string, removeEverything: 
   if (res.error?.code === "23505") throw new Error("That account is already suspended.");
   if (res.error) {
     console.error("Admin:", res.error.message);
-    throw new Error(/row-level security/.test(res.error.message) ? "Admins can't be suspended." : "Couldn't suspend. Please try again.");
+    throw new Error(
+      /row-level security/.test(res.error.message)
+        ? "You can't suspend this account. Admins can't be suspended, and moderators can only suspend people who've been reported (not other moderators)."
+        : "Couldn't suspend. Please try again.",
+    );
   }
   if (removeEverything) {
     const paths = check(await supabase.rpc("admin_remove_all_content", { target: userId })) as string[] | null;

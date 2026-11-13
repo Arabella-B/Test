@@ -1,5 +1,6 @@
 import { demoFindPost, demoRemovePost } from "../discover/demoApi";
 import { demoDeleteGroup, demoFindMessage, demoRemoveMessage, demoRemoveMessagesBy } from "../groups/demoApi";
+import { getDemoRole } from "../lib/demoRole";
 import type { Moderator, Person, Report, Suspension, VerifiedBusiness } from "./adminApi";
 
 // Made-up admin and moderator data for the demo's Admin and Moderator views.
@@ -77,6 +78,10 @@ export const demoAdmin = {
 
   async suspend(userId: string, reason: string, removeEverything: boolean) {
     if (userId === "demo-me") throw new Error("Admins can't be suspended.");
+    if (getDemoRole() === "moderator") {
+      if (db().moderators.some((m) => m.userId === userId)) throw new Error("Moderators can't suspend other moderators.");
+      if (!db().reports.some((r) => r.reportedUserId === userId)) throw new Error("Moderators can only suspend people who've been reported.");
+    }
     if (db().suspended.some((s) => s.userId === userId)) throw new Error("That account is already suspended.");
     db().suspended.unshift({ userId, name: nameOf(userId), reason: reason.trim(), suspendedAt: new Date().toISOString() });
     if (removeEverything) {
